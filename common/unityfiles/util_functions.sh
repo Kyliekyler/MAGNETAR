@@ -673,8 +673,7 @@ unity_uninstall() {
 
   ui_print " "
   ui_print "- COMPLETING UNINSTALL..."
-  ui_print " "
-  ui_print "- DONE"
+  ui_print "  DONE"
   ui_print " "
 }
 
@@ -710,6 +709,9 @@ comp_check() {
 unity_main() {
   # Set variables
   set_vars
+  
+  KYLIEKYLER=$(grep_prop ro.product.vendor.device /vendor/build.prop)
+  SOC=$(grep_prop ro.product.board /vendor/build.prop)
 
   # Add blank line to end of all files if needbe
   for i in $(find $TMPDIR -type f -name "*.sh" -o -name "*.prop"); do
