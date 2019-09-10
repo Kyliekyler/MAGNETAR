@@ -710,8 +710,19 @@ unity_main() {
   # Set variables
   set_vars
   
-  KYLIEKYLER=$(grep_prop ro.product.vendor.device /vendor/build.prop)
-  SOC=$(grep_prop ro.product.board /vendor/build.prop)
+  VER=$(grep_prop version $TMPDIR/module.prop)
+  REL=$(grep_prop versionCode $TMPDIR/module.prop)
+  case $API in
+    27|28|29)
+      KYLIEKYLER=$(grep_prop ro.product.vendor.device /vendor/build.prop)
+      SOC=$(grep_prop ro.product.board /vendor/build.prop)
+    ;;
+    
+    25|26)
+      KYLIEKYLER=$(grep_prop ro.product.device /system/build.prop)
+      SOC=$(grep_prop ro.product.board /system/build.prop)
+    ;;
+  esac
 
   # Add blank line to end of all files if needbe
   for i in $(find $TMPDIR -type f -name "*.sh" -o -name "*.prop"); do

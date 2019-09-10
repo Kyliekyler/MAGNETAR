@@ -33,7 +33,7 @@ comp_check
 # Uncomment SYSOVER if you want the mod to always be installed to system (even on magisk) - note that this can still be set to true by the user by adding 'sysover' to the zipname
 # Uncomment DIRSEPOL if you want sepolicy patches applied to the boot img directly (not recommended) - THIS REQUIRES THE RAMDISK PATCHER ADDON (this addon requires minimum api of 17)
 # Uncomment DEBUG if you want full debug logs (saved to /sdcard in magisk manager and the zip directory in twrp) - note that this can still be set to true by the user by adding 'debug' to the zipname
-MINAPI=28
+MINAPI=25
 MAXAPI=29
 #DYNLIB=true
 #SYSOVER=true
@@ -75,9 +75,19 @@ REPLACE="
 print_modname() {
   VER=$(grep_prop version $TMPDIR/module.prop)
   REL=$(grep_prop versionCode $TMPDIR/module.prop)
-  MAGNETAR=$(grep_prop ro.product.vendor.model /vendor/build.prop)
-  KYLIEKYLER=$(grep_prop ro.product.vendor.device /vendor/build.prop)
-  SOC=$(grep_prop ro.product.board /vendor/build.prop)
+  case $API in
+    27|28|29)
+      MAGNETAR=$(grep_prop ro.product.vendor.model /vendor/build.prop)
+      KYLIEKYLER=$(grep_prop ro.product.vendor.device /vendor/build.prop)
+      SOC=$(grep_prop ro.product.board /vendor/build.prop)
+    ;;
+    
+    25|26)
+      MAGNETAR=$(grep_prop ro.product.model /system/build.prop)
+      KYLIEKYLER=$(grep_prop ro.product.device /system/build.prop)
+      SOC=$(grep_prop ro.product.board /system/build.prop)
+    ;;
+  esac
   ui_print " "
   ui_print "×××××××××××××××××××××××××××××××××××××××××××××××"                                                 
   ui_print "  _____ __________ _____ ____ _____ _________  "
@@ -88,8 +98,8 @@ print_modname() {
   ui_print "×××××××××××××××××××××××××××××××××××××××××××××××"
   ui_print "  MODULE VERSION | $VER"
   ui_print "  MODULE B.ID    | $REL"
-  ui_print "  DEVICE MODEL   | $MAGNETAR ($KYLIEKYLER)"
-  ui_print "  CHIPSET        | $SOC"
+  ui_print "  DEVICE MODEL   | $(echo $MAGNETAR | tr a-z A-Z) ($(echo $KYLIEKYLER | tr a-z A-Z))"
+  ui_print "  CHIPSET        | $(echo $SOC | tr a-z A-Z)"
   ui_print "×××××××××××××××××××××××××××××××××××××××××××××××"  
   ui_print " "                                              
   unity_main # Don't change this line 

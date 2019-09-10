@@ -5,7 +5,7 @@ Eliminate Lags and Throttling, Enhance Sounds, Run Your Game Smoothly and Comfor
 - This will improve overall performance but in exchange for a bit increased power usage and may cause heating
 
 # Compatibility
-- [![Android P](https://img.shields.io/badge/Android-9-lightgreen.svg)](https://developer.android.com/)
+- [![Android 9](https://img.shields.io/badge/Android-9-lightgreen.svg)](https://developer.android.com/)
 - [![Android 10](https://img.shields.io/badge/Android-10-brightgreen.svg)](https://developer.android.com/)
 - [![Magisk](https://img.shields.io/badge/Magisk-19%2B-00B39B.svg)](https://forum.xda-developers.com/apps/magisk/official-magisk-v7-universal-systemless-t3473445)
    
@@ -14,7 +14,18 @@ Eliminate Lags and Throttling, Enhance Sounds, Run Your Game Smoothly and Comfor
 - Reboot after you finished installing
 
 # Changelog
-#### BRAVO (1908312141)
+### CHARLIE
+- Performance Improvements
+- Proper Android 10 Support
+- Updated Props
+- Extended Min API to 25
+- Added More Devices to Run Service Script
+- Added Thermal Bin to Entry-Level SOC
+- Adjusted Tweaking Values
+- Improved Module Logging
+- Sound Mod Will Only Be Installed on AOSP Based Android 9 Rom (Device Specific)
+
+### BRAVO (1908312141)
 - Performance Improvements
 - Adjusted Some Tweaking Values
 - Fixed Some Settings That Didn't Get Applied
