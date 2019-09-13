@@ -251,7 +251,7 @@ case $HALT in
         else
           echo "[X] SDCARD TUNE" | tee -a $MAGNELOG
         fi
-        
+
       ;;  
     
       *)
