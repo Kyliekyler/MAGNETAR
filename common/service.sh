@@ -74,7 +74,7 @@ case $HALT in
         fi
         
         sync;
-        chmod 0644 /proc/sys/*; 2>/dev/null
+        chmod 0644 /proc/sys/* 2>/dev/null
         chmod 0644 /sys/block/*        
         chmod 0644 /sys/module/*
         
@@ -172,12 +172,9 @@ case $HALT in
         echo "0" > /dev/stune/schedtune.sched_boost_no_override
         echo "0" > /dev/stune/schedtune.prefer_idle
         echo "0" > /dev/stune/schedtune.boost
-        echo "0" > /sys/devices/system/cpu/cpu0/sched_mostly_idle_freq
-        echo "0" > /sys/devices/system/cpu/cpu4/sched_mostly_idle_freq
-        echo "0" > /sys/devices/system/cpu/cpu2/sched_mostly_idle_freq
-        echo "0" > /sys/devices/system/cpu/cpu4/sched_mostly_idle_freq
-        echo "0" > /sys/devices/system/cpu/cpu6/sched_mostly_idle_freq
-        echo "0" > /sys/devices/system/cpu/cpu1/sched_mostly_idle_freq
+        for i in 0 1 2 3 4 5 6; do
+          echo "0" > /sys/devices/system/cpu/cpu$i/sched_mostly_idle_freq
+        done
         
         if [ $(cat /dev/stune/schedtune.boost) == "0" ] || [ $(cat /sys/devices/system/cpu/cpu0/sched_mostly_idle_freq) == "0" ]; then          
           echo "[✓] CPU TUNE" | tee -a $MAGNELOG
@@ -231,69 +228,30 @@ case $HALT in
         fi
         
         # SDCARD BOOST IS HERE ============================================//
-        echo "cfq" > /sys/block/sda/queue/scheduler
-        echo "1536" > /sys/block/sda/queue/read_ahead_kb
-        echo "0" > /sys/block/sda/queue/rotational
-        echo "0" > /sys/block/sda/queue/iostats
-        echo "0" > /sys/block/sda/queue/add_random
-        echo "1" > /sys/block/sda/queue/rq_affinity
-        echo "0" > /sys/block/sda/queue/nomerges
-        echo "1536" > /sys/block/sda/queue/nr_requests
-        echo "cfq" > /sys/block/sdb/queue/scheduler
-        echo "1536" > /sys/block/sdb/queue/read_ahead_kb
-        echo "0" > /sys/block/sdb/queue/rotational
-        echo "0" > /sys/block/sdb/queue/iostats
-        echo "0" > /sys/block/sdb/queue/add_random
-        echo "1" > /sys/block/sdb/queue/rq_affinity
-        echo "0" > /sys/block/sdb/queue/nomerges
-        echo "1536" > /sys/block/sdb/queue/nr_requests
-        echo "cfq" > /sys/block/sdc/queue/scheduler
-        echo "1536" > /sys/block/sdc/queue/read_ahead_kb
-        echo "0" > /sys/block/sdc/queue/rotational
-        echo "0" > /sys/block/sdc/queue/iostats
-        echo "0" > /sys/block/sdc/queue/add_random
-        echo "1" > /sys/block/sdc/queue/rq_affinity
-        echo "0" > /sys/block/sdc/queue/nomerges
-        echo "1536" > /sys/block/sdc/queue/nr_requests
-        echo "cfq" > /sys/block/sdd/queue/scheduler
-        echo "1536" > /sys/block/sdd/queue/read_ahead_kb
-        echo "0" > /sys/block/sdd/queue/rotational
-        echo "0" > /sys/block/sdd/queue/iostats
-        echo "0" > /sys/block/sdd/queue/add_random
-        echo "1" > /sys/block/sdd/queue/rq_affinity
-        echo "0" > /sys/block/sdd/queue/nomerges
-        echo "1536" > /sys/block/sdd/queue/nr_requests
-        echo "cfq" > /sys/block/sde/queue/scheduler
-        echo "1536" > /sys/block/sde/queue/read_ahead_kb
-        echo "0" > /sys/block/sde/queue/rotational
-        echo "0" > /sys/block/sde/queue/iostats
-        echo "0" > /sys/block/sde/queue/add_random
-        echo "1" > /sys/block/sde/queue/rq_affinity
-        echo "0" > /sys/block/sde/queue/nomerges
-        echo "1536" > /sys/block/sde/queue/nr_requests
-        echo "cfq" > /sys/block/sdf/queue/scheduler
-        echo "1536" > /sys/block/sdf/queue/read_ahead_kb
-        echo "0" > /sys/block/sdf/queue/rotational
-        echo "0" > /sys/block/sdf/queue/iostats
-        echo "0" > /sys/block/sdf/queue/add_random
-        echo "1" > /sys/block/sdf/queue/rq_affinity
-        echo "0" > /sys/block/sdf/queue/nomerges
-        echo "1536" > /sys/block/sdf/queue/nr_requests
-        echo "cfq" > /sys/block/mmcblk0/queue/scheduler
-        echo "1536" > /sys/block/mmcblk0/queue/read_ahead_kb
-        echo "0" > /sys/block/mmcblk0/queue/rotational
-        echo "0" > /sys/block/mmcblk0/queue/iostats
-        echo "0" > /sys/block/mmcblk0/queue/add_random
-        echo "1" > /sys/block/mmcblk0/queue/rq_affinity
-        echo "0" > /sys/block/mmcblk0/queue/nomerges
-        echo "1536" > /sys/block/mmcblk0/queue/nr_requests   
-        
-        if [ $(cat /sys/block/mmcblk0/queue/nomerges) == "0" ]; then
-          echo "[✓] SDCARD TUNE" | tee -a $MAGNELOG
+
+        MMC=$(ls -d /sys/block/mmc*)
+        DM=$(ls -d /sys/block/dm-*)
+        SD=$(ls -d /sys/block/sd*)
+        LOOP=$(ls -d /sys/block/loop*)
+        RAM=$(ls -d /sys/block/ram*)
+        ZRAM=$(ls -d /sys/block/zram*)
+
+        for X in $MMC $SD $DM $LOOP $RAM $ZRAM
+        do
+          echo "cfq" > $X/queue/scheduler 2>/dev/null
+          echo "1536" > $X/queue/read_ahead_kb 2>/dev/null
+          echo "0" > $X/queue/rotational 2>/dev/null
+          echo "0" > $X/queue/iostats 2>/dev/null
+          echo "0" > $X/queue/add_random 2>/dev/null
+          echo "1" > $X/queue/rq_affinity 2>/dev/null
+          echo "0" > $X/queue/nomerges 2>/dev/null
+          echo "1536" > $X/queue/nr_requests 2>/dev/null
+        done
+        echo "[✓] SDCARD TUNE" | tee -a $MAGNELOG
         else
           echo "[X] SDCARD TUNE" | tee -a $MAGNELOG
         fi
-
+        
       ;;  
     
       *)
