@@ -28,12 +28,12 @@ echo " MODULE VERSION: $VER " | tee -a $MAGNELOG
 echo " MODULE BUILD ID: $REL " | tee -a $MAGNELOG
 echo " MODULE STATUS: $STS" | tee -a $MAGNELOG
 echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
-echo " DEVICE: $(echo $KYLIEKYLER | tr a-z A-Z)" | tee -a $MAGNELOG    
+echo " DEVICE: $(echo $KYLIEKYLER | tr a-z A-Z)" | tee -a $MAGNELOG
 echo " CHIPSET: $(echo $SOC | tr a-z A-Z)" | tee -a $MAGNELOG
-echo " ROM: $(echo $ROM | tr a-z A-Z)" | tee -a $MAGNELOG  
+echo " ROM: $(echo $ROM | tr a-z A-Z)" | tee -a $MAGNELOG
 echo " KERNEL: $(echo $KERNEL | tr a-z A-Z)" | tee -a $MAGNELOG
-echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG 
-                      
+echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
+
 echo "" | tee -a $MAGNELOG
 echo " MAGNETAR STARTED @$(echo $(timestamp) | tr a-z A-Z)" | tee -a $MAGNELOG
 
@@ -62,7 +62,7 @@ fi
 
 if [ -e "/system/vendor/etc/thermal-engine-class0.conf" ]; then
   echo "  [✓] THERMAL CONFIG" | tee -a $MAGNELOG
-else 
+else
   echo "  [X] THERMAL CONFIG" | tee -a $MAGNELOG
 fi
 
@@ -74,22 +74,22 @@ case $HALT in
         echo "ONLY INSTALL SCRIPT RAN, $(echo $KYLIEKYLER | tr a-z A-Z) NOT FULLY SUPPORTED" | tee -a $MAGNELOG
         echo "" | tee -a $MAGNELOG
         echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
-        echo " DEVELOPER: Kyliekyler" | tee -a $MAGNELOG    
-        echo " GROUP: https://t.me/MAGNETAR1999" | tee -a $MAGNELOG 
+        echo " DEVELOPER: Kyliekyler" | tee -a $MAGNELOG
+        echo " GROUP: https://t.me/MAGNETAR1999" | tee -a $MAGNELOG
         echo " CHANNEL: https://t.me/MAGNETARCHAT" | tee -a $MAGNELOG
-        echo " SUPPORT: https://paypal.com/kyliekyler" | tee -a $MAGNELOG    
-        echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG                       
+        echo " SUPPORT: https://paypal.com/kyliekyler" | tee -a $MAGNELOG
+        echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
         exit 1
       ;;
-     
-      *)   
+      
+      *)
         sleep 5
         echo "" | tee -a $MAGNELOG
         echo "- SERVICE SCRIPT" | tee -a $MAGNELOG
-              
-        # VARS IS HERE ====================================================//        
-        NFSADJ1=0; NFSADJ2=117; NFSADJ3=235; NFSADJ4=411; NFSADJ5=823; NFSADJ6=1000 
-        KYLIEKYLERA=16384; KYLIEKYLERB=24576; KYLIEKYLERC=32768; KYLIEKYLERD=65536; KYLIEKYLERE=131072; KYLIEKYLERF=163840        
+        
+        # VARS IS HERE ====================================================//
+        NFSADJ1=0; NFSADJ2=117; NFSADJ3=235; NFSADJ4=411; NFSADJ5=823; NFSADJ6=1000
+        KYLIEKYLERA=16384; KYLIEKYLERB=24576; KYLIEKYLERC=32768; KYLIEKYLERD=65536; KYLIEKYLERE=131072; KYLIEKYLERF=163840
         
         if [ -d "/sys/class/kgsl/kgsl-3d0" ]; then
           GPU=$(/sys/class/kgsl/kgsl-3d0)
@@ -136,13 +136,13 @@ case $HALT in
           echo "1" > /dev/stune/schedtune.sched_boost_enabled
           echo "0" > /dev/stune/schedtune.sched_boost_no_override
           echo "0" > /dev/stune/schedtune.prefer_idle
-          echo "0" > /dev/stune/schedtune.boost         
+          echo "0" > /dev/stune/schedtune.boost
           echo "  [✓] CPU TUNING" | tee -a $MAGNELOG
         else           
           echo "  [X] CPU TUNING" | tee -a $MAGNELOG
-        fi      
+        fi
         
-        # VM IS HERE ======================================================//        
+        # VM IS HERE ======================================================//
         sysctl -e -w vm.dirty_background_ratio=4 2>/dev/null
         sysctl -e -w vm.dirty_ratio=10 2>/dev/null
         sysctl -e -w vm.vfs_cache_pressure=1 2>/dev/null
@@ -159,13 +159,14 @@ case $HALT in
         sysctl -e -w vm.overcommit_ratio=100 2>/dev/null    
         sysctl -e -w fs.lease-break-time=20 2>/dev/null
         
-        if [ $(cat /proc/sys/vm/vfs_cache_pressure) == "1" ]; then          
+        if [ $(cat /proc/sys/vm/vfs_cache_pressure) == "1" ]; then
+        
           echo "  [✓] DVM TUNING" | tee -a $MAGNELOG
-        else          
+        else
           echo "  [X] DVM TUNING" | tee -a $MAGNELOG
         fi
-   
-        #GPU IS HERE =======================================================//   
+        
+        #GPU IS HERE =======================================================//
         if [ -e "/sys/class/kgsl/kgsl-3d0" ]; then
           echo "0" > /sys/class/kgsl/kgsl-3d0/throttling
           echo "0" > /sys/class/kgsl/kgsl-3d0/force_no_nap
@@ -182,30 +183,26 @@ case $HALT in
           echo "1" > /sys/devices/soc/*.qcom,kgsl-3d0/kgsl/kgsl-3d0/bus_split
         fi
         
-        if [ -e "$GPU/max_pwrlevel" ]; then 
+        if [ -e "$GPU/max_pwrlevel" ]; then
           echo "0" > $GPU/max_pwrlevel
         fi
         
-        if [ -e "$GPU/devfreq/adrenoboost" ]; then 
+        if [ -e "$GPU/devfreq/adrenoboost" ]; then
           echo "2" > $GPU/devfreq/adrenoboost
         fi
-
-        if [ -e "/sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate" ]; then 
+        
+        if [ -e "/sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate" ]; then
           echo "1" > /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate
           echo "Y" > /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate
         fi
         
-        if [ $(cat /sys/class/kgsl/kgsl-3d0/throttling) == "0" ] || [ $(cat /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate) == "Y" ] || [ $(cat $GPU/devfreq/adrenoboost) == "2" ] ||   [ $(cat $GPU/max_pwrlevel) == "0" ]; then          
+        if [ $(cat /sys/class/kgsl/kgsl-3d0/throttling) == "0" ] || [ $(cat /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate) == "Y" ] || [ $(cat $GPU/devfreq/adrenoboost) == "2" ] ||   [ $(cat $GPU/max_pwrlevel) == "0" ]; then
           echo "  [✓] GPU TUNING" | tee -a $MAGNELOG
-        else          
+        else
           echo "  [X] GPU TUNING" | tee -a $MAGNELOG
         fi
-                       
-        # PARAMETERS / MINFREE IS HERE ====================================//
-        echo "0" > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
-        echo "$NFSADJ1,$NFSADJ2,$NFSADJ3,$NFSADJ4,$NFSADJ5,$NFSADJ6" > /sys/module/lowmemorykiller/parameters/adj
-        echo "$KYLIEKYLERA,$KYLIEKYLERB,$KYLIEKYLERC,$KYLIEKYLERD,$KYLIEKYLERE,$KYLIEKYLERF" > /sys/module/lowmemorykiller/parameters/minfree
         
+        # PARAMETERS / MINFREE IS HERE ====================================//
         if [ -d /sys/module/lowmemorykiller/parameters ]; then
           echo "0" > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
           setprop lmk.autocalc false
@@ -216,8 +213,6 @@ case $HALT in
           echo "  [X] LMK TUNING" | tee -a $MAGNELOG
         fi
         # NETWORK SPEED BOOST IS HERE =====================================//
-        sysctl -e -w net.ipv4.tcp_congestion_control=westwood
-        
         if [ -e /proc/sys/net/ipv4/tcp_congestion_control ]; then
           echo "westwood" > /proc/sys/net/ipv4/tcp_congestion_control
           echo "  [✓] WESTWOOD NET TCP" | tee -a $MAGNELOG
@@ -227,8 +222,6 @@ case $HALT in
         fi
           
         # FSYNC IS HERE ===================================================//
-        
-        
         if [ -d /sys/module/sync/parameters ]; then
           echo "Y" > /sys/module/sync/parameters/fsync_enabled
           echo "1" > /sys/module/sync/parameters/auto_fsync_delay_sec
@@ -236,7 +229,7 @@ case $HALT in
         else
           echo "  [X] FSYNC TUNING" | tee -a $MAGNELOG
         fi
-
+        
         # SDCARD BOOST IS HERE ============================================//
         if [ -d /sys/block ]; then
           for X in $ALL; do
@@ -262,10 +255,10 @@ case $HALT in
         else
           echo "  [X] ENTROPY TUNING" | tee -a $MAGNELOG
         fi
-                
+        
         # FORCE FAST CHARGE IS HERE =======================================//
         if [ -e /sys/kernel/fast_charge/force_fast_charge ]; then
-          echo "1" > /sys/kernel/fast_charge/force_fast_charge        
+          echo "1" > /sys/kernel/fast_charge/force_fast_charge
           echo "  [✓] FAST CHARGE TUNING" | tee -a $MAGNELOG
         else
           echo "  [X] FAST CHARGE TUNING" | tee -a $MAGNELOG
@@ -279,19 +272,20 @@ case $HALT in
     echo " CONFLICTING MODULE FOUND, MAGNETAR SERVICE SCRIPT WON'T RUN" | tee -a $MAGNELOG
     echo "" | tee -a $MAGNELOG
     echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
-    echo " DEVELOPER: Kyliekyler" | tee -a $MAGNELOG    
-    echo " GROUP: https://t.me/MAGNETAR1999" | tee -a $MAGNELOG 
+    echo " DEVELOPER: Kyliekyler" | tee -a $MAGNELOG
+    echo " GROUP: https://t.me/MAGNETAR1999" | tee -a $MAGNELOG
     echo " CHANNEL: https://t.me/MAGNETARCHAT" | tee -a $MAGNELOG
-    echo " SUPPORT: https://paypal.com/kyliekyler" | tee -a $MAGNELOG    
-    echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG                       
+    echo " SUPPORT: https://paypal.com/kyliekyler" | tee -a $MAGNELOG
+    echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
     exit 1
   ;;
 esac
 
 echo "" | tee -a $MAGNELOG
 echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
-echo " DEVELOPER: Kyliekyler" | tee -a $MAGNELOG    
-echo " GROUP: https://t.me/MAGNETAR1999" | tee -a $MAGNELOG 
+echo " DEVELOPER: Kyliekyler" | tee -a $MAGNELOG
+echo " GROUP: https://t.me/MAGNETAR1999" | tee -a $MAGNELOG
 echo " CHANNEL: https://t.me/MAGNETARCHAT" | tee -a $MAGNELOG
-echo " SUPPORT: https://paypal.com/kyliekyler" | tee -a $MAGNELOG    
-echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG 
+echo " SUPPORT: https://paypal.com/kyliekyler" | tee -a $MAGNELOG
+echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
+exit 0
