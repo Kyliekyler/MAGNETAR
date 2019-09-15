@@ -160,7 +160,6 @@ case $HALT in
         sysctl -e -w fs.lease-break-time=20 2>/dev/null
         
         if [ $(cat /proc/sys/vm/vfs_cache_pressure) == "1" ]; then
-        
           echo "  [✓] DVM TUNING" | tee -a $MAGNELOG;
         else
           echo "  [X] DVM TUNING" | tee -a $MAGNELOG;
