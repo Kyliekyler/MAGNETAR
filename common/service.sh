@@ -61,9 +61,9 @@ else
 fi;
 
 if [ -e "/system/vendor/etc/thermal-engine-class0.conf" ]; then
-  echo "  [✓] THERMAL CONfi;G" | tee -a $MAGNELOG;
+  echo "  [✓] THERMAL CONFIG" | tee -a $MAGNELOG;
 else
-  echo "  [X] THERMAL CONfi;G" | tee -a $MAGNELOG;
+  echo "  [X] THERMAL CONFIG" | tee -a $MAGNELOG;
 fi;
 
 case $HALT in
@@ -238,7 +238,7 @@ case $HALT in
             echo "0" > $X/queue/rotational 2>/dev/null
             echo "0" > $X/queue/iostats 2>/dev/null
             echo "0" > $X/queue/add_random 2>/dev/null
-            echo "1" > $X/queue/rq_affi;nity 2>/dev/null
+            echo "1" > $X/queue/rq_affinity 2>/dev/null
             echo "0" > $X/queue/nomerges 2>/dev/null
             echo "1536" > $X/queue/nr_requests 2>/dev/null
           done
