@@ -75,17 +75,30 @@ REPLACE="
 print_modname() {
   VER=$(grep_prop version $TMPDIR/module.prop)
   REL=$(grep_prop versionCode $TMPDIR/module.prop)
+  STS=$(grep_prop status $TMPDIR/module.prop)
+  SOC0=$(getprop ro.product.board)
+  SOC1=$(getprop ro.product.platform)
+  SOC2=$(getprop ro.board.platform)
+  
+  if [ ! "$SOC0" = "" ]; then
+    SOC=$(getprop ro.product.board)
+  elif [ ! "$SOC1" = "" ]; then
+    SOC=$(getprop ro.product.platform)
+  elif [ ! "$SOC2" = "" ]; then
+    SOC=$(getprop ro.board.platform)
+  else 
+    SOC="UNIDENTIFIED"
+  fi
+  
   case $API in
     27|28|29)
       MAGNETAR=$(grep_prop ro.product.vendor.model /vendor/build.prop)
       KYLIEKYLER=$(grep_prop ro.product.vendor.device /vendor/build.prop)
-      SOC=$(grep_prop ro.product.board /vendor/build.prop)
     ;;
     
     25|26)
       MAGNETAR=$(grep_prop ro.product.model /system/build.prop)
       KYLIEKYLER=$(grep_prop ro.product.device /system/build.prop)
-      SOC=$(grep_prop ro.product.board /system/build.prop)
     ;;
   esac
   ui_print " "
@@ -96,7 +109,7 @@ print_modname() {
   ui_print " |_|_|_|_|__|_____|_|___|____| |_| |_|__|_|__| "
   ui_print "                                 by Kyliekyler "                                             
   ui_print "×××××××××××××××××××××××××××××××××××××××××××××××"
-  ui_print "  MODULE VERSION | $VER"
+  ui_print "  MODULE VERSION | $VER ($STS)"
   ui_print "  MODULE B.ID    | $REL"
   ui_print "  DEVICE MODEL   | $(echo $MAGNETAR | tr a-z A-Z) ($(echo $KYLIEKYLER | tr a-z A-Z))"
   ui_print "  CHIPSET        | $(echo $SOC | tr a-z A-Z)"

@@ -78,7 +78,7 @@ case $FX in
   ;;
 esac
 
-for i in "KYLIEKYLER" "HALT" "API" "VER" "REL" "SOC"; do
+for i in "KYLIEKYLER" "KERNEL" "HALT" "API" "VER" "REL" "STS" "SOC" "ROM"; do
   sed -i "2i $i=$(eval echo \$$i)" $TMPDIR/common/service.sh
 done
  

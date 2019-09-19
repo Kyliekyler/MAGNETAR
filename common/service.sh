@@ -10,62 +10,91 @@ fi
 
 MAGNELOG=/data/MAGNETAR/magne.log
 
-if [ -e $MAGNELOG ]; then
+if [ -e $MAGNELOG; ]; then
  rm $MAGNELOG
 fi
 
-while ! pgrep com.android ; do
-  sleep 100
+while ! pgrep com.android; do
+  sleep 90
 done
 
-echo "×××××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
-echo "MODULE NAME: MAGNETAR" | tee -a $MAGNELOG
-echo "MODULE VERSION: $VER " | tee -a $MAGNELOG
-echo "MODULE BUILD ID: $REL " | tee -a $MAGNELOG
-echo "DEVICE CODENAME: $(echo $KYLIEKYLER | tr a-z A-Z)" | tee -a $MAGNELOG    
-echo "DEVICE CHIPSET: $(echo $SOC | tr a-z A-Z)" | tee -a $MAGNELOG    
-echo "STATUS: STABLE" | tee -a $MAGNELOG    
-echo "×××××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG                       
-echo "" | tee -a $MAGNELOG
+timestamp() {
+  date +"%c" 
+}
 
-echo "INSTALL SCRIPT" | tee -a $MAGNELOG
-echo "" | tee -a $MAGNELOG
+echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
+echo " MODULE NAME: MAGNETAR" | tee -a $MAGNELOG
+echo " MODULE VERSION: $VER " | tee -a $MAGNELOG
+echo " MODULE BUILD ID: $REL " | tee -a $MAGNELOG
+echo " MODULE STATUS: $STS" | tee -a $MAGNELOG
+echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
+echo " DEVICE: $(echo $KYLIEKYLER | tr a-z A-Z)" | tee -a $MAGNELOG
+echo " CHIPSET: $(echo $SOC | tr a-z A-Z)" | tee -a $MAGNELOG
+echo " ROM: $(echo $ROM | tr a-z A-Z)" | tee -a $MAGNELOG
+echo " KERNEL: $(echo $KERNEL | tr a-z A-Z)" | tee -a $MAGNELOG
+echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
 
-if [ -e "/system/bin/sound8x60" ]; then
-  echo "[✓] SOUND FX" | tee -a $MAGNELOG
+echo "" | tee -a $MAGNELOG
+echo " MAGNETAR STARTED @ $(echo $(timestamp) | tr a-z A-Z)" | tee -a $MAGNELOG
+
+sleep 5
+echo "" | tee -a $MAGNELOG
+echo "- INSTALL SCRIPT" | tee -a $MAGNELOG
+
+if [ $(cat /sys/devices/platform/kcal_ctrl.0/kcal_sat) == "268" ]; then
+  echo "  [✓] KCAL" | tee -a $MAGNELOG
 else
-  echo "[X] SOUND FX" | tee -a $MAGNELOG
+  echo "  [X] KCAL" | tee -a $MAGNELOG
 fi
 
-if [ $(cat /sys/devices/platform/kcal_ctrl.0/kcal_sat) == "270" ]; then
-  echo "[✓] KCAL CONFIG" | tee -a $MAGNELOG
+if [ -e "/system/bin/sound8x60" ]; then
+  echo "  [✓] SOUND FX" | tee -a $MAGNELOG
 else
-  echo "[X] KCAL CONFIG" | tee -a $MAGNELOG
+  echo "  [X] SOUND FX" | tee -a $MAGNELOG
+fi
+
+if [ -e "/system/lib/egl/egl.cfg" ]; then
+  echo "  [✓] EGL CONFIG" | tee -a $MAGNELOG
+else
+  echo "  [X] EGL CONFIG" | tee -a $MAGNELOG
 fi
 
 if [ ! -s "/system/vendor/bin/thermal-engine" ]; then
-  echo "[✓] THERMAL BIN" | tee -a $MAGNELOG
+  echo "  [✓] THERMAL BIN" | tee -a $MAGNELOG
 else
-  echo "[X] THERMAL BIN" | tee -a $MAGNELOG
+  echo "  [X] THERMAL BIN" | tee -a $MAGNELOG
 fi
 
 if [ -e "/system/vendor/etc/thermal-engine-class0.conf" ]; then
-  echo "[✓] THERMAL CONFIG" | tee -a $MAGNELOG
-else 
-  echo "[X] THERMAL CONFIG" | tee -a $MAGNELOG
+  echo "  [✓] THERMAL CONFIG" | tee -a $MAGNELOG
+else
+  echo "  [X] THERMAL CONFIG" | tee -a $MAGNELOG
 fi
 
 case $HALT in
   false)
-    case $KYLIEKYLER in
-      whyred|bullhead|rosy|cancro|*H850*|wayne|jasmine*|beryllium|tulip|star2lte)   
+    case $(echo $KYLIEKYLER | tr A-Z a-z) in
+      will|add|later)
         echo "" | tee -a $MAGNELOG
-        echo "SERVICE SCRIPT" | tee -a $MAGNELOG
+        echo "ONLY INSTALL SCRIPT RAN, $(echo $KYLIEKYLER | tr a-z A-Z) NOT FULLY SUPPORTED" | tee -a $MAGNELOG
         echo "" | tee -a $MAGNELOG
+        echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
+        echo " DEVELOPER: Kyliekyler" | tee -a $MAGNELOG
+        echo " GROUP: https://t.me/MAGNETAR1999" | tee -a $MAGNELOG
+        echo " CHANNEL: https://t.me/MAGNETARCHAT" | tee -a $MAGNELOG
+        echo " SUPPORT: https://paypal.com/kyliekyler" | tee -a $MAGNELOG
+        echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
+        exit 1
+      ;;
+      
+      *)
+        sleep 5
+        echo "" | tee -a $MAGNELOG
+        echo "- SERVICE SCRIPT" | tee -a $MAGNELOG
         
-        # VARS IS HERE ====================================================//        
-        NFSADJ1=0; NFSADJ2=117; NFSADJ3=235; NFSADJ4=411; NFSADJ5=823; NFSADJ6=1000 
-        KYLIEKYLERA=16384; KYLIEKYLERB=24576; KYLIEKYLERC=32768; KYLIEKYLERD=65536; KYLIEKYLERE=131072; KYLIEKYLERF=163840        
+        # VARS IS HERE ====================================================//
+        NFSADJ1=0; NFSADJ2=117; NFSADJ3=235; NFSADJ4=411; NFSADJ5=823; NFSADJ6=1000
+        KYLIEKYLERA=16384; KYLIEKYLERB=24576; KYLIEKYLERC=32768; KYLIEKYLERD=65536; KYLIEKYLERE=131072; KYLIEKYLERF=163840
         
         if [ -d "/sys/class/kgsl/kgsl-3d0" ]; then
           GPU=$(/sys/class/kgsl/kgsl-3d0)
@@ -73,118 +102,73 @@ case $HALT in
           GPU=$(/sys/devices/soc/*.qcom,kgsl-3d0/kgsl/kgsl-3d0)
         fi
         
+        ALL=$(ls -d /sys/block/*)
+        
         sync;
-        chmod 0644 /proc/sys/*; 2>/dev/null
-        chmod 0644 /sys/block/*        
-        chmod 0644 /sys/module/*
+        chmod 0644 /proc/sys/* 2>/dev/null
+        chmod 0644 /sys/block/* 2>/dev/null      
+        chmod 0644 /sys/module/* 2>/dev/null
         
-        # ENTROPY IS HERE =================================================//
-        echo "1024" > /proc/sys/kernel/random/read_wakeup_threshold
-        echo "2048" > /proc/sys/kernel/random/write_wakeup_threshold
-        
-        if [ $(cat /proc/sys/kernel/random/read_wakeup_threshold) == "1024" ] || [ $(cat /proc/sys/kernel/random/write_wakeup_threshold) == "2048" ]; then
-          
-          echo "[✓] ENTROPY TUNE" | tee -a $MAGNELOG
-        else
-          
-          echo "[X] ENTROPY TUNE" | tee -a $MAGNELOG
-        fi
-        
-        # FORCE FAST CHARGE IS HERE =======================================//
-        echo "1" > /sys/kernel/fast_charge/force_fast_charge
-        
-        if [ $(cat /sys/kernel/fast_charge/force_fast_charge) == "1" ]; then          
-          echo "[✓] CHARGE TUNE" | tee -a $MAGNELOG
-        else          
-          echo "[X] CHARGE TUNE" | tee -a $MAGNELOG
-        fi
-        
-        # PANIC IS HERE ===================================================//
-        sysctl -e -w vm.panic_on_oom=0 2>/dev/null
+        # CPU IS HERE ==============================================//
         sysctl -e -w kernel.panic_on_oops=0 2>/dev/null
         sysctl -e -w kernel.panic=0 2>/dev/null
         sysctl -e -w kernel.panic_on_warn=0 2>/dev/null
+        sysctl -e -w kernel.sched_upmigrate=95 2>/dev/null
+        sysctl -e -w kernel.sched_downmigrate=85 2>/dev/null
+        sysctl -e -w kernel.sched_group_upmigrate=100 2>/dev/null
+        sysctl -e -w kernel.sched_group_downmigrate=95 2>/dev/null
         
-        if [ $(cat /proc/sys/vm/panic_on_oom) == "0" ]; then         
-          echo "[✓] PANIC TUNE" | tee -a $MAGNELOG
-        else       
-          echo "[X] PANIC TUNE" | tee -a $MAGNELOG
+        if [ -d /dev ]; then
+          echo "0" > /dev/cpuset/background/cpus
+          echo "0" > /dev/cpuset/system-background/cpus
+          echo "1" > /dev/stune/top-app/schedtune.colocate
+          echo "1" > /dev/stune/top-app/schedtune.sched_boost_enabled
+          echo "1" > /dev/stune/top-app/schedtune.sched_boost_no_override
+          echo "0" > /dev/stune/top-app/schedtune.prefer_idle
+          echo "0" > /dev/stune/top-app/schedtune.boost
+          echo "0" > /dev/stune/foreground/schedtune.colocate
+          echo "1" > /dev/stune/foreground/schedtune.sched_boost_enabled
+          echo "0" > /dev/stune/foreground/schedtune.sched_boost_no_override
+          echo "0" > /dev/stune/foreground/schedtune.prefer_idle
+          echo "0" > /dev/stune/foreground/schedtune.boost
+          echo "0" > /dev/stune/background/schedtune.colocate
+          echo "1" > /dev/stune/background/schedtune.sched_boost_enabled
+          echo "0" > /dev/stune/background/schedtune.sched_boost_no_override
+          echo "0" > /dev/stune/background/schedtune.prefer_idle
+          echo "0" > /dev/stune/background/schedtune.boost
+          echo "0" > /dev/stune/schedtune.colocate
+          echo "1" > /dev/stune/schedtune.sched_boost_enabled
+          echo "0" > /dev/stune/schedtune.sched_boost_no_override
+          echo "0" > /dev/stune/schedtune.prefer_idle
+          echo "0" > /dev/stune/schedtune.boost
+          echo "  [✓] CPU TUNING" | tee -a $MAGNELOG
+        else           
+          echo "  [X] CPU TUNING" | tee -a $MAGNELOG
         fi
-        
-        # FSYNC IS HERE ===================================================//
-        echo "Y" > /sys/module/sync/parameters/fsync_enabled
-        echo "1" > /sys/module/sync/parameters/auto_fsync_delay_sec
-        
-        if [ $(cat /sys/module/sync/parameters/fsync_enabled) == "Y" ] || [ $(cat /sys/module/sync/parameters/auto_fsync_delay_sec) == "1" ]; then         
-          echo "[✓] FSYNC TUNE" | tee -a $MAGNELOG
-        else         
-          echo "[X] FSYNC TUNE" | tee -a $MAGNELOG 
-        fi    
         
         # VM IS HERE ======================================================//
         sysctl -e -w vm.dirty_background_ratio=5 2>/dev/null
         sysctl -e -w vm.dirty_ratio=20 2>/dev/null
-        sysctl -e -w vm.vfs_cache_pressure=150 2>/dev/null
+        sysctl -e -w vm.vfs_cache_pressure=50 2>/dev/null
         sysctl -e -w vm.dirty_expire_centisecs=200 2>/dev/null
-        sysctl -e -w vm.dirty_writeback_centisecs=300 2>/dev/null
-        sysctl -e -w vm.swappiness=100 2>/dev/null
+        sysctl -e -w vm.dirty_writeback_centisecs=500 2>/dev/null
+        sysctl -e -w vm.swappiness=20 2>/dev/null
+        sysctl -e -w vm.drop_caches=0 2>/dev/null
+        sysctl -e -w vm.overcommit_ratio=50 2>/dev/null
         sysctl -e -w vm.page-cluster=1 2>/dev/null
         sysctl -e -w vm.min_free_kbytes=4096 2>/dev/null
+        sysctl -e -w vm.laptop_mode=0 2>/dev/null
+        sysctl -e -w vm.panic_on_oom=0 2>/dev/null
         sysctl -e -w fs.lease-break-time=20 2>/dev/null
+        sysctl -e -w fs.aio-max-nr=131072 2>/dev/null
+        sysctl -e -w fs.dir-notify-enable=0 2>/dev/null
         
-        if [ $(cat /proc/sys/vm/vfs_cache_pressure) == "150" ]; then          
-          echo "[✓] DVM TUNE" | tee -a $MAGNELOG
-        else          
-          echo "[X] DVM TUNE" | tee -a $MAGNELOG
+        if [ $(cat /proc/sys/vm/vfs_cache_pressure) == "50" ]; then     
+          echo "  [✓] DVM TUNING" | tee -a $MAGNELOG
+        else
+          echo "  [X] DVM TUNING" | tee -a $MAGNELOG
         fi
         
-        # PARAMETERS / MINFREE IS HERE ====================================//
-        echo "0" > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
-        echo "$NFSADJ1,$NFSADJ2,$NFSADJ3,$NFSADJ4,$NFSADJ5,$NFSADJ6" > /sys/module/lowmemorykiller/parameters/adj
-        echo "$KYLIEKYLERA,$KYLIEKYLERB,$KYLIEKYLERC,$KYLIEKYLERD,$KYLIEKYLERE,$KYLIEKYLERF" > /sys/module/lowmemorykiller/parameters/minfree
-        
-        if [ $(cat /sys/module/lowmemorykiller/parameters/minfree) == "$KYLIEKYLERA,$KYLIEKYLERB,$KYLIEKYLERC,$KYLIEKYLERD,$KYLIEKYLERE,$KYLIEKYLERF" ]; then          
-          echo "[✓] LMK TUNE" | tee -a $MAGNELOG
-        else           
-          echo "[X] LMK TUNE" | tee -a $MAGNELOG
-        fi
-        
-        # CPU TUNE IS HERE ==============================================//
-        echo "0" > /dev/cpuset/background/cpus
-        echo "0" > /dev/cpuset/system-background/cpus
-        echo "1" > /dev/stune/top-app/schedtune.colocate
-        echo "1" > /dev/stune/top-app/schedtune.sched_boost_enabled
-        echo "1" > /dev/stune/top-app/schedtune.sched_boost_no_override
-        echo "0" > /dev/stune/top-app/schedtune.prefer_idle
-        echo "0" > /dev/stune/top-app/schedtune.boost
-        echo "0" > /dev/stune/foreground/schedtune.colocate
-        echo "1" > /dev/stune/foreground/schedtune.sched_boost_enabled
-        echo "0" > /dev/stune/foreground/schedtune.sched_boost_no_override
-        echo "0" > /dev/stune/foreground/schedtune.prefer_idle
-        echo "0" > /dev/stune/foreground/schedtune.boost
-        echo "0" > /dev/stune/background/schedtune.colocate
-        echo "1" > /dev/stune/background/schedtune.sched_boost_enabled
-        echo "0" > /dev/stune/background/schedtune.sched_boost_no_override
-        echo "0" > /dev/stune/background/schedtune.prefer_idle
-        echo "0" > /dev/stune/background/schedtune.boost
-        echo "0" > /dev/stune/schedtune.colocate
-        echo "1" > /dev/stune/schedtune.sched_boost_enabled
-        echo "0" > /dev/stune/schedtune.sched_boost_no_override
-        echo "0" > /dev/stune/schedtune.prefer_idle
-        echo "0" > /dev/stune/schedtune.boost
-        echo "0" > /sys/devices/system/cpu/cpu0/sched_mostly_idle_freq
-        echo "0" > /sys/devices/system/cpu/cpu4/sched_mostly_idle_freq
-        echo "0" > /sys/devices/system/cpu/cpu2/sched_mostly_idle_freq
-        echo "0" > /sys/devices/system/cpu/cpu4/sched_mostly_idle_freq
-        echo "0" > /sys/devices/system/cpu/cpu6/sched_mostly_idle_freq
-        echo "0" > /sys/devices/system/cpu/cpu1/sched_mostly_idle_freq
-        
-        if [ $(cat /dev/stune/schedtune.boost) == "0" ] || [ $(cat /sys/devices/system/cpu/cpu0/sched_mostly_idle_freq) == "0" ]; then          
-          echo "[✓] CPU TUNE" | tee -a $MAGNELOG
-        else           
-          echo "[X] CPU TUNE" | tee -a $MAGNELOG
-        fi    
-    
         #GPU IS HERE =======================================================//
         if [ -e "/sys/class/kgsl/kgsl-3d0" ]; then
           echo "0" > /sys/class/kgsl/kgsl-3d0/throttling
@@ -202,133 +186,147 @@ case $HALT in
           echo "1" > /sys/devices/soc/*.qcom,kgsl-3d0/kgsl/kgsl-3d0/bus_split
         fi
         
-        if [ -e "$GPU/max_pwrlevel" ]; then 
+        if [ -e "$GPU/max_pwrlevel" ]; then
           echo "0" > $GPU/max_pwrlevel
         fi
         
-        if [ -e "$GPU/devfreq/adrenoboost" ]; then 
+        if [ -e "$GPU/devfreq/adrenoboost" ]; then
           echo "2" > $GPU/devfreq/adrenoboost
         fi
         
-        if [ -e "/sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate" ]; then 
-          echo "Y" > /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate
+        if [ -e "/sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate" ]; then
           echo "1" > /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate
+          echo "Y" > /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate
         fi
         
-        if [ $(cat /sys/class/kgsl/kgsl-3d0/throttling) == "0" ] || [ $(cat /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate) == "Y" ] || [ $(cat $GPU/devfreq/adrenoboost) == "2" ] || [ $(cat $GPU/max_pwrlevel) == "0" ]; then          
-          echo "[✓] GPU TUNE" | tee -a $MAGNELOG
-        else          
-          echo "[X] GPU TUNE" | tee -a $MAGNELOG
+        if [ $(cat /sys/class/kgsl/kgsl-3d0/throttling) == "0" ] || [ $(cat /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate) == "Y" ] || [ $(cat $GPU/devfreq/adrenoboost) == "2" ] ||   [ $(cat $GPU/max_pwrlevel) == "0" ]; then
+          echo "  [✓] GPU TUNING" | tee -a $MAGNELOG
+        else
+          echo "  [X] GPU TUNING" | tee -a $MAGNELOG
         fi
-       
+        
+        # PARAMETERS / MINFREE IS HERE ====================================//
+        if [ -d /sys/module/lowmemorykiller/parameters ]; then
+          echo "0" > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+          setprop lmk.autocalc false
+          echo "$NFSADJ1,$NFSADJ2,$NFSADJ3,$NFSADJ4,$NFSADJ5,$NFSADJ6" > /sys/module/lowmemorykiller/parameters/adj
+          echo "$KYLIEKYLERA,$KYLIEKYLERB,$KYLIEKYLERC,$KYLIEKYLERD,$KYLIEKYLERE,$KYLIEKYLERF" > /sys/module/lowmemorykiller/parameters/minfree
+          echo "  [✓] LMK TUNING" | tee -a $MAGNELOG
+        else
+          echo "  [X] LMK TUNING" | tee -a $MAGNELOG
+        fi
+        
         # NETWORK SPEED BOOST IS HERE =====================================//
-        sysctl -e -w net.ipv4.tcp_congestion_control=westwood
+        sysctl -e -w net.ipv4.conf.default.secure_redirects=0 2>/dev/null
+        sysctl -e -w net.ipv4.conf.default.accept_redirects=0 2>/dev/null
+        sysctl -e -w net.ipv4.conf.default.accept_source_route=0 2>/dev/null
+        sysctl -e -w net.ipv4.conf.all.secure_redirects=0 2>/dev/null
+        sysctl -e -w net.ipv4.conf.all.accept_redirects=0 2>/dev/null
+        sysctl -e -w net.ipv4.conf.all.accept_source_route=0 2>/dev/null
+        sysctl -e -w net.ipv4.ip_forward=0 2>/dev/null
+        sysctl -e -w net.ipv4.ip_dynaddr=0 2>/dev/null
+        sysctl -e -w net.ipv4.ip_no_pmtu_disc=0 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_ecn=0 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_timestamps=0 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_tw_reuse=1 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_fack=1 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_sack=1 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_dsack=1 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_rfc1337=1 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_tw_recycle=1 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_window_scaling=1 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_moderate_rcvbuf=1 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_no_metrics_save=1 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_synack_retries=2 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_syn_retries=2 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_keepalive_probes=5 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_keepalive_intvl=30 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_fin_timeout=30 2>/dev/null
+        sysctl -e -w net.ipv4.tcp_keepalive_time=1800 2>/dev/null
+        sysctl -e -w net.core.rmem_max=5505024 2>/dev/null
+        sysctl -e -w net.core.wmem_max=5505024 2>/dev/null
+        sysctl -e -w net.core.rmem_default=5505024 2>/dev/null
+        sysctl -e -w net.core.wmem_default=5505024 2>/dev/null
+        sysctl -e -w net.core.optmem_max=20480 2>/dev/null
+        sysctl -e -w net.ipv4.icmp_echo_ignore_broadcasts=1 2>/dev/null
+        sysctl -e -w net.ipv4.icmp_echo_ignore_all=1 2>/dev/null
+        sysctl -e -w net.ipv4.icmp_ignore_bogus_error_responses=1 2>/dev/null
+        echo "524288 1048576 5505024" > /proc/sys/net/ipv4/tcp_rmem
+        echo "262144 524288 5505024" > /proc/sys/net/ipv4/tcp_wmem
+        if [ -e /proc/sys/net/ipv4/tcp_congestion_control ]; then
+          echo "westwood" > /proc/sys/net/ipv4/tcp_congestion_control
+          echo "  [✓] TCP TUNING" | tee -a $MAGNELOG
+        else
+          echo "cubic" > /proc/sys/net/ipv4/tcp_congestion_control
+          echo "  [✓] TCP TUNING" | tee -a $MAGNELOG
+        fi
         
-        if [ $(cat /proc/sys/net/ipv4/tcp_congestion_control) == "westwood" ]; then          
-          echo "[✓] NET TUNE" | tee -a $MAGNELOG
-        else     
-          echo "[X] NET TUNE" | tee -a $MAGNELOG
+          
+        # FSYNC IS HERE ===================================================//
+        if [ -d /sys/module/sync/parameters ]; then
+          echo "Y" > /sys/module/sync/parameters/fsync_enabled
+          echo "1" > /sys/module/sync/parameters/auto_fsync_delay_sec
+          echo "  [✓] FSYNC TUNING" | tee -a $MAGNELOG
+        else
+          echo "  [X] FSYNC TUNING" | tee -a $MAGNELO
         fi
         
         # SDCARD BOOST IS HERE ============================================//
-        echo "cfq" > /sys/block/sda/queue/scheduler
-        echo "1536" > /sys/block/sda/queue/read_ahead_kb
-        echo "0" > /sys/block/sda/queue/rotational
-        echo "0" > /sys/block/sda/queue/iostats
-        echo "0" > /sys/block/sda/queue/add_random
-        echo "1" > /sys/block/sda/queue/rq_affinity
-        echo "0" > /sys/block/sda/queue/nomerges
-        echo "1536" > /sys/block/sda/queue/nr_requests
-        echo "cfq" > /sys/block/sdb/queue/scheduler
-        echo "1536" > /sys/block/sdb/queue/read_ahead_kb
-        echo "0" > /sys/block/sdb/queue/rotational
-        echo "0" > /sys/block/sdb/queue/iostats
-        echo "0" > /sys/block/sdb/queue/add_random
-        echo "1" > /sys/block/sdb/queue/rq_affinity
-        echo "0" > /sys/block/sdb/queue/nomerges
-        echo "1536" > /sys/block/sdb/queue/nr_requests
-        echo "cfq" > /sys/block/sdc/queue/scheduler
-        echo "1536" > /sys/block/sdc/queue/read_ahead_kb
-        echo "0" > /sys/block/sdc/queue/rotational
-        echo "0" > /sys/block/sdc/queue/iostats
-        echo "0" > /sys/block/sdc/queue/add_random
-        echo "1" > /sys/block/sdc/queue/rq_affinity
-        echo "0" > /sys/block/sdc/queue/nomerges
-        echo "1536" > /sys/block/sdc/queue/nr_requests
-        echo "cfq" > /sys/block/sdd/queue/scheduler
-        echo "1536" > /sys/block/sdd/queue/read_ahead_kb
-        echo "0" > /sys/block/sdd/queue/rotational
-        echo "0" > /sys/block/sdd/queue/iostats
-        echo "0" > /sys/block/sdd/queue/add_random
-        echo "1" > /sys/block/sdd/queue/rq_affinity
-        echo "0" > /sys/block/sdd/queue/nomerges
-        echo "1536" > /sys/block/sdd/queue/nr_requests
-        echo "cfq" > /sys/block/sde/queue/scheduler
-        echo "1536" > /sys/block/sde/queue/read_ahead_kb
-        echo "0" > /sys/block/sde/queue/rotational
-        echo "0" > /sys/block/sde/queue/iostats
-        echo "0" > /sys/block/sde/queue/add_random
-        echo "1" > /sys/block/sde/queue/rq_affinity
-        echo "0" > /sys/block/sde/queue/nomerges
-        echo "1536" > /sys/block/sde/queue/nr_requests
-        echo "cfq" > /sys/block/sdf/queue/scheduler
-        echo "1536" > /sys/block/sdf/queue/read_ahead_kb
-        echo "0" > /sys/block/sdf/queue/rotational
-        echo "0" > /sys/block/sdf/queue/iostats
-        echo "0" > /sys/block/sdf/queue/add_random
-        echo "1" > /sys/block/sdf/queue/rq_affinity
-        echo "0" > /sys/block/sdf/queue/nomerges
-        echo "1536" > /sys/block/sdf/queue/nr_requests
-        echo "cfq" > /sys/block/mmcblk0/queue/scheduler
-        echo "1536" > /sys/block/mmcblk0/queue/read_ahead_kb
-        echo "0" > /sys/block/mmcblk0/queue/rotational
-        echo "0" > /sys/block/mmcblk0/queue/iostats
-        echo "0" > /sys/block/mmcblk0/queue/add_random
-        echo "1" > /sys/block/mmcblk0/queue/rq_affinity
-        echo "0" > /sys/block/mmcblk0/queue/nomerges
-        echo "1536" > /sys/block/mmcblk0/queue/nr_requests   
-        
-        if [ $(cat /sys/block/mmcblk0/queue/nomerges) == "0" ]; then
-          echo "[✓] SDCARD TUNE" | tee -a $MAGNELOG
+        if [ -d /sys/block ]; then
+          for X in $ALL; do
+            echo "cfq" > $X/queue/scheduler 2>/dev/null
+            echo "1536" > $X/queue/read_ahead_kb 2>/dev/null
+            echo "0" > $X/queue/rotational 2>/dev/null
+            echo "0" > $X/queue/iostats 2>/dev/null
+            echo "0" > $X/queue/add_random 2>/dev/null
+            echo "1" > $X/queue/rq_affinity 2>/dev/null
+            echo "0" > $X/queue/nomerges 2>/dev/null
+            echo "1536" > $X/queue/nr_requests 2>/dev/null
+          done
+          echo "  [✓] QUEUE TUNING" | tee -a $MAGNELOG
         else
-          echo "[X] SDCARD TUNE" | tee -a $MAGNELOG
+          echo "  [X] QUEUE TUNING" | tee -a $MAGNELOG
         fi
-
+        
+        # ENTROPY IS HERE =================================================//
+        if [ -d /proc/sys/kernel/random ]; then
+          echo "1024" > /proc/sys/kernel/random/read_wakeup_threshold
+          echo "2048" > /proc/sys/kernel/random/write_wakeup_threshold
+          echo "  [✓] ENTROPY TUNING" | tee -a $MAGNELOG
+        else
+          echo "  [X] ENTROPY TUNING" | tee -a $MAGNELOG
+        fi
+        
+        # FORCE FAST CHARGE IS HERE =======================================//
+        if [ -e /sys/kernel/fast_charge/force_fast_charge ]; then
+          echo "1" > /sys/kernel/fast_charge/force_fast_charge
+          echo "  [✓] FAST CHARGE TUNING" | tee -a $MAGNELOG
+        else
+          echo "  [X] FAST CHARGE TUNING" | tee -a $MAGNELOG
+        fi
       ;;  
-    
-      *)
-        echo "" | tee -a $MAGNELOG
-        echo "ONLY INSTALL SCRIPT RAN, $(echo $KYLIEKYLER | tr a-z A-Z) NOT FULLY SUPPORTED" | tee -a $MAGNELOG
-        echo "" | tee -a $MAGNELOG
-        echo "×××××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
-        echo "AUTHOR/DEV: https://t.me/Kyliekyler" | tee -a $MAGNELOG    
-        echo "GROUP: https://t.me/MAGNETAR1999" | tee -a $MAGNELOG 
-        echo "CHANNEL: https://t.me/MAGNETARCHAT" | tee -a $MAGNELOG
-        echo "SUPPORT: https://paypal.com/kyliekyler" | tee -a $MAGNELOG    
-        echo "×××××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG                       
-        exit 1
-      ;;
     esac
   ;;
   
   true)
     echo "" | tee -a $MAGNELOG
-    echo "CONFLICTING MODULE FOUND, MAGNETAR SERVICE SCRIPT WON'T RUN" | tee -a $MAGNELOG
+    echo " CONFLICTING MODULE FOUND, MAGNETAR SERVICE SCRIPT WON'T RUN" | tee -a $MAGNELOG
     echo "" | tee -a $MAGNELOG
-    echo "×××××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
-    echo "AUTHOR/DEV: https://t.me/Kyliekyler" | tee -a $MAGNELOG    
-    echo "GROUP: https://t.me/MAGNETAR1999" | tee -a $MAGNELOG 
-    echo "CHANNEL: https://t.me/MAGNETARCHAT" | tee -a $MAGNELOG
-    echo "SUPPORT: https://paypal.com/kyliekyler" | tee -a $MAGNELOG    
-    echo "×××××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG                       
+    echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
+    echo " DEVELOPER: Kyliekyler" | tee -a $MAGNELOG
+    echo " GROUP: https://t.me/MAGNETAR1999" | tee -a $MAGNELOG
+    echo " CHANNEL: https://t.me/MAGNETARCHAT" | tee -a $MAGNELOG
+    echo " SUPPORT: https://paypal.com/kyliekyler" | tee -a $MAGNELOG
+    echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
     exit 1
   ;;
 esac
 
-echo "" | tee -a $MAGNELOG
-echo "×××××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
-echo "AUTHOR/DEV: https://t.me/Kyliekyler" | tee -a $MAGNELOG    
-echo "GROUP: https://t.me/MAGNETAR1999" | tee -a $MAGNELOG 
-echo "CHANNEL: https://t.me/MAGNETARCHAT" | tee -a $MAGNELOG
-echo "SUPPORT: https://paypal.com/kyliekyler" | tee -a $MAGNELOG    
-echo "×××××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG 
+echo "" | tee -a $MAGNELOG;
+echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
+echo " DEVELOPER: Kyliekyler" | tee -a $MAGNELOG
+echo " GROUP: https://t.me/MAGNETAR1999" | tee -a $MAGNELOG
+echo " CHANNEL: https://t.me/MAGNETARCHAT" | tee -a $MAGNELOG
+echo " SUPPORT: https://paypal.com/kyliekyler" | tee -a $MAGNELOG
+echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG
+exit 0

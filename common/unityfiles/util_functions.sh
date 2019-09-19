@@ -712,15 +712,30 @@ unity_main() {
   
   VER=$(grep_prop version $TMPDIR/module.prop)
   REL=$(grep_prop versionCode $TMPDIR/module.prop)
+  STS=$(grep_prop status $TMPDIR/module.prop)
+  ROM=$(grep_prop ro.build.display.id | cut -d'-' -f1)
+  KERNEL=$(uname -r)
+  SOC0=$(getprop ro.product.board)
+  SOC1=$(getprop ro.product.platform)
+  SOC2=$(getprop ro.board.platform)
+  
+  if [ ! "$SOC0" = "" ]; then
+    SOC=$(getprop ro.product.board)
+  elif [ ! "$SOC1" = "" ]; then
+    SOC=$(getprop ro.product.platform)
+  elif [ ! "$SOC2" = "" ]; then
+    SOC=$(getprop ro.board.platform)
+  else 
+    SOC="UNIDENTIFIED"
+  fi
+  
   case $API in
     27|28|29)
       KYLIEKYLER=$(grep_prop ro.product.vendor.device /vendor/build.prop)
-      SOC=$(grep_prop ro.product.board /vendor/build.prop)
     ;;
     
     25|26)
       KYLIEKYLER=$(grep_prop ro.product.device /system/build.prop)
-      SOC=$(grep_prop ro.product.board /system/build.prop)
     ;;
   esac
 
