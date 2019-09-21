@@ -8,7 +8,7 @@ if [ ! -d /data/MAGNETAR ]; then
  mkdir -p /data/MAGNETAR
 fi;
 
-MAGNELOG;=/data/MAGNETAR/magne.log
+MAGNELOG=/data/MAGNETAR/magne.log
 
 if [ -e $MAGNELOG; ]; then
  rm $MAGNELOG;
@@ -35,10 +35,9 @@ echo " KERNEL: $(echo $KERNEL | tr a-z A-Z)" | tee -a $MAGNELOG;
 echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG;
 
 echo "" | tee -a $MAGNELOG;
-echo " MAGNETAR STARTED @$(echo $(timestamp) | tr a-z A-Z)" | tee -a $MAGNELOG;
+echo " MAGNETAR STARTED @ $(echo $(timestamp) | tr a-z A-Z)" | tee -a $MAGNELOG;
 
 sleep 5
-
 echo "" | tee -a $MAGNELOG;
 echo "- INSTALL SCRIPT" | tee -a $MAGNELOG;
 
@@ -52,6 +51,12 @@ if [ -e "/system/bin/sound8x60" ]; then
   echo "  [✓] SOUND FX" | tee -a $MAGNELOG;
 else
   echo "  [X] SOUND FX" | tee -a $MAGNELOG;
+fi;
+
+if [ -e "/system/lib/egl/egl.cfg" ]; then
+  echo "  [✓] EGL CONFIG" | tee -a $MAGNELOG;
+else
+  echo "  [X] EGL CONFIG" | tee -a $MAGNELOG;
 fi;
 
 if [ ! -s "/system/vendor/bin/thermal-engine" ]; then
@@ -69,7 +74,7 @@ fi;
 case $HALT in
   false)
     case $(echo $KYLIEKYLER | tr A-Z a-z) in
-      s2)
+      will|add|later)
         echo "" | tee -a $MAGNELOG;
         echo "ONLY INSTALL SCRIPT RAN, $(echo $KYLIEKYLER | tr a-z A-Z) NOT FULLY SUPPORTED" | tee -a $MAGNELOG;
         echo "" | tee -a $MAGNELOG;
@@ -90,6 +95,8 @@ case $HALT in
         # VARS IS HERE ====================================================//
         NFSADJ1=0; NFSADJ2=117; NFSADJ3=235; NFSADJ4=411; NFSADJ5=823; NFSADJ6=1000
         KYLIEKYLERA=16384; KYLIEKYLERB=24576; KYLIEKYLERC=32768; KYLIEKYLERD=65536; KYLIEKYLERE=131072; KYLIEKYLERF=163840
+        TACC=/proc/sys/net/ipv4/tcp_available_congestion_control
+        ALL=$(ls -d /sys/block/*)
         
         if [ -d "/sys/class/kgsl/kgsl-3d0" ]; then
           GPU=$(/sys/class/kgsl/kgsl-3d0)
@@ -97,23 +104,28 @@ case $HALT in
           GPU=$(/sys/devices/soc/*.qcom,kgsl-3d0/kgsl/kgsl-3d0)
         fi;
         
-        ALL=$(ls -d /sys/block/*)
+        if  grep -l 'sociopath' $TACC; then
+          tcp=sociopath
+        elif  grep -l 'westwood' $TACC; then
+          tcp=westwood
+        elif  grep -l 'cubic' $TACC; then
+          tcp=cubic
+        else
+          tcp=reno
+        fi;
         
         sync;
-        chmod 0644 /proc/sys/* 2>/dev/null
-        chmod 0644 /sys/block/* 2>/dev/null      
-        chmod 0644 /sys/module/*
+        chmod 0666 /proc/sys/* 2>/dev/null
         
         # CPU IS HERE ==============================================//
         sysctl -e -w kernel.panic_on_oops=0 2>/dev/null
         sysctl -e -w kernel.panic=0 2>/dev/null
         sysctl -e -w kernel.panic_on_warn=0 2>/dev/null
-        sysctl -e -w kernel.sched_latency_ns=10000000 2>/dev/null
-        sysctl -e -w kernel.sched_wakeup_granularity_ns=0 2>/dev/null
-        sysctl -e -w kernel.sched_min_granularity_ns=2000000 2>/dev/null
-        sysctl -e -w kernel.sched_shares_ratelimit=725000 2>/dev/null
-        sysctl -e -w kernel.sched_rt_period_us=1000000 2>/dev/null
-        sysctl -e -w kernel.sched_rt_runtime_us=95000 2>/dev/null
+        sysctl -e -w kernel.sched_upmigrate=95 2>/dev/null
+        sysctl -e -w kernel.sched_downmigrate=85 2>/dev/null
+        sysctl -e -w kernel.sched_group_upmigrate=100 2>/dev/null
+        sysctl -e -w kernel.sched_group_downmigrate=95 2>/dev/null
+        
         if [ -d /dev ]; then
           echo "0" > /dev/cpuset/background/cpus
           echo "0" > /dev/cpuset/system-background/cpus
@@ -143,62 +155,50 @@ case $HALT in
         fi;
         
         # VM IS HERE ======================================================//
-        sysctl -e -w vm.dirty_background_ratio=4 2>/dev/null
-        sysctl -e -w vm.dirty_ratio=10 2>/dev/null
-        sysctl -e -w vm.vfs_cache_pressure=1 2>/dev/null
-        sysctl -e -w vm.dirty_expire_centisecs=100 2>/dev/null
+        sysctl -e -w vm.dirty_background_ratio=5 2>/dev/null
+        sysctl -e -w vm.dirty_ratio=20 2>/dev/null
+        sysctl -e -w vm.vfs_cache_pressure=50 2>/dev/null
+        sysctl -e -w vm.dirty_expire_centisecs=200 2>/dev/null
         sysctl -e -w vm.dirty_writeback_centisecs=500 2>/dev/null
-        sysctl -e -w vm.swappiness=30 2>/dev/null
+        sysctl -e -w vm.swappiness=20 2>/dev/null
+        sysctl -e -w vm.drop_caches=0 2>/dev/null
+        sysctl -e -w vm.overcommit_ratio=50 2>/dev/null
         sysctl -e -w vm.page-cluster=1 2>/dev/null
-        sysctl -e -w vm.drop_caches=3 2>/dev/null
         sysctl -e -w vm.min_free_kbytes=4096 2>/dev/null
         sysctl -e -w vm.laptop_mode=0 2>/dev/null
         sysctl -e -w vm.panic_on_oom=0 2>/dev/null
-        sysctl -e -w vm.oom_kill_allocating_task=0 2>/dev/null
-        sysctl -e -w vm.overcommit_memory=1 2>/dev/null    
-        sysctl -e -w vm.overcommit_ratio=100 2>/dev/null    
         sysctl -e -w fs.lease-break-time=20 2>/dev/null
+        sysctl -e -w fs.aio-max-nr=131072 2>/dev/null
+        sysctl -e -w fs.dir-notify-enable=0 2>/dev/null
         
-        if [ $(cat /proc/sys/vm/vfs_cache_pressure) == "1" ]; then
+        if [ $(cat /proc/sys/vm/vfs_cache_pressure) == "50" ]; then     
           echo "  [✓] DVM TUNING" | tee -a $MAGNELOG;
         else
           echo "  [X] DVM TUNING" | tee -a $MAGNELOG;
         fi;
         
         #GPU IS HERE =======================================================//
-        if [ -e "/sys/class/kgsl/kgsl-3d0" ]; then
-          echo "0" > /sys/class/kgsl/kgsl-3d0/throttling
-          echo "0" > /sys/class/kgsl/kgsl-3d0/force_no_nap
-          echo "0" > /sys/class/kgsl/kgsl-3d0/force_bus_on
-          echo "0" > /sys/class/kgsl/kgsl-3d0/force_clk_on 
-          echo "0" > /sys/class/kgsl/kgsl-3d0/force_rail_on
-          echo "1" > /sys/class/kgsl/kgsl-3d0/bus_split
-        elif [ -e "/sys/devices/soc/*.qcom,kgsl-3d0/kgsl/kgsl-3d0" ]; then
-          echo "0" > /sys/devices/soc/*.qcom,kgsl-3d0/kgsl/kgsl-3d0/throttling
-          echo "0" > /sys/devices/soc/*.qcom,kgsl-3d0/kgsl/kgsl-3d0/force_no_nap
-          echo "0" > /sys/devices/soc/*.qcom,kgsl-3d0/kgsl/kgsl-3d0/force_bus_on
-          echo "0" > /sys/devices/soc/*.qcom,kgsl-3d0/kgsl/kgsl-3d0/force_clk_on 
-          echo "0" > /sys/devices/soc/*.qcom,kgsl-3d0/kgsl/kgsl-3d0/force_rail_on
-          echo "1" > /sys/devices/soc/*.qcom,kgsl-3d0/kgsl/kgsl-3d0/bus_split
-        fi;
         
         if [ -e "$GPU/max_pwrlevel" ]; then
           echo "0" > $GPU/max_pwrlevel
+          echo "  [✓] GPU SCALING" | tee -a $MAGNELOG;
+        else
+          echo "  [X] GPU SCALING" | tee -a $MAGNELOG;
         fi;
         
         if [ -e "$GPU/devfreq/adrenoboost" ]; then
           echo "2" > $GPU/devfreq/adrenoboost
+          echo "  [✓] ADRENO BOOST" | tee -a $MAGNELOG;
+        else
+          echo "  [X] ADRENO BOOST" | tee -a $MAGNELOG;
         fi;
         
         if [ -e "/sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate" ]; then
           echo "1" > /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate
           echo "Y" > /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate
-        fi;
-        
-        if [ $(cat /sys/class/kgsl/kgsl-3d0/throttling) == "0" ] || [ $(cat /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate) == "Y" ] || [ $(cat $GPU/devfreq/adrenoboost) == "2" ] ||   [ $(cat $GPU/max_pwrlevel) == "0" ]; then
-          echo "  [✓] GPU TUNING" | tee -a $MAGNELOG;
+          echo "  [✓] GPU ALGORITHM" | tee -a $MAGNELOG;
         else
-          echo "  [X] GPU TUNING" | tee -a $MAGNELOG;
+          echo "  [X] GPU ALGORITHM" | tee -a $MAGNELOG;
         fi;
         
         # PARAMETERS / MINFREE IS HERE ====================================//
@@ -211,22 +211,58 @@ case $HALT in
         else
           echo "  [X] LMK TUNING" | tee -a $MAGNELOG;
         fi;
+        
         # NETWORK SPEED BOOST IS HERE =====================================//
         if [ -e /proc/sys/net/ipv4/tcp_congestion_control ]; then
-          echo "westwood" > /proc/sys/net/ipv4/tcp_congestion_control
-          echo "  [✓] WESTWOOD NET TCP" | tee -a $MAGNELOG;
+          echo "$tcp" > /proc/sys/net/ipv4/tcp_congestion_control
+          sysctl -e -w net.ipv4.conf.default.secure_redirects=0 2>/dev/null
+          sysctl -e -w net.ipv4.conf.default.accept_redirects=0 2>/dev/null
+          sysctl -e -w net.ipv4.conf.default.accept_source_route=0 2>/dev/null
+          sysctl -e -w net.ipv4.conf.all.secure_redirects=0 2>/dev/null
+          sysctl -e -w net.ipv4.conf.all.accept_redirects=0 2>/dev/null
+          sysctl -e -w net.ipv4.conf.all.accept_source_route=0 2>/dev/null
+          sysctl -e -w net.ipv4.ip_forward=0 2>/dev/null
+          sysctl -e -w net.ipv4.ip_dynaddr=0 2>/dev/null
+          sysctl -e -w net.ipv4.ip_no_pmtu_disc=0 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_ecn=0 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_timestamps=0 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_tw_reuse=1 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_fack=1 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_sack=1 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_dsack=1 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_rfc1337=1 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_tw_recycle=1 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_window_scaling=1 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_moderate_rcvbuf=1 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_no_metrics_save=1 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_synack_retries=2 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_syn_retries=2 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_keepalive_probes=5 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_keepalive_intvl=30 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_fi;n_timeout=30 2>/dev/null
+          sysctl -e -w net.ipv4.tcp_keepalive_time=1800 2>/dev/null
+          sysctl -e -w net.core.rmem_max=5505024 2>/dev/null
+          sysctl -e -w net.core.wmem_max=5505024 2>/dev/null
+          sysctl -e -w net.core.rmem_default=5505024 2>/dev/null
+          sysctl -e -w net.core.wmem_default=5505024 2>/dev/null
+          sysctl -e -w net.core.optmem_max=20480 2>/dev/null
+          sysctl -e -w net.ipv4.icmp_echo_ignore_broadcasts=1 2>/dev/null
+          sysctl -e -w net.ipv4.icmp_echo_ignore_all=1 2>/dev/null
+          sysctl -e -w net.ipv4.icmp_ignore_bogus_error_responses=1 2>/dev/null
+          echo "524288 1048576 5505024" > /proc/sys/net/ipv4/tcp_rmem
+          echo "262144 524288 5505024" > /proc/sys/net/ipv4/tcp_wmem
+          echo "  [✓] $tcp TCP TUNING" | tee -a $MAGNELOG;
         else
-          echo "cubic" > /proc/sys/net/ipv4/tcp_congestion_control
-          echo "  [✓] CUBIC NET TCP" | tee -a $MAGNELOG;
-        fi;
-          
+          echo "  [X] TCP TUNING" | tee -a $MAGNELOG;
+         fi;
+         
         # FSYNC IS HERE ===================================================//
         if [ -d /sys/module/sync/parameters ]; then
           echo "Y" > /sys/module/sync/parameters/fsync_enabled
           echo "1" > /sys/module/sync/parameters/auto_fsync_delay_sec
           echo "  [✓] FSYNC TUNING" | tee -a $MAGNELOG;
         else
-          echo "  [X] FSYNC TUNING" | tee -a $MAGNELOG;
+          echo "  [X] FSYNC TUNING" | tee -a $MAGNELO
         fi;
         
         # SDCARD BOOST IS HERE ============================================//
@@ -237,13 +273,13 @@ case $HALT in
             echo "0" > $X/queue/rotational 2>/dev/null
             echo "0" > $X/queue/iostats 2>/dev/null
             echo "0" > $X/queue/add_random 2>/dev/null
-            echo "1" > $X/queue/rq_affinity 2>/dev/null
+            echo "1" > $X/queue/rq_affi;nity 2>/dev/null
             echo "0" > $X/queue/nomerges 2>/dev/null
             echo "1536" > $X/queue/nr_requests 2>/dev/null
           done
           echo "  [✓] QUEUE TUNING" | tee -a $MAGNELOG;
         else
-        echo "  [X] QUEUE TUNING" | tee -a $MAGNELOG;
+          echo "  [X] QUEUE TUNING" | tee -a $MAGNELOG;
         fi;
         
         # ENTROPY IS HERE =================================================//
@@ -280,6 +316,7 @@ case $HALT in
   ;;
 esac
 
+sync;
 echo "" | tee -a $MAGNELOG;
 echo "×××××××××××××××××××××××××××××××××××××××××××××" | tee -a $MAGNELOG;
 echo " DEVELOPER: Kyliekyler" | tee -a $MAGNELOG;
