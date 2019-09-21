@@ -171,7 +171,7 @@ case $HALT in
         sysctl -e -w fs.aio-max-nr=131072 2>/dev/null
         sysctl -e -w fs.dir-notify-enable=0 2>/dev/null
         
-        if [ $(cat /proc/sys/vm/vfs_cache_pressure) == "50" ]; then     
+        if [ $(cat /proc/sys/vm/vfs_cache_pressure) == "50" ]; then
           echo "  [✓] DVM TUNING" | tee -a $MAGNELOG;
         else
           echo "  [X] DVM TUNING" | tee -a $MAGNELOG;
@@ -262,7 +262,7 @@ case $HALT in
           echo "1" > /sys/module/sync/parameters/auto_fsync_delay_sec
           echo "  [✓] FSYNC TUNING" | tee -a $MAGNELOG;
         else
-          echo "  [X] FSYNC TUNING" | tee -a $MAGNELO
+          echo "  [X] FSYNC TUNING" | tee -a $MAGNELOG;
         fi;
         
         # SDCARD BOOST IS HERE ============================================//
@@ -273,7 +273,7 @@ case $HALT in
             echo "0" > $X/queue/rotational 2>/dev/null
             echo "0" > $X/queue/iostats 2>/dev/null
             echo "0" > $X/queue/add_random 2>/dev/null
-            echo "1" > $X/queue/rq_affi;nity 2>/dev/null
+            echo "1" > $X/queue/rq_affinity 2>/dev/null
             echo "0" > $X/queue/nomerges 2>/dev/null
             echo "1536" > $X/queue/nr_requests 2>/dev/null
           done
