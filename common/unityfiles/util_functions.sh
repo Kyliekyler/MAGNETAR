@@ -352,7 +352,7 @@ run_addons() {
   while true; do
     case "$1" in
       -m) NAME=main; shift;;
-      -h) NAME=preinstall; PNAME="Preinstall"; shift;;
+      -h) NAME=preinstall; PNAME="PREINSTALL"; shift;;
       -i) NAME=install; PNAME="Install"; shift;;
       -u) NAME=uninstall; PNAME="Uninstall"; shift;;
       -v) NAME=postuninstall; PNAME="Postuninstall"; shift;;
@@ -360,13 +360,13 @@ run_addons() {
     esac
   done
   if [ "$(ls -A $TMPDIR/addon/*/$NAME.sh 2>/dev/null)" ]; then
-    [ -z $PNAME ] || { ui_print " "; ui_print "- Running $PNAME Addons..."; }
+    [ -z $PNAME ] || { ui_print " "; ui_print "- RUNNING $PNAME ADDONS..."; }
     for i in $TMPDIR/addon/*/$NAME.sh; do
       ui_print " "
-      ui_print "- Running $(echo $i | sed -r "s|$TMPDIR/addon/(.*)/$NAME.sh|\1|")..."
+      ui_print "- RUNNING $(echo $i | sed -r "s|$TMPDIR/addon/(.*)/$NAME.sh|\1|" | tr a-z A-Z)..."
       . $i
     done
-    [ -z $PNAME ] || { ui_print " "; ui_print "- `echo $PNAME`ing..."; }
+    [ -z $PNAME ] || { ui_print " "; ui_print "- `echo $PNAME`ING..."; }
   fi
 }
 
@@ -714,15 +714,14 @@ unity_main() {
   REL=$(grep_prop versionCode $TMPDIR/module.prop)
   STS=$(grep_prop status $TMPDIR/module.prop)
   ROM=$(grep_prop ro.build.display.id | cut -d'-' -f1)
-  KERNEL=$(uname -r)
-  SOC0=$(getprop ro.product.board)
-  SOC1=$(getprop ro.product.platform)
+  SOC0=$(getprop ro.product.platform)
+  SOC1=$(getprop ro.product.board)
   SOC2=$(getprop ro.board.platform)
   
   if [ ! "$SOC0" = "" ]; then
-    SOC=$(getprop ro.product.board)
+    SOC=$(getprop ro.board.plaform)
   elif [ ! "$SOC1" = "" ]; then
-    SOC=$(getprop ro.product.platform)
+    SOC=$(getprop ro.product.board)
   elif [ ! "$SOC2" = "" ]; then
     SOC=$(getprop ro.board.platform)
   else 

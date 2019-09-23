@@ -1,9 +1,14 @@
 # MAGNETAR
-Eliminate Lags and Throttling, Enhance Sounds, Run Your Game Smoothly and Comfortably with No Substantial Performance Drops
+<p align="center">
+  <img src="https://github.com/Magisk-Modules-Repo/MAGNETAR/blob/master/.github/magnetar.png"> 
+</p>
+ 
+<p align="center">
+  <a href="https://t.me/MAGNETAR1999"><img src="https://img.shields.io/badge/Telegram-Channel-blue.svg"></a><br/><a href="https://t.me/MAGNETARCHAT"><img src="https://img.shields.io/badge/Telegram-Group-blue.svg"></a>
+</p>
+<br/>
 
-# Community
-- [![Channel](https://img.shields.io/badge/Telegram-Channel-red.svg)](https://MAGNETAR1999)
-- [![Group](https://img.shields.io/badge/Telegram-Group-red.svg)](https://t.me/MAGNETARCHAT)
+Eliminate Lags and Throttling, Enhance Sounds, Run Your Game Smoothly and Comfortably with No Substantial Performance Drops
 
 # Notes
 - This will improve overall performance but in exchange for a bit increased power usage and may cause heating
@@ -15,14 +20,35 @@ Eliminate Lags and Throttling, Enhance Sounds, Run Your Game Smoothly and Comfor
 - [![Android 10](https://img.shields.io/badge/Android-10-brightgreen.svg)](https://developer.android.com/)
 - [![Magisk](https://img.shields.io/badge/Magisk-19%2B-00B39B.svg)](https://forum.xda-developers.com/apps/magisk/official-magisk-v7-universal-systemless-t3473445)
 - [![Chipset](https://img.shields.io/badge/Qualcomm-Snapdragon-red.svg)](https://qualcomm.com)
-
-- If you want to add your device, ping me on my [telegram account](https://t.me/Kyliekyler)
    
 # Instructions
 - Download and install the module
+- Choose using vol keys
 - Reboot after you finished installing
 
 # Changelog
+### ECHO (1909230945)
+- Various Adjustments
+- Smoother Performance
+- Added SD855 Support
+- Added SoundFX Opt-in/out
+- Added More GPU/CPU Tweaks
+- Fixed Wifi Issues On Some Devices
+- Fixed Static Call Sound
+- Fixed Scroll Bug
+- Fixed Module Logging Duplicate
+- Updated Thermal
+- Better Idling
+  - Reduced Heating
+  - Lower Batt Consumption
+- Updated Props
+  - Removed Various Props
+  - Reverted Some Props from Build 1909101057
+- Smart Fast Charge
+  - Lowering Charge Input When Battery Temp Reached 45°C
+- Improved Log Checking
+- Increased Override Time To 3mins After Boot
+
 ### DELTA (1909191327)
 - Support for All Devices Using QComm Snapdragon SOC
 - Improved System Speed
@@ -63,3 +89,4 @@ Eliminate Lags and Throttling, Enhance Sounds, Run Your Game Smoothly and Comfor
 - [K1ks](https://t.me/K1ks1) for His Help & Tweaks To Make This Module Possible
 - [Zackptg5](https://github.com/Zackptg5) for Unity template
 - [topjohnwu](https://github.com/topjohnwu) for Magisk
+- To my TESTERS who give immediate feedback and hunting 🐞

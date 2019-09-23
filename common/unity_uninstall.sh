@@ -2,7 +2,7 @@
 #  |     | _  |   __|   | |  __|_   _| _  | __ | 
 #  | | | |    |  |  | | | |  __| | | |    |   -| 
 #  |_|_|_|_|__|_____|_|___|____| |_| |_|__|_|__| 
-#                                  by Kyliekyler    
+#                      by Kyliekyler • EST. 2019   
 
 if [ -e /data/adb/modules/MAGNETAR ]; then
   rm -rf /data/adb/modules/MAGNETAR
