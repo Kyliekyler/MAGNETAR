@@ -501,10 +501,10 @@ magnevars() {
       CODENAME=$(getprop ro.product.device)
     ;;
   esac
-  
-  if [ -d $MOUNTEDROOT/MAGNETAR$SYS/etc/.MODID ]; then
+    
+  if [ -d $MOUNTEDROOT/$MODID$SYS/etc/.$MODID ]; then
     MAGNEPATH=$MOUNTEDROOT/$MODID$SYS/etc/.$MODID
-  elif [ -d $SYS/etc/.MAGNETAR ]; then
+  else
     MAGNEPATH=$SYS/etc/.$MODID
   fi
 }
