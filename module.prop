@@ -1,7 +1,16 @@
+#   _____ __________ _____ ____ _____ _________  
+#  |     | _  |   __|   | |  __|_   _| _  | __ | 
+#  | | | |    |  |  | | | |  __| | | |    |   -| 
+#  |_|_|_|_|__|_____|_|___|____| |_| |_|__|_|__| 
+#                           by Kyliekyler © 2019 
+
+#==========================================================================//
+# GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
+#==========================================================================//
+
 id=MAGNETAR
 name=MAGNETAR
-version=ECHO
-status=STABLE
-versionCode=1909230945
+version=FOXTROT
+versionCode=1910111550
 author=Kyliekyler
 description=Eliminate Lags and Throttling, Enhance Sounds, Run Your Game Smoothly and Comfortably with No Substantial Performance Drops

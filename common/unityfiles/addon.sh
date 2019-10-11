@@ -1,10 +1,14 @@
 #!/sbin/sh
-# ADDOND_VERSION=2
+
 #   _____ __________ _____ ____ _____ _________  
 #  |     | _  |   __|   | |  __|_   _| _  | __ | 
 #  | | | |    |  |  | | | |  __| | | |    |   -| 
 #  |_|_|_|_|__|_____|_|___|____| |_| |_|__|_|__| 
-#                                  by Kyliekyler      
+#                           by Kyliekyler © 2019    
+
+#==========================================================================//
+# GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
+#==========================================================================//
 
 . /tmp/backuptool.functions
 
@@ -34,10 +38,8 @@ case "$ARG" in
     sed -i "s/NORESTORE//g" $P/addon.d/$MODID-files2
   ;;
   post-backup)
-    # Stub
   ;;
   pre-restore)
-    # Stub
   ;;
   post-restore)
     rm -f $P/addon.d/$MODID-files2

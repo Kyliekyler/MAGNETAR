@@ -8,7 +8,7 @@
 </p>
 <br/>
 
-Eliminate Lags and Throttling, Enhance Sounds, Run Your Game Smoothly and Comfortably with No Substantial Performance Drops
+Eliminate Lags and Throttling — Run Your Game Smoothly and Comfortably with No Substantial Performance Drops
 
 # Notes
 - This will improve overall performance but in exchange for a bit increased power usage and may cause heating
@@ -16,6 +16,8 @@ Eliminate Lags and Throttling, Enhance Sounds, Run Your Game Smoothly and Comfor
 - Some phones arent booting when installing the module, try to get logs and send me on the group
 
 # Compatibility
+- [![Android 7](https://img.shields.io/badge/Android-7-violet.svg)](https://developer.android.com/)
+- [![Android 8](https://img.shields.io/badge/Android-8-yellow.svg)](https://developer.android.com/)
 - [![Android 9](https://img.shields.io/badge/Android-9-lightgreen.svg)](https://developer.android.com/)
 - [![Android 10](https://img.shields.io/badge/Android-10-brightgreen.svg)](https://developer.android.com/)
 - [![Magisk](https://img.shields.io/badge/Magisk-19%2B-00B39B.svg)](https://forum.xda-developers.com/apps/magisk/official-magisk-v7-universal-systemless-t3473445)
@@ -23,10 +25,37 @@ Eliminate Lags and Throttling, Enhance Sounds, Run Your Game Smoothly and Comfor
    
 # Instructions
 - Download and install the module
-- Choose using vol keys
 - Reboot after you finished installing
 
 # Changelog
+### FOXTROT (1910091430)
+- Anti-Kang Parameters
+- Fully Rewritten For Efficiency
+- Not Forcing Config To Avoid Conflicts
+- Force High Quality Graphics
+- Added RAM Gaming Configuration
+- Adjusted Kernel Gaming Config
+- Removed Governor Config For CPU & GPU
+- Fixed Lag When Certain Temp Reached
+- Much Better Temps
+- Removed SoundFX
+- Updated Props
+- Compiled With Clang 
+  - 32bit and 64bit SOC Support
+- All New Logging System
+  - Detailed Logging
+- Improved SOC Detection
+  - Fixed Recovery Installation
+- Smoother UI
+  - FPS Unlocking
+  - Auto Freq
+- Reduced Idle Drain
+  - Adjusted LPM Parameters
+  - Disabled Debuggers
+- EAS / HMP Tuning
+- Better Color Adjustment
+- More...
+  
 ### ECHO (1909230945)
 - Various Adjustments
 - Smoother Performance
@@ -86,7 +115,6 @@ Eliminate Lags and Throttling, Enhance Sounds, Run Your Game Smoothly and Comfor
 
 # Credits
 - [Hafiz](https://t.me/HafizZiq) for Fixes and Code Optimization
-- [K1ks](https://t.me/K1ks1) for His Help & Tweaks To Make This Module Possible
 - [Zackptg5](https://github.com/Zackptg5) for Unity template
 - [topjohnwu](https://github.com/topjohnwu) for Magisk
 - To my TESTERS who give immediate feedback and hunting 🐞

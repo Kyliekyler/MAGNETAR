@@ -2,12 +2,25 @@
 #  |     | _  |   __|   | |  __|_   _| _  | __ | 
 #  | | | |    |  |  | | | |  __| | | |    |   -| 
 #  |_|_|_|_|__|_____|_|___|____| |_| |_|__|_|__| 
-#                      by Kyliekyler • EST. 2019   
+#                           by Kyliekyler © 2019   
 
-if [ -e /data/adb/modules/MAGNETAR ]; then
-  rm -rf /data/adb/modules/MAGNETAR
+#===========================================================================//
+# GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
+#===========================================================================//
+
+# DELETE ===================================================================//
+if [ -d $MOUNTEDROOT/$MODID ]; then
+  rm -rf $MOUNTEDROOT/$MODID
 fi
 
-if [ -e /data/MAGNETAR ]; then
-  rm -rf /data/MAGNETAR
+if [ -d $SYS/etc/.$MODID ]; then
+  rm -rf $SYS/etc/.$MODID
+fi
+
+if [ -d /data/$MODID ]; then
+  rm -rf /data/$MODID
+fi
+
+if [ -d /dev/.$MODID ]; then
+  rm -rf /dev/.$MODID
 fi
