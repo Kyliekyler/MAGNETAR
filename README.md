@@ -28,7 +28,7 @@ Eliminate Lags and Throttling — Run Your Game Smoothly and Comfortably with No
 - Reboot after you finished installing
 
 # Changelog
-### FOXTROT (1910111955)
+### FOXTROT (1910112244)
 - Anti-Kang Parameters
 - Fully Rewritten For Efficiency
 - Not Forcing Config To Avoid Conflicts
