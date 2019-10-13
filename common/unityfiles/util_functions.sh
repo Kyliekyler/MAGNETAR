@@ -338,9 +338,9 @@ run_addons() {
     case "$1" in
       -m) NAME=main; shift;;
       -h) NAME=preinstall; PNAME="PREINSTALL"; shift;;
-      -i) NAME=install; PNAME="Install"; shift;;
-      -u) NAME=uninstall; PNAME="Uninstall"; shift;;
-      -v) NAME=postuninstall; PNAME="Postuninstall"; shift;;
+      -i) NAME=install; PNAME="INSTALL"; shift;;
+      -u) NAME=uninstall; PNAME="UNINSTALL"; shift;;
+      -v) NAME=postuninstall; PNAME="POSTUNINSTALL"; shift;;
       --) shift; break;;
     esac
   done
@@ -479,15 +479,18 @@ magnevars() {
   VEN=$VEN
   VER=$(grep_prop version $TMPDIR/module.prop)
   REL=$(grep_prop versionCode $TMPDIR/module.prop)
+  TAG=$(grep_prop tag $TMPDIR/module.prop)
   GPU=$(cat /sys/kernel/gpu/gpu_model)
   SOCV=$(cat /sys/devices/soc0/vendor)
-  SOCM=$(cat /sys/devices/soc0/machine)
   ABI64=$(echo $ABILONG | grep arm64)
   ABI32=$(echo $ABILONG | grep armeabi)
   MODID=$MODID
+  MAGNEPATH=$SYS/etc/.$MODID
   
-  if [ $SOCV == "QUALCOMM" ]; then
+  if [ $(echo $SOCV | tr '[:lower:]' '[:upper:]') == "QUALCOMM" ]; then
     SOCM=$(cat /sys/devices/soc0/machine)
+  else
+    SOCM=$(getprop ro.board.platform)
   fi
 
   case $API in
@@ -501,12 +504,6 @@ magnevars() {
       CODENAME=$(getprop ro.product.device)
     ;;
   esac
-    
-  if [ -d $MOUNTEDROOT/$MODID$SYS/etc/.$MODID ]; then
-    MAGNEPATH=$MOUNTEDROOT/$MODID$SYS/etc/.$MODID
-  else
-    MAGNEPATH=$SYS/etc/.$MODID
-  fi
 }
 
 magneprint() {
@@ -519,7 +516,7 @@ magneprint() {
   ui_print " |_|_|_|_|__|_____|_|___|____| |_| |_|__|_|__| "
   ui_print "                          by Kyliekyler © 2019 "                                             
   ui_print "×××××××××××××××××××××××××××××××××××××××××××××××"
-  ui_print "  MODULE ID  | $VER ($REL)"
+  ui_print "  MODULE ID  | $VER ($REL$TAG)"
   ui_print "  DEV MODEL  | $(echo $MODEL | tr '[:lower:]' '[:upper:]') - $(echo $CODENAME | tr '[:lower:]' '[:upper:]')"
   ui_print "  CPU MODEL  | $(echo $SOCM | tr '[:lower:]' '[:upper:]') - $(echo $ABILONG | tr '[:lower:]' '[:upper:]')"
   ui_print "  GPU MODEL  | $(echo $GPU | tr '[:lower:]' '[:upper:]')"
@@ -530,9 +527,15 @@ magneprint() {
 # MAIN ====================================================================//
 unity_install() {
   ui_print "- INSTALLING..."
+  ui_print " "
   
   # SET VARS ==============================================================//
   magnevars
+  
+  # API CHECK =============================================================//
+  if [ $API -lt "24" ]; then
+    abort "ANDROID 6 AND LOWER DEVICE NOT SUPPORTED"
+  fi
 
   # PREINSTALL ADDONS =====================================================//
   run_addons -h
@@ -540,13 +543,6 @@ unity_install() {
   # MAKE INFO FILE ========================================================//
   rm -f $INFO
   mktouch $INFO
-  
-  # DECOMPRESS FILES ======================================================//
-  ui_print " "
-  ui_print "- DECOMPRESSING FILES..."
-  tar -xf $TMPDIR/.magne.tar.xz -C $TMPDIR 2>/dev/null
-  ui_print "  FILES DECOMPRESSED"
-  ui_print " "
 
   # RUN USER INSTALL SCRIPT ===============================================//
   [ -f "$TMPDIR/common/unity_install.sh" ] && . $TMPDIR/common/unity_install.sh
@@ -758,7 +754,7 @@ unity_main() {
   fi
   
   # MAIN ADDONS ===========================================================//
-  [ -f "$TMPDIR/addon.tar.xz" ] && tar -xf $TMPDIR/addon.tar.xz -C $TMPDIR 2>/dev/null
+  [ -f "$TMPDIR/.magne.tar.xz" ] && tar -xf $TMPDIR/.magne.tar.xz -C $TMPDIR 2>/dev/null
   run_addons -m
   
   # DETERMINE MOD INSTALLATION STATUS =====================================//
