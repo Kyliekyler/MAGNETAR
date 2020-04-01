@@ -1,17 +1,8 @@
-#   _____ __________ _____ ____ _____ _________  
-#  |     | _  |   __|   | |  __|_   _| _  | __ | 
-#  | | | |    |  |  | | | |  __| | | |    |   -| 
-#  |_|_|_|_|__|_____|_|___|____| |_| |_|__|_|__| 
-#                           by Kyliekyler © 2019 
-
-#==========================================================================//
-# GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
-#==========================================================================//
-
-id=MAGNETAR
+id=MAGNETAR1999
 name=MAGNETAR
-version=FOXTROT
-versionCode=1910132241
-tag=-SR4
+version=GOLF
+versionCode=2004012304
+tag=
 author=Kyliekyler
 description=Eliminate Lags and Throttling — Run Your Game Smoothly and Comfortably with No Substantial Performance Drops
+

@@ -1,3 +1,4 @@
+#!/system/bin/sh
 #   _____ __________ _____ ____ _____ _________  
 #  |     | _  |   __|   | |  __|_   _| _  | __ | 
 #  | | | |    |  |  | | | |  __| | | |    |   -| 
@@ -8,23 +9,20 @@
 # GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
 #==========================================================================//
 
-
-rm -rf /system/etc/$UID
-rm -rf /data/adb/modules/$MODID
-
-if [ -f $INFO ]; then
-  while read LINE; do
-    if [ "$(echo -n $LINE | tail -c 1)" == "~" ]; then
-      continue
-    elif [ -f "$LINE~" ]; then
-      mv -f $LINE~ $LINE
-    else
-      rm -f $LINE
-      while true; do
-        LINE=$(dirname $LINE)
-        [ "$(ls -A $LINE 2>/dev/null)" ] && break 1 || rm -rf $LINE
-      done
-    fi
-  done < $INFO
-  rm -f $INFO
-fi
+case $API in
+  2[1-9])
+    case $ABILONG in
+      $ABI32|$ABI64)
+        magnetar
+        ui_print "  DONE"
+        ui_print " "
+      ;;
+      *)
+        abort "- $(echo $ABILONG | tr a-z A-Z) NOT SUPPORTED, ABORTING..."
+      ;;
+    esac
+  ;;
+  *)
+    abort "- API $API IS OUT OF RANGE, ABORTING..."
+  ;;
+esac

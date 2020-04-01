@@ -6,5 +6,4 @@
 META-INF/** text eol=lf
 
 # Denote all files that are truly binary and should not be modified.
-common/unityfiles/tools/** binary
-addon/** binary
+common/addon/**/tools/** binary

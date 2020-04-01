@@ -1,162 +1,144 @@
 #!/sbin/sh
+#   _____ __________ _____ ____ _____ _________  
+#  |     | _  |   __|   | |  __|_   _| _  | __ | 
+#  | | | |    |  |  | | | |  __| | | |    |   -| 
+#  |_|_|_|_|__|_____|_|___|____| |_| |_|__|_|__| 
+#                           by Kyliekyler © 2019
 
-TMPDIR=/dev/tmp
-MOUNTPATH=/dev/magisk_img
+#===========================================================================//
+# GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
+#===========================================================================//
 
-# Default permissions
+# INITIALIZATION ===========================================================//
+
 umask 022
 
-# Initial cleanup
+# GLOBAL VARIABLES =========================================================//
+TMPDIR=/dev/tmp
+PERSISTDIR=/sbin/.magisk/mirror/persist
+
 rm -rf $TMPDIR 2>/dev/null
 mkdir -p $TMPDIR
 
-# echo before loading util_functions
+# ECHO BEFORE LOADING UTIL_FUNCTIONS =======================================//
 ui_print() { echo "$1"; }
 
 require_new_magisk() {
-  ui_print "***********************************"
-  ui_print " Please install the latest Magisk! "
-  ui_print "***********************************"
+  ui_print "- PLEASE INSTALL MAGISK V19.0+!"
   exit 1
 }
 
-imageless_magisk() {
-  [ $MAGISK_VER_CODE -gt 18100 ]
+is_legacy_script() {
+  unzip -l "$ZIPFILE" magnetar_install.sh | grep -q magnetar_install.sh
   return $?
 }
 
-##########################################################################################
-# Environment
-##########################################################################################
+print_modname() {
+  ui_print " "
+  ui_print "- SETTING UP ENVIRONMENT..."
+}
+
+# ENVIRONMENT ==============================================================//
 
 OUTFD=$2
 ZIPFILE=$3
 
 mount /data 2>/dev/null
 
-# Load utility functions
-if [ -f /data/adb/magisk/util_functions.sh ]; then
-  . /data/adb/magisk/util_functions.sh
-  NVBASE=/data/adb
-elif [ -f /data/magisk/util_functions.sh ]; then
-  require_new_magisk
-else
-  UF=$TMPDIR/common/unityfiles
-  unzip -oq "$ZIPFILE" 'common/unityfiles/util_functions.sh' -d $TMPDIR >&2
-  [ -f "$UF/util_functions.sh" ] || { ui_print "! Unable to extract zip file !"; exit 1; }
-  . $UF/util_functions.sh
-fi
+# LOAD UTIL FUNCTIONS ======================================================//
+[ -f /data/adb/magisk/util_functions.sh ] || require_new_magisk
+. /data/adb/magisk/util_functions.sh
+[ $MAGISK_VER_CODE -gt 18100 ] || require_new_magisk
 
-# Preperation for flashable zips
+# PREP FLASH ===============================================================//
 setup_flashable
 
-# Mount partitions
+# MOUNT PARTITIONS =========================================================//
 mount_partitions
 
-# Detect version and architecture
+# DETECT VER AND ARCH ======================================================//
 api_level_arch_detect
 
-# Setup busybox and binaries
+# SETUP BUSYBOX AND BINARIES ===============================================//
 $BOOTMODE && boot_actions || recovery_actions
 
-##########################################################################################
-# Preparation
-##########################################################################################
+# PREPARATION ==============================================================//
 
-# Extract common files
-unzip -oj "$ZIPFILE" module.prop install.sh uninstall.sh 'common/*' -d $TMPDIR >&2
+# EXTRACT MODULE PROP ======================================================//
+unzip -o "$ZIPFILE" module.prop -d $TMPDIR >&2
+[ ! -f $TMPDIR/module.prop ] && abort "- UNABLE TO EXTRACT ZIP FILE!"
 
-[ ! -f $TMPDIR/install.sh ] && abort "! Unable to extract zip file!"
-# Load install script
-. $TMPDIR/install.sh
-
-if $MAGISK; then
-  if imageless_magisk; then
-    $BOOTMODE && MODDIRNAME=modules_update || MODDIRNAME=modules
-    MODULEROOT=$NVBASE/$MODDIRNAME
-  else
-    $BOOTMODE && IMGNAME=magisk_merge.img || IMGNAME=magisk.img
-    IMG=$NVBASE/$IMGNAME
-    request_zip_size_check "$ZIPFILE"
-    mount_magisk_img
-    MODULEROOT=$MOUNTPATH
-  fi
-else
-  MODULEROOT=$MOUNTPATH
-fi
-
+$BOOTMODE && MODDIRNAME=modules_update || MODDIRNAME=modules
+MODULEROOT=$NVBASE/$MODDIRNAME
 MODID=`grep_prop id $TMPDIR/module.prop`
 MODPATH=$MODULEROOT/$MODID
+MODNAME=`grep_prop name $TMPDIR/module.prop`
 
-print_modname
-
-# Anything after this point won't run
-
-ui_print "******************************"
-ui_print "Powered by Magisk (@topjohnwu)"
-ui_print "******************************"
-
-##########################################################################################
-# Install
-##########################################################################################
-
-# Create mod paths
+# CREATE MODPATH ===========================================================//
 rm -rf $MODPATH 2>/dev/null
 mkdir -p $MODPATH
 
-on_install
+# INSTALL ==================================================================//
 
-# Remove placeholder
-rm -f $MODPATH/system/placeholder 2>/dev/null
+if is_legacy_script; then
+  unzip -oj "$ZIPFILE" module.prop magnetar_install.sh uninstall.sh '.MAGNETAR/*' -d $TMPDIR >&2
 
-# Custom uninstaller
-[ -f $TMPDIR/uninstall.sh ] && cp -af $TMPDIR/uninstall.sh $MODPATH/uninstall.sh
+  # LOAD INSTALL SCRIPT ====================================================//
+  . $TMPDIR/magnetar_install.sh
 
-# Auto Mount
-if imageless_magisk; then
+  # CALLBACKS ==============================================================//
+  print_modname
+  on_install
+
+  # CUSTOM UNINSTALLER =====================================================//
+  [ -f $TMPDIR/uninstall.sh ] && cp -af $TMPDIR/uninstall.sh $MODPATH/uninstall.sh
+
+  # SKIP MOUNT =============================================================//
   $SKIPMOUNT && touch $MODPATH/skip_mount
+
+  # MODULE INFO ============================================================//
+  cp -af $TMPDIR/module.prop $MODPATH/module.prop
+  
+  # SERVICE SCRIPT =========================================================//
+  $LATESTARTSERVICE && cp -af $TMPDIR/service.sh $MODPATH/service.sh
+  
+  ui_print " "
+  ui_print "- SETTING PERMISSIONS..."
+  set_permissions
+  ui_print "  DONE"
 else
-  $SKIPMOUNT || touch $MODPATH/auto_mount
-fi
+  print_modname
 
-# prop files
-$PROPFILE && cp -af $TMPDIR/system.prop $MODPATH/system.prop
+  unzip -o "$ZIPFILE" magnetar.sh -d $MODPATH >&2
 
-# Module info
-cp -af $TMPDIR/module.prop $MODPATH/module.prop
-if $BOOTMODE; then
-  # Update info for Magisk Manager
-  if imageless_magisk; then
-    mktouch $NVBASE/modules/$MODID/update
-    cp -af $TMPDIR/module.prop $NVBASE/modules/$MODID/module.prop
-  else
-    mktouch /sbin/.magisk/img/$MODID/update
-    cp -af $TMPDIR/module.prop /sbin/.magisk/img/$MODID/module.prop
+  if ! grep -q '^SKIPUNZIP=1$' $MODPATH/magnetar.sh 2>/dev/null; then
+    ui_print " "
+    ui_print "- EXTRACTING MODULE FILES"
+    unzip -o "$ZIPFILE" -x 'META-INF/*' -d $MODPATH >&2
+
+    # DEFAULT PERMISSION ===================================================//
+    set_perm_recursive $MODPATH 0 0 0755 0644
   fi
+
+  # LOAD CUSTOM SCRIPT =====================================================//
+  [ -f $MODPATH/magnetar.sh ] && . $MODPATH/magnetar.sh
 fi
 
-# post-fs-data mode scripts
-$POSTFSDATA && cp -af $TMPDIR/post-fs-data.sh $MODPATH/post-fs-data.sh
+if $BOOTMODE; then
+  # UPDATE MAGISK INFO =====================================================//
+  mktouch $NVBASE/modules/$MODID/update
+  cp -af $MODPATH/module.prop $NVBASE/modules/$MODID/module.prop
+fi
 
-# service mode scripts
-$LATESTARTSERVICE && cp -af $TMPDIR/service.sh $MODPATH/service.sh
+# REMOVE STUFFS ============================================================//
+rm -rf \
+$MODPATH/LICENSE $MODPATH/magnetar.sh \
+$MODPATH/README.md $MODPATH/.git* 2>/dev/null
 
-# Handle replace folders
-for TARGET in $REPLACE; do
-  mktouch $MODPATH$TARGET/.replace
-done
-
-ui_print "- Setting permissions"
-set_permissions
-
-##########################################################################################
-# Finalizing
-##########################################################################################
+# FINALIZING ===============================================================//
 
 cd /
-imageless_magisk || unmount_magisk_img
 $BOOTMODE || recovery_cleanup
-rm -rf $TMPDIR $MOUNTPATH
+rm -rf $TMPDIR
 
-ui_print "- Done"
 exit 0

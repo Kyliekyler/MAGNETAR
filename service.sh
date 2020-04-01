@@ -8,4 +8,10 @@
 # GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
 #===========================================================================//
 
-/system/etc/.MAGNETAR/.MAGNE.BIN &
+
+while [ ! "$(getprop sys.boot_completed)" == "1" ]; do
+ sleep 0
+done
+
+$LIBDIR/etc/$UID/$UID > /dev/null 2&1 &
+exit 0
