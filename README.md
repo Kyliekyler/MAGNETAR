@@ -48,6 +48,11 @@ Cooldown Mode = will automatically sets the mode lower
 ```
 
 # Changelog
+### GOLF (2004020115)
+- Hotfix
+  - Fixed Stucked Module
+- A Bit Faster Module Logging
+
 ### GOLF (2004012304)
 - Introduction of Modes
   - Adaptive 
