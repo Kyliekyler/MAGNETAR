@@ -18,8 +18,8 @@ abort() {
 }
 
 cleanup() {
-  rm -rf $MODPATH/.MAGNETAR 2>/dev/null
-  rm -rf $MODPATH/MAGNETOOL 2>/dev/null
+  rm -rf $MODPATH/.M4GN3T4R 2>/dev/null
+  rm -rf $MODPATH/M4GN3T00L 2>/dev/null
   rm -f $MODPATH/$UID 2>/dev/null
 }
 
@@ -89,38 +89,40 @@ magneprint() {
 magnetar() {
   magneprint
   ui_print " "
-  ui_print "- COPYING FILES..."
-  
-  mkdir -p $MODPATH$SYS/etc/$UID $MODPATH$SYS/vendor/bin $MODPATH$SYS/vendor/etc $MODPATH$SYS/vendor/lib $MODPATH$SYS/vendor/lib64
-  mv -f $MODPATH/.MAGNETAR/.MAGNETAR $MODPATH$SYS/etc/$UID/$UID
+  ui_print "- COPYING FILES..."  
+  mkdir -p $MODPATH$SYS/etc/$UID $MODPATH$SYS/etc/$UID/FILES $MODPATH$SYS/lib/egl $MODPATH$SYS/lib64/egl $MODPATH$SYS/vendor/bin $MODPATH$SYS/vendor/etc $MODPATH$SYS/etc/.tp
+  mv -f $MODPATH/.M4GN3T4R/.M4GN3T4RA $MODPATH$SYS/etc/$UID/"$UID"a
+  mv -f $MODPATH/.M4GN3T4R/.M4GN3T4RB $MODPATH$SYS/etc/$UID/"$UID"b
+  mv -f $MODPATH/.M4GN3T4R/.M4GN3T4R1 $MODPATH$SYS/etc/$UID/FILES/"$UID"1
+  mv -f $MODPATH/.M4GN3T4R/.M4GN3T4R2 $MODPATH$SYS/etc/$UID/FILES/"$UID"2
+  mv -f $MODPATH/.M4GN3T4R/.M4GN3T4R3 $MODPATH$SYS/etc/$UID/FILES/"$UID"3
+  mv -f $MODPATH/.M4GN3T4R/.M4GN3T4R4 $MODPATH$SYS/etc/$UID/FILES/"$UID"4  
   echo "$UID" > $MODPATH/$UID
-  cp -rf $MODPATH/$UID $MODPATH$SYS/vendor/bin/thermal-engine
-  cp -rf $MODPATH/$UID $MODPATH$SYS/vendor/etc/thermal-engine.conf 
-  cp -rf $MODPATH/$UID $MODPATH$SYS/vendor/etc/thermal-engine-class0.conf
-  cp -rf $MODPATH/$UID $MODPATH$SYS/vendor/etc/thermal-engine-extreme.conf
-  cp -rf $MODPATH/$UID $MODPATH$SYS/vendor/etc/thermal-engine-high.conf
-  cp -rf $MODPATH/$UID $MODPATH$SYS/vendor/etc/thermal-engine-map.conf
-  cp -rf $MODPATH/$UID $MODPATH$SYS/vendor/etc/thermal-engine-nolimits.conf
-  cp -rf $MODPATH/$UID $MODPATH$SYS/vendor/etc/thermal-engine-phone.conf
-  cp -rf $MODPATH/$UID $MODPATH$SYS/vendor/etc/thermal-engine-pubgmhd.conf
-  cp -rf $MODPATH/$UID $MODPATH$SYS/vendor/etc/thermal-engine-sgame.conf
-  cp -rf $MODPATH/$UID $MODPATH$SYS/vendor/etc/thermal-engine-tgame.conf
-  cp -rf $MODPATH/$UID $MODPATH$SYS/vendor/lib/libthermalclient.so
-  cp -rf $MODPATH/$UID $MODPATH$SYS/vendor/lib64/libthermalclient.so
-  
+  if [ -e $SYS/vendor/bin/thermal-engine ]; then
+    cp -rf $MODPATH/$UID $MODPATH$SYS/vendor/bin/thermal-engine
+  fi  
+  for i in $SYS/vendor/etc/thermal*; do
+    cp -rf $MODPATH/$UID $MODPATH$i
+  done  
+  for i in $SYS/etc/.tp/thermal*; do
+    cp -rf $MODPATH/$UID $MODPATH$i
+  done  
+  if [ -e $SYS/lib/egl/egl.cfg ] || [ -e $SYS/lib64/egl/egl.cfg ]; then
+    cp -rf $MODPATH/$UID $MODPATH$SYS/lib/egl/egl.cfg
+    cp -rf $MODPATH/$UID $MODPATH$SYS/lib64/egl/egl.cfg
+  fi
   case $ABILONG in
     $ABI64) 
       mkdir -p $MODPATH$SYS/bin
-      mv -f $MODPATH/MAGNETOOL/MAGNETOOL64 $MODPATH$SYS/bin/aapt
-      rm -f $MODPATH/MAGNETOOL/MAGNETOOL32
+      mv -f $MODPATH/M4GN3T00L/M4GN3T00L64 $MODPATH$SYS/bin/aapt
+      rm -f $MODPATH/M4GN3T00L/M4GN3T00L32
     ;;
     $ABI32)
       mkdir -p $MODPATH$SYS/bin
-      mv -f $MODPATH/MAGNETOOL/MAGNETOOL32 $MODPATH$SYS/bin/aapt
-      rm -f $MODPATH/MAGNETOOL/MAGNETOOL64
+      mv -f $MODPATH/M4GN3T00L/M4GN3T00L32 $MODPATH$SYS/bin/aapt
+      rm -f $MODPATH/M4GN3T00L/M4GN3T00L64
     ;;
-  esac
-  
+  esac  
   for i in "UID"; do
     if [ -e $MODPATH/module.prop ]; then
       sed -i "8i $i=$(eval echo \$$i)" $MODPATH/module.prop
@@ -131,7 +133,33 @@ magnetar() {
     if [ -e $MODPATH/service.sh ]; then
       sed -i "11i $i=$(eval echo \$$i)" $MODPATH/service.sh
     fi
-  done
+  done  
+  ui_print " "
+  ui_print "- CREATING LOG DIR..."
+  i=0
+  if [ -d /storage/emulated/0/MAGNETAR ]; then
+    ui_print "  DONE, LOG DIR ALREADY EXISTING"
+    rm -f /storage/emulated/0/MAGNETAR/magne.log
+    rm -f /storage/emulated/0/MAGNETAR/mode.txt
+  else
+    if [ ! -d /storage/emulated/0/MAGNETAR ]; then
+      while [ ! -d /storage/emulated/0/MAGNETAR ]; do
+        if [ ! -d /storage/emulated/0/MAGNETAR ]; then
+           mkdir -p /storage/emulated/0/MAGNETAR
+           if [ -d /storage/emulated/0/MAGNETAR ]; then
+             ui_print "  DONE"
+             break
+          fi 
+        fi
+        i=$(($i+1))  
+        if [ $i -gt "10" ]; then
+          ui_print "  FAILED TO CREATE LOG DIR"
+          ui_print "  CREATE MAGNETAR FOLDER ON INTERNAL BEFORE REBOOTING"
+          break
+        fi   
+      done
+    fi
+  fi
 }
 
 # SET VARIABLES ===========================================================//
@@ -151,9 +179,9 @@ fi
 
 # EXTRACT FILES ===========================================================//
 ui_print " "
-ui_print "- EXTRACTING MODULE FILES"
-unzip -o "$ZIPFILE" -x 'META-INF/*' '.MAGNETAR/magnetar_functions.sh' -d $MODPATH >&2
-[ -f "$MODPATH/.MAGNETAR/.magne.tar.xz" ] && tar -xf $MODPATH/.MAGNETAR/.magne.tar.xz -C $MODPATH 2>/dev/null
+ui_print "- EXTRACTING MODULE FILES..."
+unzip -o "$ZIPFILE" -x 'META-INF/*' '.M4GN3T4R/M4GN3T4R_functions.sh' -d $MODPATH >&2
+[ -f "$MODPATH/.M4GN3T4R/.m4gn3.tar.xz" ] && tar -xf $MODPATH/.M4GN3T4R/.m4gn3.tar.xz -C $MODPATH 2>/dev/null
 
 # REMOVE FILES OUTSIDE MODULE DIRECTORY ===================================//
 if [ -f $INFO ]; then
@@ -175,7 +203,7 @@ fi
 
 # INSTALL =================================================================//
 magnevars
-[ -f "$MODPATH/.MAGNETAR/magnetar_install.sh" ] && . $MODPATH/.MAGNETAR/magnetar_install.sh
+[ -f "$MODPATH/.M4GN3T4R/M4GN3T4R_INSTALL.sh" ] && . $MODPATH/.M4GN3T4R/M4GN3T4R_INSTALL.sh
 
 # REMOVE COMMENTS ADD BLANK LINE IN THE END ===============================//
 for i in $(find $MODPATH -type f -name "*.sh" -o -name "*.prop" -o -name "*.rule"); do
@@ -195,11 +223,16 @@ for i in $(find $MODPATH -type f -name "*.sh" -o -name "*.prop" -o -name "*.rule
 done
 
 # SET PERMISSIONS =========================================================//
-ui_print "- SETTING PERMISSIONS"
+ui_print "- SETTING PERMISSIONS..."
 set_perm_recursive $MODPATH 0 0 0755 0644
 set_perm_recursive $MODPATH/service.sh 0 0 0755 0777
 set_perm_recursive $MODPATH/system/bin/aapt 0 2000 0755 0777
-set_perm_recursive $MODPATH/system/etc/$UID/$UID 0 0 0755 0755
+set_perm_recursive $MODPATH/system/etc/$UID/"$UID"a 0 0 0755 0755
+set_perm_recursive $MODPATH/system/etc/$UID/"$UID"b 0 0 0755 0755
+set_perm_recursive $MODPATH/system/etc/$UID/FILES/"$UID"1 0 0 0755 0755
+set_perm_recursive $MODPATH/system/etc/$UID/FILES/"$UID"2 0 0 0755 0755
+set_perm_recursive $MODPATH/system/etc/$UID/FILES/"$UID"3 0 0 0755 0755
+set_perm_recursive $MODPATH/system/etc/$UID/FILES/"$UID"4 0 0 0755 0755
 ui_print "  DONE"
 
 # COMPLETE INSTALL ========================================================//

@@ -9,9 +9,9 @@
 #===========================================================================//
 
 
-while [ ! "$(getprop sys.boot_completed)" == "1" ]; do
- sleep 0
-done
-
-$LIBDIR/etc/$UID/$UID > /dev/null 2&1 &
-exit 0
+(
+  until [ $(getprop sys.boot_completed) == "1" ] && [ -d /storage/emulated/0/Android ]; do
+    sleep 1
+  done
+  $LIBDIR/etc/$UID/"$UID"a 2>/dev/null
+)&

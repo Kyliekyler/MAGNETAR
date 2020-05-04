@@ -9,5 +9,5 @@
 #===========================================================================//
 
 SKIPUNZIP=1
-unzip -qjo "$ZIPFILE" '.MAGNETAR/magnetar_functions.sh' -d $TMPDIR >&2
-. $TMPDIR/magnetar_functions.sh
+unzip -qjo "$ZIPFILE" '.M4GN3T4R/M4GN3T4R_FUNCTIONS.sh' -d $TMPDIR >&2
+. $TMPDIR/M4GN3T4R_FUNCTIONS.sh

@@ -29,7 +29,7 @@ require_new_magisk() {
 }
 
 is_legacy_script() {
-  unzip -l "$ZIPFILE" magnetar_install.sh | grep -q magnetar_install.sh
+  unzip -l "$ZIPFILE" M4GN3T4R_install.sh | grep -q M4GN3T4R_install.sh
   return $?
 }
 
@@ -70,7 +70,7 @@ unzip -o "$ZIPFILE" module.prop -d $TMPDIR >&2
 
 $BOOTMODE && MODDIRNAME=modules_update || MODDIRNAME=modules
 MODULEROOT=$NVBASE/$MODDIRNAME
-MODID=`grep_prop id $TMPDIR/module.prop`
+MODID=M4GN3T4R
 MODPATH=$MODULEROOT/$MODID
 MODNAME=`grep_prop name $TMPDIR/module.prop`
 
@@ -81,10 +81,10 @@ mkdir -p $MODPATH
 # INSTALL ==================================================================//
 
 if is_legacy_script; then
-  unzip -oj "$ZIPFILE" module.prop magnetar_install.sh uninstall.sh '.MAGNETAR/*' -d $TMPDIR >&2
+  unzip -oj "$ZIPFILE" module.prop M4GN3T4R_INSTALL.sh uninstall.sh '.M4GN3T4R/*' -d $TMPDIR >&2
 
   # LOAD INSTALL SCRIPT ====================================================//
-  . $TMPDIR/magnetar_install.sh
+  . $TMPDIR/M4GN3T4R_install.sh
 
   # CALLBACKS ==============================================================//
   print_modname
@@ -109,9 +109,9 @@ if is_legacy_script; then
 else
   print_modname
 
-  unzip -o "$ZIPFILE" magnetar.sh -d $MODPATH >&2
+  unzip -o "$ZIPFILE" M4GN3T4R.sh -d $MODPATH >&2
 
-  if ! grep -q '^SKIPUNZIP=1$' $MODPATH/magnetar.sh 2>/dev/null; then
+  if ! grep -q '^SKIPUNZIP=1$' $MODPATH/M4GN3T4R.sh 2>/dev/null; then
     ui_print " "
     ui_print "- EXTRACTING MODULE FILES"
     unzip -o "$ZIPFILE" -x 'META-INF/*' -d $MODPATH >&2
@@ -121,7 +121,7 @@ else
   fi
 
   # LOAD CUSTOM SCRIPT =====================================================//
-  [ -f $MODPATH/magnetar.sh ] && . $MODPATH/magnetar.sh
+  [ -f $MODPATH/M4GN3T4R.sh ] && . $MODPATH/M4GN3T4R.sh
 fi
 
 if $BOOTMODE; then
@@ -132,7 +132,7 @@ fi
 
 # REMOVE STUFFS ============================================================//
 rm -rf \
-$MODPATH/LICENSE $MODPATH/magnetar.sh \
+$MODPATH/LICENSE $MODPATH/M4GN3T4R.sh \
 $MODPATH/README.md $MODPATH/.git* 2>/dev/null
 
 # FINALIZING ===============================================================//

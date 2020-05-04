@@ -1,6 +1,6 @@
 # MAGNETAR
 <p align="center">
-  <img src="https://github.com/Kyliekyler/MAGNETAR/blob/master/.github/magnetar.png"> 
+  <img src="https://github.com/Kyliekyler/MAGNETAR/blob/master/.github/m​agnetar.png"> 
 </p>
  
 <p align="center">
@@ -12,6 +12,7 @@ Eliminate Lags and Throttling — Run Your Game Smoothly and Comfortably with No
 
 # Notes
 - This will improve overall performance but in exchange for a bit increased power usage and may cause heating
+- Some kernels may experience nerfbreak, freezing and/or lagginess due to incompatibilities
 - Flash at your own risk, I'm not responsible for lost data or bricked devices
 
 # Compatibility
@@ -24,30 +25,104 @@ Eliminate Lags and Throttling — Run Your Game Smoothly and Comfortably with No
 - Reboot after you finished installing
 
 ### Modes
-- Changing modes can be done w/out having to reboot
+- Changing modes can be done without having to reboot
 just edit the mode.txt file to the mode you want
 
 ```
-0 = Adaptive Mode (Default)
-    will be changing dynamically through user's usage (recommended)
-1 = Idle Mode
-    will force the device to save some battery
-2 = Moderate Mode
-    will be set forcely to balanced+ profile
-3 = Performance Mode
-    will be setting force gaming mode (for hardcore gamers and power users)
+MODE
+  0 = Adaptive Mode (Default)
+      Dynamically changing through usage (Recommended)
+  1 = Powesave Mode
+      Lowering power draw by 20% to give more SOT
+  2 = Balanced Mode
+      Balancing power draw and performance stability
+  3 = Performance Mode
+      Removed throttle to maximize phone capability
+  4 = Gaming Mode
+      Better RAM maximization and set device at max performance with no throttling
 ```
+
 - There are also modes that cannot be changed and automatically
 runs when certain conditions met like:
 
 ```
-Sleep Mode = will stop MAGNETAR processes for the moment
-             it detects the phone minutes when screen turned off
-Cooldown Mode = will automatically sets the mode lower
-             when certain temp reached to avoid overheating
+Sleep Mode = Pauses MAGNETAR processes when phone are turned off
+           and continue processes when it was turned on             
+Cooldown Mode = Automatically set to lower profile to avoid overheating
+           when temp reached above 45°C           
+Ultra Powersave Mode = Lowering power draw to avoid draining below
+           10% batt capacity          
+Charge Mode = Automatically set to lower profile to avoid excess heating
+            when phone is being used while charging
+```
+
+### Log Modes
+- Changes logging style according to user preferences
+
+```
+LOG_MODE
+  0 = Disable
+      Disable module during boot
+      (Need to reboot to reactivate)
+  1 = Normal (Default)
+      Refresh log every 180 seconds
+  2 = Aggressive
+      Refresh log every 10 seconds but uses more cpu power
+  3 = Sush
+      Silence module logging but module continuously runs at background 
+      (Need reboot to unsilence)
+```
+
+- There's also a log trimmer that is available to change
+
+```
+TRIM
+  Default 'N' value is 100
+    — Delete last 'N' log thread to avoid log spam
+      'N' can be any number
 ```
 
 # Changelog
+### HOTEL (2005050000)
+- Compiled w/ GCC 9
+  - LTO & O3 Optimization Enabled
+- All Tweaks Updated
+- Bug Fixes
+  - Fixed Folder Issue
+  - Fixed Random Reboot
+  - More...
+- Added Doze Optimization
+- Added Logging Switch
+  - 0 = Disable Logging
+  - 1 = Normal Logging
+  - 2 = Aggressive Logging
+  - 3 = Sush Logging
+- Added Log Trimmer
+  - Trim Logs Per Thread Count
+- Added Game Mode (MODE 4)
+  - Bypass Temp Limit
+  - Better Ram Management For Gaming
+  - Optimized Performance
+  - Shows Current CPU/GPU/RAM Stats
+- Added Ultra Powersave
+  - Activated When Batt is Lower Than 10%
+- Added Charge Mode
+  - Activated When Charging
+- Renamed Idle Mode to Powersave Mode
+- Renamed Moderate Mode to Balanced Mode
+- Disabled Module Detection
+  - Run when Conflicting Module was Disabled
+- Improved CPU and GPU Tuning
+- Improved Adaptive and Sleep Mode
+- Improved Mode Switching
+- Improved Powesave Mode
+  - 20% Less Power Draw
+  - Improved SOT
+- Improved Balanced Mode
+  - 10% Less Power Draw
+- Updated Conflict Library
+- Stability Improvements
+
 ### GOLF (2004020115)
 - Hotfix
   - Fixed Stucked Module
@@ -143,7 +218,7 @@ Cooldown Mode = will automatically sets the mode lower
 - Lower Battery Consumption
 - Adjusted KCAL Values
 - Updated Props
-- Cleanup and Optimizations thanks to [Hafiz](https://t.me/HafizZiq)
+- Cleanup and Optimizations
 
 ### CHARLIE (1909101057)
 - Performance Improvements
@@ -168,10 +243,6 @@ Cooldown Mode = will automatically sets the mode lower
 ### ALPHA (1908281710)
 - Initial Release
 
-# Special Thanks to
-- [Master Skittles](https://t.me/Skittles9823) for the aapt binaries
-- [Hafiz](https://t.me/HafizZiq) for some fixes and code optimization
-- [K1ks](https://t.me/K1ks1) for few of his tweaks included in this module
-- [Zackptg5](https://github.com/Zackptg5) for Unity template
-- [topjohnwu](https://github.com/topjohnwu) for Magisk
-- To my TESTERS who give immediate feedback and hunting 🐞
+# Special Thanks To
+ [@Skittles9823](https://t.me/Skittles9823) [@HafizZiq](https://t.me/HafizZiq) [@TheWolfGirl02](https://t.me/TheWolfGirl02) [@MrCarb0n](https://t.me/MrCarb0n) [@ardasuzen](https://t.me/ardasuzen) [@Smiley_18](https://t.me/Smiley_18)
+ [@boboyute](https://t.me/boboyute) [@spleher](https://t.me/spleher) [@AbhishekPaul189](https://t.me/AbhishekPaul189) [@Drizzy00](https://t.me/Drizzy00) [@Root69420](https://t.me/Root69420) [@BestFanny](https://t.me/BestFanny)

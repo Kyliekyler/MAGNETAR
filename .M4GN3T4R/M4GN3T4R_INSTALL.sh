@@ -14,7 +14,6 @@ case $API in
     case $ABILONG in
       $ABI32|$ABI64)
         magnetar
-        ui_print "  DONE"
         ui_print " "
       ;;
       *)
