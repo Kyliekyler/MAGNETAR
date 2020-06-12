@@ -9,62 +9,51 @@
 # GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
 #===========================================================================//
 
-# INITIALIZATION ===========================================================//
-
+# INITIALIZATION
 umask 022
 
-# GLOBAL VARIABLES =========================================================//
+# GLOBAL VARIABLES
 TMPDIR=/dev/tmp
 PERSISTDIR=/sbin/.magisk/mirror/persist
 
 rm -rf $TMPDIR 2>/dev/null
 mkdir -p $TMPDIR
 
-# ECHO BEFORE LOADING UTIL_FUNCTIONS =======================================//
-ui_print() { echo "$1"; }
-
+# ECHO BEFORE LOADING UTIL_FUNCTIONS
 require_new_magisk() {
-  ui_print "- PLEASE INSTALL MAGISK V19.0+!"
+  echo "- PLEASE INSTALL MAGISK V19.0+!"
   exit 1
 }
 
-is_legacy_script() {
-  unzip -l "$ZIPFILE" M4GN3T4R_install.sh | grep -q M4GN3T4R_install.sh
-  return $?
+PRINT_MODNAME() {
+  echo " "
+  echo "- SETTING UP ENVIRONMENT..."
 }
 
-print_modname() {
-  ui_print " "
-  ui_print "- SETTING UP ENVIRONMENT..."
-}
-
-# ENVIRONMENT ==============================================================//
+# ENVIRONMENT
 
 OUTFD=$2
 ZIPFILE=$3
 
 mount /data 2>/dev/null
 
-# LOAD UTIL FUNCTIONS ======================================================//
+# FUNCTIONS
 [ -f /data/adb/magisk/util_functions.sh ] || require_new_magisk
 . /data/adb/magisk/util_functions.sh
 [ $MAGISK_VER_CODE -gt 18100 ] || require_new_magisk
 
-# PREP FLASH ===============================================================//
+# PREP FLASH
 setup_flashable
 
-# MOUNT PARTITIONS =========================================================//
+# MOUNT PARTITIONS
 mount_partitions
 
-# DETECT VER AND ARCH ======================================================//
-api_level_arch_detect
-
-# SETUP BUSYBOX AND BINARIES ===============================================//
+# SETUP BUSYBOX AND BINARIES
 $BOOTMODE && boot_actions || recovery_actions
 
-# PREPARATION ==============================================================//
+# PREPARATION
 
-# EXTRACT MODULE PROP ======================================================//
+# EXTRACT MODULE PROP
 unzip -o "$ZIPFILE" module.prop -d $TMPDIR >&2
 [ ! -f $TMPDIR/module.prop ] && abort "- UNABLE TO EXTRACT ZIP FILE!"
 
@@ -72,71 +61,46 @@ $BOOTMODE && MODDIRNAME=modules_update || MODDIRNAME=modules
 MODULEROOT=$NVBASE/$MODDIRNAME
 MODID=M4GN3T4R
 MODPATH=$MODULEROOT/$MODID
-MODNAME=`grep_prop name $TMPDIR/module.prop`
+MODNAME=$(grep_prop name $TMPDIR/module.prop)
 
-# CREATE MODPATH ===========================================================//
+# CREATE MODPATH
 rm -rf $MODPATH 2>/dev/null
 mkdir -p $MODPATH
 
-# INSTALL ==================================================================//
+# INSTALL
+PRINT_MODNAME
+unzip -o "$ZIPFILE" install -d $MODPATH >&2
 
-if is_legacy_script; then
-  unzip -oj "$ZIPFILE" module.prop M4GN3T4R_INSTALL.sh uninstall.sh '.M4GN3T4R/*' -d $TMPDIR >&2
+if ! grep -q '^SKIPUNZIP=1$' $MODPATH/install 2>/dev/null; then
+  echo " "
+  echo "- EXTRACTING MODULE FILES"
+  unzip -o "$ZIPFILE" -x 'META-INF/*' -d $MODPATH >&2
 
-  # LOAD INSTALL SCRIPT ====================================================//
-  . $TMPDIR/M4GN3T4R_install.sh
-
-  # CALLBACKS ==============================================================//
-  print_modname
-  on_install
-
-  # CUSTOM UNINSTALLER =====================================================//
-  [ -f $TMPDIR/uninstall.sh ] && cp -af $TMPDIR/uninstall.sh $MODPATH/uninstall.sh
-
-  # SKIP MOUNT =============================================================//
-  $SKIPMOUNT && touch $MODPATH/skip_mount
-
-  # MODULE INFO ============================================================//
-  cp -af $TMPDIR/module.prop $MODPATH/module.prop
-  
-  # SERVICE SCRIPT =========================================================//
-  $LATESTARTSERVICE && cp -af $TMPDIR/service.sh $MODPATH/service.sh
-  
-  ui_print " "
-  ui_print "- SETTING PERMISSIONS..."
-  set_permissions
-  ui_print "  DONE"
-else
-  print_modname
-
-  unzip -o "$ZIPFILE" M4GN3T4R.sh -d $MODPATH >&2
-
-  if ! grep -q '^SKIPUNZIP=1$' $MODPATH/M4GN3T4R.sh 2>/dev/null; then
-    ui_print " "
-    ui_print "- EXTRACTING MODULE FILES"
-    unzip -o "$ZIPFILE" -x 'META-INF/*' -d $MODPATH >&2
-
-    # DEFAULT PERMISSION ===================================================//
-    set_perm_recursive $MODPATH 0 0 0755 0644
-  fi
-
-  # LOAD CUSTOM SCRIPT =====================================================//
-  [ -f $MODPATH/M4GN3T4R.sh ] && . $MODPATH/M4GN3T4R.sh
+  # DEFAULT PERMISSION
+  set_perm_recursive $MODPATH 0 0 0755 0644
 fi
 
+# LOAD CUSTOM INSTALLER
+SKIPUNZIP=1
+[ -f "$MODPATH/binary.tar.xz" ] && tar -xf $MODPATH/binary.tar.xz -C $MODPATH 2>/dev/null
+chmod 0755 $MODPATH/install
+PID=""
+( $MODPATH/install )&
+PID="$!"
+wait $PID 2>/dev/null
+
 if $BOOTMODE; then
-  # UPDATE MAGISK INFO =====================================================//
+  # UPDATE MAGISK INFO
   mktouch $NVBASE/modules/$MODID/update
   cp -af $MODPATH/module.prop $NVBASE/modules/$MODID/module.prop
 fi
 
-# REMOVE STUFFS ============================================================//
+# REMOVE STUFFS
 rm -rf \
-$MODPATH/LICENSE $MODPATH/M4GN3T4R.sh \
+$MODPATH/LICENSE $MODPATH/install \
 $MODPATH/README.md $MODPATH/.git* 2>/dev/null
 
-# FINALIZING ===============================================================//
-
+# FINALIZING
 cd /
 $BOOTMODE || recovery_cleanup
 rm -rf $TMPDIR

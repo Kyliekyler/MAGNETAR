@@ -1,6 +1,6 @@
 # MAGNETAR
 <p align="center">
-  <img src="https://github.com/Kyliekyler/MAGNETAR/blob/master/.github/m​agnetar.png"> 
+  <img src="https://github.com/Kyliekyler/MAGNETAR/blob/master/.github/logo.png"> 
 </p>
  
 <p align="center">
@@ -11,8 +11,7 @@
 Eliminate Lags and Throttling — Run Your Game Smoothly and Comfortably with No Substantial Performance Drops
 
 # Notes
-- This will improve overall performance but in exchange for a bit increased power usage and may cause heating
-- Some kernels may experience nerfbreak, freezing and/or lagginess due to incompatibilities
+- This will improve overall performance but may increase power usage and may cause heating
 - Flash at your own risk, I'm not responsible for lost data or bricked devices
 
 # Compatibility
@@ -37,9 +36,9 @@ MODE
   2 = Balanced Mode
       Balancing power draw and performance stability
   3 = Performance Mode
-      Removed throttle to maximize phone capability
+      Boosting device to accompany performance needs
   4 = Gaming Mode
-      Better RAM maximization and set device at max performance with no throttling
+      Boosting more and better performance stability which is suitable for gaming
 ```
 
 - There are also modes that cannot be changed and automatically
@@ -48,12 +47,12 @@ runs when certain conditions met like:
 ```
 Sleep Mode = Pauses MAGNETAR processes when phone are turned off
            and continue processes when it was turned on             
-Cooldown Mode = Automatically set to lower profile to avoid overheating
-           when temp reached above 45°C           
+Cooldown Mode = Monitors temp and automatically set low performance
+           when temp reached above 45°C
 Ultra Powersave Mode = Lowering power draw to avoid draining below
            10% batt capacity          
-Charge Mode = Automatically set to lower profile to avoid excess heating
-            when phone is being used while charging
+Charge Mode = Like adaptive mode but prioritizes temp over performance
+           to avoid excess heating while phone is on charge
 ```
 
 ### Log Modes
@@ -65,9 +64,9 @@ LOG_MODE
       Disable module during boot
       (Need to reboot to reactivate)
   1 = Normal (Default)
-      Refresh log every 180 seconds
+      Refresh log every 60 seconds
   2 = Aggressive
-      Refresh log every 10 seconds but uses more cpu power
+      Refresh log every second
   3 = Sush
       Silence module logging but module continuously runs at background 
       (Need reboot to unsilence)
@@ -83,6 +82,19 @@ TRIM
 ```
 
 # Changelog
+### INDIA (2006121454)
+- Added Config Backup
+  - Restores Default Config On Uninstall
+- Added Error Logger
+  - Can Be Found As "error.txt" On MAGNETAR Folder
+- Improved Adaptive Mode
+  - Better Game Detection
+  - Much Accurate Mode Switcher
+- Improved Performance
+  - Better & Updated Tweaks
+- Improved Charge Mode Algorithm
+- Various Bug Fixes
+
 ### HOTEL (2005050000)
 - Compiled w/ GCC 9
   - LTO & O3 Optimization Enabled
@@ -244,5 +256,10 @@ TRIM
 - Initial Release
 
 # Special Thanks To
- [@Skittles9823](https://t.me/Skittles9823) [@HafizZiq](https://t.me/HafizZiq) [@TheWolfGirl02](https://t.me/TheWolfGirl02) [@MrCarb0n](https://t.me/MrCarb0n) [@ardasuzen](https://t.me/ardasuzen) [@Smiley_18](https://t.me/Smiley_18)
- [@boboyute](https://t.me/boboyute) [@spleher](https://t.me/spleher) [@AbhishekPaul189](https://t.me/AbhishekPaul189) [@Drizzy00](https://t.me/Drizzy00) [@Root69420](https://t.me/Root69420) [@BestFanny](https://t.me/BestFanny)
+- [@TheWolfGirl02](https://t.me/TheWolfGirl02)
+- [@MrCarb0n](https://t.me/MrCarb0n)
+- [@ardasuzen](https://t.me/ardasuzen)
+- [@Smiley_18](https://t.me/Smiley_18)
+- [@Drizzy00](https://t.me/Drizzy00)
+- All Other Testers
+ 
