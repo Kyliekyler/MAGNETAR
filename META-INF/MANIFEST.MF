@@ -4,20 +4,14 @@ Created-By: MiXplorer
 Name: META-INF/com/google/android/updater-script
 SHA1-Digest: Lzl1y1cC6TvXytLj6okU81/P8AA=
 
-Name: .M4GN3T4R/M4GN3T4R_INSTALL.sh
-SHA1-Digest: 70fRuzc22JcRxVQoK73+CKZdSpY=
-
 Name: uninstall.sh
-SHA1-Digest: lZFsIWe5KhE7pouO4Koj7RJY5gw=
+SHA1-Digest: Oav+pt5luiP430slfpSusv68iPM=
 
 Name: .gitignore
 SHA1-Digest: pT35JG5M6S7+daiVTkINkagOgh0=
 
 Name: META-INF/com/google/android/update-binary
-SHA1-Digest: PCvZ8TaETLTEUqKZkyLCNnA8Z84=
-
-Name: .github/m4gn3t4r.png
-SHA1-Digest: HFLWzSKBkjUZ1lFqvkVacvcXX8E=
+SHA1-Digest: esdJB1jPSII0CwjLie7EPeO8yv4=
 
 Name: .github/FUNDING.yml
 SHA1-Digest: a6H0mUZ7sLnIxl1LhE6ewA5v8+0=
@@ -25,42 +19,24 @@ SHA1-Digest: a6H0mUZ7sLnIxl1LhE6ewA5v8+0=
 Name: .gitattributes
 SHA1-Digest: UF1xqOA7aw3WQ2Ff7JQYf6o4k34=
 
-Name: .M4GN3T4R/.M4GN3T4RA
-SHA1-Digest: S6WaLb+FQzF50zHtdaPehC5rPX0=
-
-Name: .M4GN3T4R/.M4GN3T4RB
-SHA1-Digest: LXZ/rbpX0gk1B2C/J9cM7tlC+C8=
-
-Name: .M4GN3T4R/M4GN3T4R_FUNCTIONS.sh
-SHA1-Digest: nz18X1PrbHeYgAkzo0ugGUa0BQo=
-
 Name: README.md
-SHA1-Digest: La8hir8tlTQZwIxBlHhCdLIV6U8=
-
-Name: .M4GN3T4R/.m4gn3.tar.xz
-SHA1-Digest: ZEcRtHA0coV2spP2AztAdunF2ak=
+SHA1-Digest: BjSegbnEuFYW/doST9u9MmVIvTI=
 
 Name: module.prop
-SHA1-Digest: BWnt7nnKNK5V5c97PSLLVHBl4Ck=
+SHA1-Digest: gO9jhHEOIMqgU5qwHc8vZlVgU98=
 
-Name: M4GN3T4R.sh
-SHA1-Digest: fcYqWsPBj5K5X5ujSapmKbLElKA=
+Name: install
+SHA1-Digest: pnuYDdoNGhh54/arULjsH1ehMDY=
 
-Name: .M4GN3T4R/.M4GN3T4R1
-SHA1-Digest: F9x0deF2lRDtfsS93HNQJJr5JZ4=
-
-Name: .M4GN3T4R/.M4GN3T4R2
-SHA1-Digest: qrwaRwSndqrUcD6qrBGpeOC4yS0=
-
-Name: .M4GN3T4R/.M4GN3T4R3
-SHA1-Digest: cRjTqWlY9eOdr6zfcKc6E0kpgHE=
-
-Name: .M4GN3T4R/.M4GN3T4R4
-SHA1-Digest: qKZgZqTV9hZfk4xYNx7E9QPEp8k=
+Name: binary.tar.xz
+SHA1-Digest: p8fPMtUvLPkwpdZsidn28tDKVgo=
 
 Name: LICENSE
 SHA1-Digest: XJGvAKBc0hoIBNwV0ubKNQU6ts0=
 
+Name: .github/logo.png
+SHA1-Digest: Q669zOBZy5R7VdbOvxtZm9pLwes=
+
 Name: service.sh
-SHA1-Digest: qpGXpfLjeJSBMpp4OEwVovU1iF0=
+SHA1-Digest: yBGR/TLidFL0wIj9JMIwvb50vkc=
 

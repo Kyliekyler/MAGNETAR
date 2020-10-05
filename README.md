@@ -11,11 +11,10 @@
 Eliminate Lags and Throttling — Run Your Game Smoothly and Comfortably with No Substantial Performance Drops
 
 # Notes
-- This will improve overall performance but may increase power usage and may cause heating
 - Flash at your own risk, I'm not responsible for lost data or bricked devices
 
 # Compatibility
-- [![Android 5](https://img.shields.io/badge/Android-5-red.svg)]() [![Android 6](https://img.shields.io/badge/Android-6-pink.svg)]() [![Android 7](https://img.shields.io/badge/Android-7-violet.svg)]() [![Android 8](https://img.shields.io/badge/Android-8-yellow.svg)]() [![Android 9](https://img.shields.io/badge/Android-9-lightgreen.svg)]() [![Android 10](https://img.shields.io/badge/Android-10-brightgreen.svg)]()
+- [![Android 5](https://img.shields.io/badge/Android-5-red.svg)]() [![Android 6](https://img.shields.io/badge/Android-6-pink.svg)]() [![Android 7](https://img.shields.io/badge/Android-7-violet.svg)]() [![Android 8](https://img.shields.io/badge/Android-8-yellow.svg)]() [![Android 9](https://img.shields.io/badge/Android-9-lightgreen.svg)]() [![Android 10](https://img.shields.io/badge/Android-10-brightgreen.svg)]() [![Android 11](https://img.shields.io/badge/Android-11-orange.svg)]()
 - [![CPU ABI](https://img.shields.io/badge/ABI-32-pink.svg)]() [![Chipset](https://img.shields.io/badge/ABI-64-pink.svg)]()
 - [![Magisk](https://img.shields.io/badge/Magisk-19%2B-00B39B.svg)]()
    
@@ -31,14 +30,12 @@ just edit the mode.txt file to the mode you want
 MODE
   0 = Adaptive Mode (Default)
       Dynamically changing through usage (Recommended)
-  1 = Powesave Mode
+  1 = Endurance Mode
       Lowering power draw by 20% to give more SOT
-  2 = Balanced Mode
+  2 = Balance Mode / Balance+ Mode
       Balancing power draw and performance stability
-  3 = Performance Mode
-      Boosting device to accompany performance needs
-  4 = Gaming Mode
-      Boosting more and better performance stability which is suitable for gaming
+  3 = Extreme Mode
+      Boosting device and better performance stability which is suitable for gaming
 ```
 
 - There are also modes that cannot be changed and automatically
@@ -49,7 +46,7 @@ Sleep Mode = Pauses MAGNETAR processes when phone are turned off
            and continue processes when it was turned on             
 Cooldown Mode = Monitors temp and automatically set low performance
            when temp reached above 45°C
-Ultra Powersave Mode = Lowering power draw to avoid draining below
+Endurance+ Mode = Lowering power draw to avoid draining below
            10% batt capacity          
 Charge Mode = Like adaptive mode but prioritizes temp over performance
            to avoid excess heating while phone is on charge
@@ -82,6 +79,23 @@ TRIM
 ```
 
 # Changelog
+### JULIET (2010052351)
+- Added Android 11 Support
+- Compiled w/ Clang 10.0.1
+  - O3 Optimization Enabled
+- Improved CPU Load Calculations
+- Improved Config Backup & Restore
+- Improved Game Detection
+- Increased Temperature Threshold by 3°C
+- Miscellaneous Changes
+- New Modes
+  - 0 = Adaptive
+  - 1 = Endurance
+  - 2 = Balance / Balance+
+  - 3 = Extreme
+- Optimized Overall Performance
+- Various Bug Fixes & Stability Improvements
+
 ### INDIA (2006121454)
 - Added Config Backup
   - Restores Default Config On Uninstall
@@ -259,7 +273,5 @@ TRIM
 - [@TheWolfGirl02](https://t.me/TheWolfGirl02)
 - [@MrCarb0n](https://t.me/MrCarb0n)
 - [@ardasuzen](https://t.me/ardasuzen)
-- [@Smiley_18](https://t.me/Smiley_18)
 - [@Drizzy00](https://t.me/Drizzy00)
-- All Other Testers
- 
+- All of the Testers

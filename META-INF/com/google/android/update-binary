@@ -25,7 +25,7 @@ require_new_magisk() {
   exit 1
 }
 
-PRINT_MODNAME() {
+print_modname() {
   echo " "
   echo "- SETTING UP ENVIRONMENT..."
 }
@@ -68,7 +68,7 @@ rm -rf $MODPATH 2>/dev/null
 mkdir -p $MODPATH
 
 # INSTALL
-PRINT_MODNAME
+print_modname
 unzip -o "$ZIPFILE" install -d $MODPATH >&2
 
 if ! grep -q '^SKIPUNZIP=1$' $MODPATH/install 2>/dev/null; then
@@ -93,12 +93,24 @@ if $BOOTMODE; then
   # UPDATE MAGISK INFO
   mktouch $NVBASE/modules/$MODID/update
   cp -af $MODPATH/module.prop $NVBASE/modules/$MODID/module.prop
+elif ! $BOOTMODE; then
+  echo "- ONLY UNINSTALL IS SUPPORTED IN RECOVERY"
+  echo " "
+  echo "- UNINSTALLING..."
+  touch $MODPATH/remove
+  [ -s $INFO ] && install_script $MODPATH/uninstall.sh || $BB rm -f $INFO $MODPATH/uninstall.sh
+  recovery_cleanup
+  cleanup
+  $BB rm -rf $NVBASE/modules_update/$MODID $TMPDIR 2>/dev/null
+  echo "  DONE"
+  exit 0
 fi
 
 # REMOVE STUFFS
 rm -rf \
 $MODPATH/LICENSE $MODPATH/install \
-$MODPATH/README.md $MODPATH/.git* 2>/dev/null
+$MODPATH/README.md $MODPATH/.git* \
+$MODPATH/binary* 2>/dev/null
 
 # FINALIZING
 cd /

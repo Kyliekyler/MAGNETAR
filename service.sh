@@ -8,12 +8,9 @@
 # GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
 #===========================================================================//
 
-
 (
-  BB=/data/adb/magisk/busybox
-  MODDIR=/system/etc/$UID
   until [ $(getprop sys.boot_completed) -eq "1" ] && [ -d /storage/emulated/0/Android ]; do
     $BB sleep 1
   done
-  $MODDIR/"$UID"a 2>/dev/null
+  $MODDIR/"$MID"A 2>/dev/null
 )&
