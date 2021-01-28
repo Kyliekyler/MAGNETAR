@@ -11,7 +11,7 @@
 Eliminate Lags and Throttling — Run Your Game Smoothly and Comfortably with No Substantial Performance Drops
 
 # Notes
-- Flash at your own risk, I'm not responsible for lost data or bricked devices
+- Flash at your own risk, [@Kyliekyler](https://t.me/Kyliekyler) is not responsible for lost data or bricked devices!
 
 # Compatibility
 - [![Android 5](https://img.shields.io/badge/Android-5-red.svg)]() [![Android 6](https://img.shields.io/badge/Android-6-pink.svg)]() [![Android 7](https://img.shields.io/badge/Android-7-violet.svg)]() [![Android 8](https://img.shields.io/badge/Android-8-yellow.svg)]() [![Android 9](https://img.shields.io/badge/Android-9-lightgreen.svg)]() [![Android 10](https://img.shields.io/badge/Android-10-brightgreen.svg)]() [![Android 11](https://img.shields.io/badge/Android-11-orange.svg)]()
@@ -24,61 +24,73 @@ Eliminate Lags and Throttling — Run Your Game Smoothly and Comfortably with No
 
 ### Modes
 - Changing modes can be done without having to reboot
-just edit the mode.txt file to the mode you want
+- To change mode: Open Terminal (e.g Termux) then do the following command after ```su```
 
 ```
-MODE
+Command:
+  setprop magnetar <mode number>
+  
+Modes:
   0 = Adaptive Mode (Default)
       Dynamically changing through usage (Recommended)
   1 = Endurance Mode
-      Lowering power draw by 20% to give more SOT
-  2 = Balance Mode / Balance+ Mode
+      Lowering power draw by 22% to give more SOT
+  2 = Balance/Balance+ Mode
       Balancing power draw and performance stability
   3 = Extreme Mode
-      Boosting device and better performance stability which is suitable for gaming
+      Boosting device for better performance stability and sustainability
+
+Example:
+  setprop magnetar 0
 ```
 
-- There are also modes that cannot be changed and automatically
-runs when certain conditions met like:
+- Other modes that are triggered automatically by specific event:
 
 ```
-Sleep Mode = Pauses MAGNETAR processes when phone are turned off
-           and continue processes when it was turned on             
-Cooldown Mode = Monitors temp and automatically set low performance
-           when temp reached above 45°C
-Endurance+ Mode = Lowering power draw to avoid draining below
-           10% batt capacity          
-Charge Mode = Like adaptive mode but prioritizes temp over performance
-           to avoid excess heating while phone is on charge
+Sleep Mode
+  - Pauses processes when phone screen is turned off and continue processes when it was turned on.     
+Charge Mode
+  - Prioritizes temperature over performance to avoid excess heating while phone is on charge.
+Charge Cooldown / Cooldown Mode
+  - Monitors temperature and gradually ramp down the performance when threshold is reached.
+Endurance+
+  - Lowering power draw to avoid draining below 10% batt capacity.
 ```
 
-### Log Modes
-- Changes logging style according to user preferences
-
-```
-LOG_MODE
-  0 = Disable
-      Disable module during boot
-      (Need to reboot to reactivate)
-  1 = Normal (Default)
-      Refresh log every 60 seconds
-  2 = Aggressive
-      Refresh log every second
-  3 = Sush
-      Silence module logging but module continuously runs at background 
-      (Need reboot to unsilence)
-```
-
-- There's also a log trimmer that is available to change
-
-```
-TRIM
-  Default 'N' value is 100
-    — Delete last 'N' log thread to avoid log spam
-      'N' can be any number
-```
 
 # Changelog
+### KILO (2101282050)
+- Proper Android 11 Support
+- Compiled w/ Clang 11
+  - O3 Optimization Flag Enabled
+- Added Option To Opt In/Out For Thermal Installation
+- Added Notifications To See Which Mode Is Active
+- Improved Mode Changing Method For Faster Mode Switching
+  - Terminal Command To Change Mode
+    ```
+    Command:
+      setprop magnetar <mode number>
+    
+    Modes:
+      0 = Adaptive Mode
+      1 = Endurance Mode
+      2 = Balance/Balance+ Mode
+      3 = Extreme Mode
+
+    Example:
+      setprop magnetar 0
+    ```
+- Improved Debug Logging
+  - Shows All Errors That Magnetar Makes
+- Improved Binary Execution Time
+- Fixed CPU Freq Shown On Logs
+- Miscellaneous Changes
+  - Renamed magne.log To main.log
+  - Removed mode.txt
+  - Removed Conflict Detector (Flash Other AIO Tweaker At Your Own Risk!)
+- Optimized Performance & AIE Runtime Experience
+- Various Bug Fixes & Stability Improvements
+
 ### JULIET (2010052351)
 - Added Android 11 Support
 - Compiled w/ Clang 10.0.1
@@ -270,8 +282,6 @@ TRIM
 - Initial Release
 
 # Special Thanks To
-- [@TheWolfGirl02](https://t.me/TheWolfGirl02)
 - [@MrCarb0n](https://t.me/MrCarb0n)
 - [@ardasuzen](https://t.me/ardasuzen)
-- [@Drizzy00](https://t.me/Drizzy00)
 - All of the Testers

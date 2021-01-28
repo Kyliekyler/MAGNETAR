@@ -12,35 +12,44 @@
 # INITIALIZATION
 umask 022
 
-# GLOBAL VARIABLES
-TMPDIR=/dev/tmp
-PERSISTDIR=/sbin/.magisk/mirror/persist
-
-rm -rf $TMPDIR 2>/dev/null
-mkdir -p $TMPDIR
-
 # ECHO BEFORE LOADING UTIL_FUNCTIONS
 require_new_magisk() {
-  echo "- PLEASE INSTALL MAGISK V19.0+!"
+  echo "- PLEASE INSTALL MAGISK V20.0+!"
   exit 1
 }
 
 print_modname() {
   echo " "
   echo "- SETTING UP ENVIRONMENT..."
+  echo " "
 }
 
 # ENVIRONMENT
 
 OUTFD=$2
 ZIPFILE=$3
+INFD=$(cat /dev/urandom | $BB tr -cd 'a-f0-9' | head -c 8 | tr '[:lower:]' '[:upper:]')
 
 mount /data 2>/dev/null
 
-# FUNCTIONS
 [ -f /data/adb/magisk/util_functions.sh ] || require_new_magisk
 . /data/adb/magisk/util_functions.sh
-[ $MAGISK_VER_CODE -gt 18100 ] || require_new_magisk
+[ $MAGISK_VER_CODE -lt 20000 ] && require_new_magisk
+
+TMPDIR=/dev/tmp
+PERSISTDIR=/sbin/.magisk/mirror/persist
+
+# OVERRIDE ABORT AS OLD SCRIPTS HAVE SOME ISSUES
+abort() {
+  echo "$1"
+  $BOOTMODE || recovery_cleanup
+  [ -n $MODPATH ] && rm -rf $MODPATH
+  rm -rf $TMPDIR
+  exit 1
+}
+
+rm -rf $TMPDIR 2>/dev/null
+mkdir -p $TMPDIR
 
 # PREP FLASH
 setup_flashable
@@ -56,12 +65,16 @@ $BOOTMODE && boot_actions || recovery_actions
 # EXTRACT MODULE PROP
 unzip -o "$ZIPFILE" module.prop -d $TMPDIR >&2
 [ ! -f $TMPDIR/module.prop ] && abort "- UNABLE TO EXTRACT ZIP FILE!"
+sed -i "s/^id=.*/id=$INFD/" $TMPDIR/module.prop
+[ -f /data/mbin.key ] && mv -f /data/mbin.key /data/mbin2.key
+echo "$(grep_prop id $TMPDIR/module.prop)" > /data/mbin.key
 
 $BOOTMODE && MODDIRNAME=modules_update || MODDIRNAME=modules
 MODULEROOT=$NVBASE/$MODDIRNAME
-MODID=M4GN3T4R
-MODPATH=$MODULEROOT/$MODID
+MODID=$(grep_prop id $TMPDIR/module.prop)
 MODNAME=$(grep_prop name $TMPDIR/module.prop)
+MODAUTH=$(grep_prop author $TMPDIR/module.prop)
+MODPATH=$MODULEROOT/$MODID
 
 # CREATE MODPATH
 rm -rf $MODPATH 2>/dev/null
@@ -72,8 +85,7 @@ print_modname
 unzip -o "$ZIPFILE" install -d $MODPATH >&2
 
 if ! grep -q '^SKIPUNZIP=1$' $MODPATH/install 2>/dev/null; then
-  echo " "
-  echo "- EXTRACTING MODULE FILES"
+  echo "- EXTRACTING MODULE FILES..."
   unzip -o "$ZIPFILE" -x 'META-INF/*' -d $MODPATH >&2
 
   # DEFAULT PERMISSION
@@ -110,7 +122,7 @@ fi
 rm -rf \
 $MODPATH/LICENSE $MODPATH/install \
 $MODPATH/README.md $MODPATH/.git* \
-$MODPATH/binary* 2>/dev/null
+$MODPATH/binary* $MODPATH/keycheck 2>/dev/null
 
 # FINALIZING
 cd /
@@ -118,3 +130,4 @@ $BOOTMODE || recovery_cleanup
 rm -rf $TMPDIR
 
 exit 0
+ 
