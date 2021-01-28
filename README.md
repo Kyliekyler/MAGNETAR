@@ -59,6 +59,10 @@ Endurance+
 
 
 # Changelog
+### KILO (2101290110)
+- Fixed Bootloop Issues
+- Fixed Looping Balance/Balance+ Mode
+
 ### KILO (2101282050)
 - Proper Android 11 Support
 - Compiled w/ Clang 11
