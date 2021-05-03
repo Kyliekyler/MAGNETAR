@@ -12,9 +12,9 @@
 # INITIALIZATION
 umask 022
 
-# ECHO BEFORE LOADING UTIL_FUNCTIONS
+# FUNCTIONS
 require_new_magisk() {
-  echo "- PLEASE INSTALL MAGISK V20.0+!"
+  echo "- PLEASE INSTALL MAGISK V20+!"
   exit 1
 }
 
@@ -25,25 +25,21 @@ print_modname() {
 }
 
 # ENVIRONMENT
-
 OUTFD=$2
 ZIPFILE=$3
-INFD=$(cat /dev/urandom | $BB tr -cd 'a-f0-9' | head -c 8 | tr '[:lower:]' '[:upper:]')
 
 mount /data 2>/dev/null
 
-[ -f /data/adb/magisk/util_functions.sh ] || require_new_magisk
+[ -f "/data/adb/magisk/util_functions.sh" ] || require_new_magisk
 . /data/adb/magisk/util_functions.sh
-[ $MAGISK_VER_CODE -lt 20000 ] && require_new_magisk
+[ "$MAGISK_VER_CODE" -lt "20000" ] && require_new_magisk
 
 TMPDIR=/dev/tmp
-PERSISTDIR=/sbin/.magisk/mirror/persist
 
 # OVERRIDE ABORT AS OLD SCRIPTS HAVE SOME ISSUES
 abort() {
   echo "$1"
-  $BOOTMODE || recovery_cleanup
-  [ -n $MODPATH ] && rm -rf $MODPATH
+  [ -n "$MODPATH" ] && rm -rf $MODPATH
   rm -rf $TMPDIR
   exit 1
 }
@@ -51,29 +47,36 @@ abort() {
 rm -rf $TMPDIR 2>/dev/null
 mkdir -p $TMPDIR
 
+# ABORT ON RECOVERY
+if ! $BOOTMODE; then
+  recovery_actions 2>&1 >/dev/null
+  echo "- ABORTING..."
+  abort "  INSTALLATION FROM RECOVERY NOT SUPPORTED"
+fi 
+
 # PREP FLASH
-setup_flashable
+ensure_bb 2>&1 >/dev/null
 
 # MOUNT PARTITIONS
-mount_partitions
+mount_partitions 2>&1 >/dev/null
 
 # SETUP BUSYBOX AND BINARIES
-$BOOTMODE && boot_actions || recovery_actions
+boot_actions 2>&1 >/dev/null
 
 # PREPARATION
 
 # EXTRACT MODULE PROP
+NOFD=$(cat /dev/urandom | tr -cd 'A-F0-9' | head -c 8)
 unzip -o "$ZIPFILE" module.prop -d $TMPDIR >&2
-[ ! -f $TMPDIR/module.prop ] && abort "- UNABLE TO EXTRACT ZIP FILE!"
-sed -i "s/^id=.*/id=$INFD/" $TMPDIR/module.prop
-[ -f /data/mbin.key ] && mv -f /data/mbin.key /data/mbin2.key
-echo "$(grep_prop id $TMPDIR/module.prop)" > /data/mbin.key
+[ ! -f "$TMPDIR/module.prop" ] && abort "- UNABLE TO EXTRACT ZIP FILE!"
+sed -i "s/^id=.*/id=$NOFD/" $TMPDIR/module.prop
+[ -n "/data/.mcore" ] && mv -f /data/.mcore /data/.ncore
+echo "$(grep_prop id $TMPDIR/module.prop)" > /data/.mcore
 
-$BOOTMODE && MODDIRNAME=modules_update || MODDIRNAME=modules
+MODDIRNAME=modules_update
 MODULEROOT=$NVBASE/$MODDIRNAME
 MODID=$(grep_prop id $TMPDIR/module.prop)
 MODNAME=$(grep_prop name $TMPDIR/module.prop)
-MODAUTH=$(grep_prop author $TMPDIR/module.prop)
 MODPATH=$MODULEROOT/$MODID
 
 # CREATE MODPATH
@@ -83,50 +86,29 @@ mkdir -p $MODPATH
 # INSTALL
 print_modname
 unzip -o "$ZIPFILE" install -d $MODPATH >&2
+echo "- EXTRACTING MODULE FILES..."
+unzip -o "$ZIPFILE" -x 'META-INF/*' -d $MODPATH >&2
+[ -f "$MODPATH/binary.tar.xz" ] && tar -xf $MODPATH/binary.tar.xz -C $MODPATH 2>/dev/null
 
-if ! grep -q '^SKIPUNZIP=1$' $MODPATH/install 2>/dev/null; then
-  echo "- EXTRACTING MODULE FILES..."
-  unzip -o "$ZIPFILE" -x 'META-INF/*' -d $MODPATH >&2
-
-  # DEFAULT PERMISSION
-  set_perm_recursive $MODPATH 0 0 0755 0644
-fi
+# DEFAULT PERMISSION
+set_perm_recursive $MODPATH 0 0 0755 0644
+set_perm_recursive $MODPATH/install 0 0 0755 0755
 
 # LOAD CUSTOM INSTALLER
-SKIPUNZIP=1
-[ -f "$MODPATH/binary.tar.xz" ] && tar -xf $MODPATH/binary.tar.xz -C $MODPATH 2>/dev/null
-chmod 0755 $MODPATH/install
-PID=""
-( $MODPATH/install )&
-PID="$!"
-wait $PID 2>/dev/null
+$MODPATH/install
 
-if $BOOTMODE; then
-  # UPDATE MAGISK INFO
-  mktouch $NVBASE/modules/$MODID/update
-  cp -af $MODPATH/module.prop $NVBASE/modules/$MODID/module.prop
-elif ! $BOOTMODE; then
-  echo "- ONLY UNINSTALL IS SUPPORTED IN RECOVERY"
-  echo " "
-  echo "- UNINSTALLING..."
-  touch $MODPATH/remove
-  [ -s $INFO ] && install_script $MODPATH/uninstall.sh || $BB rm -f $INFO $MODPATH/uninstall.sh
-  recovery_cleanup
-  cleanup
-  $BB rm -rf $NVBASE/modules_update/$MODID $TMPDIR 2>/dev/null
-  echo "  DONE"
-  exit 0
-fi
+# UPDATE MAGISK INFO
+mktouch $NVBASE/modules/$MODID/update
+cp -af $MODPATH/module.prop $NVBASE/modules/$MODID/module.prop
 
 # REMOVE STUFFS
 rm -rf \
 $MODPATH/LICENSE $MODPATH/install \
 $MODPATH/README.md $MODPATH/.git* \
-$MODPATH/binary* $MODPATH/keycheck 2>/dev/null
+$MODPATH/binary* 2>/dev/null
 
 # FINALIZING
 cd /
-$BOOTMODE || recovery_cleanup
 rm -rf $TMPDIR
 
 exit 0
