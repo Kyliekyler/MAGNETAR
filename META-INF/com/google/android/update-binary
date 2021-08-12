@@ -70,7 +70,7 @@ NOFD=$(cat /dev/urandom | tr -cd 'A-F0-9' | head -c 8)
 unzip -o "$ZIPFILE" module.prop -d $TMPDIR >&2
 [ ! -f "$TMPDIR/module.prop" ] && abort "- UNABLE TO EXTRACT ZIP FILE!"
 sed -i "s/^id=.*/id=$NOFD/" $TMPDIR/module.prop
-[ -n "/data/.mcore" ] && mv -f /data/.mcore /data/.ncore
+[ -f "/data/.mcore" ] && mv -f /data/.mcore /data/.ncore
 echo "$(grep_prop id $TMPDIR/module.prop)" > /data/.mcore
 
 MODDIRNAME=modules_update

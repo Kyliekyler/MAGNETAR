@@ -1,7 +1,7 @@
 # MAGNETAR
 <p align="center">
   <img src="https://github.com/Kyliekyler/MAGNETAR/blob/master/.github/logo.png">
-  Eliminate Lags and Throttling — Run Your Game Smoothly and Comfortably with No Substantial Performance Drops
+  Device Performance Optimizer — Aims To Provide An Optimal Experience At Every Usage Scenario
 </p>
 
 ## Notes
@@ -20,34 +20,30 @@
 - [MAGNEPEDIA](https://github.com/Kyliekyler/MAGNETAR/wiki)
 
 ## Changelog
-### LIMA (2105031710)
-- Added MAGNETAR CLI
-- Added MAGNEPEDIA (Wiki)
-- Added Auto Config Backup and Restore
-- Added Initial API 31 Support
-- Added Core Control
-- Added Per-App-Profiling
-- Added Configurable Thermal Threshold
-- Added Notification Toggler
-- Added Config Backup Import/Export
-- Added Database Viewer
-- Compiled with Clang 12
-- Fixed Logging On Android 11
-- Fixed Freezing Issues
-- Fixed Install Duplication
-- Moved Thermal Disabler On CLI
-- Moved Log Viewer On CLI
-- Reduced Module Size By 53%
-- Optimized Overall Performance
-- Optimized Mode Switching Algorithm
-- Optimized Engine Runtime
-- Optimized Endurance+ and Cooldown Mode
-- Miscellaneous Bug Fixes and Improvements
+### MIKE (2108121200)
+- Added ART Optimization
+- Added Configurable Auto Endurance+ Mode
+- Added Doze Optimization Profiles
+- Added RAM Management Profiles
+- Added Renderer Switcher
+- Added Ability To Restore Defaults
+- Added Fast Charge Toggler
+- Fixed Frequency Scaling
+- Fixed Dumpsys Error
+- Fixed Bubble Detection
+- Improved CLI
+- Improved Notifications
+- Improved Game Detection
+- Improved Engine Runtime
+- Improved Performance Optimization
+- Improved Endurance+ and Cooldown Mode
+- Improved Overall Stability
+- Miscellaneous Bug Fixes And Improvements
 
 [See More](https://github.com/Kyliekyler/MAGNETAR/wiki/CHANGELOG#changelog)
 
 ## Special Thanks To
-[@MrCarb0n](https://github.com/MrCarb0n), [@ardasuzen](https://github.com/ardasuzen), [@ManOfDiamond](https://github.com/ManOfDiamond), [@AkumaHunt3r](https://github.com/AkumaHunt3r), [@airpods69](https://github.com/airpods69), [@HafizZiq](https://github.com/HafizZiq), [@Paget96](https://github.com/Paget96), [@sssira](https://github.com/sssira), [@Thedeepaksabharwal](https://github.com/Thedeepaksabharwal), and all other testers
+[@MrCarb0n](https://github.com/MrCarb0n), [@ManOfDiamond](https://github.com/ManOfDiamond), [@AkumaHunt3r](https://github.com/AkumaHunt3r), [@varoo_idk](https://github.com/varoo_idk), [@sssira](https://github.com/sssira), [@Thedeepaksabharwal](https://github.com/Thedeepaksabharwal), [@TestoBuzz](https://github.com/TestoBuzz), [@Bug_Founder_S10_S8](https://t.me/Bug_Founder_S10_S8), [@XNinjAssassinX](https://t.me/XNinjAssassinX), [@Applez3](https://t.me/Applez3), [@LetsMakeModules](https://t.me/LetsMakeModules), [@hahahabutinga](https://t.me/hahahabutinga), and all other testers
 
 <br/>
 <p align="center">
