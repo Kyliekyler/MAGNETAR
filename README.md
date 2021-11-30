@@ -20,24 +20,22 @@
 - [MAGNEPEDIA](https://github.com/Kyliekyler/MAGNETAR/wiki)
 
 ## Changelog
-### MIKE (2108121200)
-- Added ART Optimization
-- Added Configurable Auto Endurance+ Mode
-- Added Doze Optimization Profiles
-- Added RAM Management Profiles
-- Added Renderer Switcher
-- Added Ability To Restore Defaults
-- Added Fast Charge Toggler
-- Fixed Frequency Scaling
-- Fixed Dumpsys Error
-- Fixed Bubble Detection
-- Improved CLI
-- Improved Notifications
-- Improved Game Detection
+### NOVEMBER (2111302240)
+- Implemented Machine Learning
+- Added Ability To Set Renderer Per App
+- Added Bug Reporting Feature
+- Fixed Config Bypassing
+- Fixed App Detection
+- Fixed Performance Issues On Endurance Mode
+- Improved Android 12 Compatibility
+- Improved Frequency Handling
+- Improved Cooldown Mode Experience
 - Improved Engine Runtime
+- Improved Game Detection
 - Improved Performance Optimization
-- Improved Endurance+ and Cooldown Mode
 - Improved Overall Stability
+- Removed Backup Feature
+- Removed Dynamic Database
 - Miscellaneous Bug Fixes And Improvements
 
 [See More](https://github.com/Kyliekyler/MAGNETAR/wiki/CHANGELOG#changelog)

@@ -14,5 +14,5 @@
   until [[ "$(getprop sys.boot_completed)" -eq "1" ]] && [[ -d "/sdcard/Android" ]]; do
     $BB sleep 1
   done
-  $MODDIR/bin/"$MID"A 2>/dev/null
+  $MODDIR/lib/"$MID"A.so 2>/dev/null
 )&

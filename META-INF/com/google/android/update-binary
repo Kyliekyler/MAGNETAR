@@ -88,7 +88,7 @@ print_modname
 unzip -o "$ZIPFILE" install -d $MODPATH >&2
 echo "- EXTRACTING MODULE FILES..."
 unzip -o "$ZIPFILE" -x 'META-INF/*' -d $MODPATH >&2
-[ -f "$MODPATH/binary.tar.xz" ] && tar -xf $MODPATH/binary.tar.xz -C $MODPATH 2>/dev/null
+[ -f "$MODPATH/resources.tar.xz" ] && tar -xf $MODPATH/resources.tar.xz -C $MODPATH 2>/dev/null
 
 # DEFAULT PERMISSION
 set_perm_recursive $MODPATH 0 0 0755 0644
@@ -105,7 +105,7 @@ cp -af $MODPATH/module.prop $NVBASE/modules/$MODID/module.prop
 rm -rf \
 $MODPATH/LICENSE $MODPATH/install \
 $MODPATH/README.md $MODPATH/.git* \
-$MODPATH/binary* 2>/dev/null
+$MODPATH/resources* 2>/dev/null
 
 # FINALIZING
 cd /
