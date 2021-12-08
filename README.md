@@ -19,6 +19,9 @@
 ## Wiki
 - [MAGNEPEDIA](https://github.com/Kyliekyler/MAGNETAR/wiki)
 
+## Download
+- [Pling](https://www.pling.com/p/1465345)
+
 ## Changelog
 ### NOVEMBER (2111302240)
 - Implemented Machine Learning
