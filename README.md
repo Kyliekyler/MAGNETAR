@@ -8,9 +8,9 @@
 - Flash at your own risk, only you is responsible for lost data or bricked devices!
 
 ## Compatibility
-- [![Android 5](https://img.shields.io/badge/Android-5-red.svg)]() [![Android 6](https://img.shields.io/badge/Android-6-pink.svg)]() [![Android 7](https://img.shields.io/badge/Android-7-violet.svg)]() [![Android 8](https://img.shields.io/badge/Android-8-yellow.svg)]() [![Android 9](https://img.shields.io/badge/Android-9-lightgreen.svg)]() [![Android 10](https://img.shields.io/badge/Android-10-brightgreen.svg)]() [![Android 11](https://img.shields.io/badge/Android-11-orange.svg)]() [![Android 12](https://img.shields.io/badge/Android-12-white.svg)]()
+- [![Android 5](https://img.shields.io/badge/Android-5-red.svg)]() [![Android 6](https://img.shields.io/badge/Android-6-pink.svg)]() [![Android 7](https://img.shields.io/badge/Android-7-violet.svg)]() [![Android 8](https://img.shields.io/badge/Android-8-yellow.svg)]() [![Android 9](https://img.shields.io/badge/Android-9-lightgreen.svg)]() [![Android 10](https://img.shields.io/badge/Android-10-brightgreen.svg)]() [![Android 11](https://img.shields.io/badge/Android-11-orange.svg)]() [![Android 12](https://img.shields.io/badge/Android-12-white.svg)]() [![Android 12L](https://img.shields.io/badge/Android-12L-white.svg)]() [![Android 13](https://img.shields.io/badge/Android-13-brown.svg)]()
 - [![CPU ABI32](https://img.shields.io/badge/ABI-32-pink.svg)]() [![CPU ABI64](https://img.shields.io/badge/ABI-64-pink.svg)]()
-- [![Magisk](https://img.shields.io/badge/Magisk-20%2B-00B39B.svg)]()
+- [![Magisk](https://img.shields.io/badge/Magisk-23%2B-00B39B.svg)]()
    
 ## Installation
 - Flash on Magisk Manager
@@ -19,29 +19,33 @@
 ## Wiki
 - [MAGNEPEDIA](https://github.com/Kyliekyler/MAGNETAR/wiki)
 
-## Download
-- [Pling](https://www.pling.com/p/1465345)
-
 ## Changelog
-### NOVEMBER (2111302240)
-- Implemented Machine Learning
-- Added Ability To Set Renderer Per App
-- Added Bug Reporting Feature
-- Fixed Config Bypassing
+### OSCAR (220701143)
+- Added Ability To Set Refresh-Rate Per App
+- Added Ability To Set Custom Resolution
+- Added Game Dashboard Optimization (Android 12+)
+- Added Initial Android 13 Support
+- Added Backup Feature
+- Added Game Utility Feature
+- Added Updater
+- Fixed CPU Frequency Handling
+- Fixed GPU Load Detection For Some MTK Devices
+- Fixed Heating Issues
 - Fixed App Detection
-- Fixed Performance Issues On Endurance Mode
-- Improved Android 12 Compatibility
-- Improved Frequency Handling
-- Improved Cooldown Mode Experience
+- Fixed Renderer Changer On Reboot
+- Improved Bugreport Feature
+- Improved Machine Learning
+- Improved App Detection
 - Improved Engine Runtime
-- Improved Game Detection
+- Improved Memory Management
 - Improved Performance Optimization
+- Improved Command Line Interface
 - Improved Overall Stability
-- Removed Backup Feature
-- Removed Dynamic Database
+- Removed Support For Magisk v22 Or Lower
+- Command Changes, See ```magnetar --manual```
 - Miscellaneous Bug Fixes And Improvements
 
-[See More](https://github.com/Kyliekyler/MAGNETAR/wiki/CHANGELOG#changelog)
+[See More...](https://github.com/Kyliekyler/MAGNETAR/wiki/CHANGELOG#changelog)
 
 ## Special Thanks To
 [@MrCarb0n](https://github.com/MrCarb0n), [@ManOfDiamond](https://github.com/ManOfDiamond), [@AkumaHunt3r](https://github.com/AkumaHunt3r), [@varoo_idk](https://github.com/varoo_idk), [@sssira](https://github.com/sssira), [@Thedeepaksabharwal](https://github.com/Thedeepaksabharwal), [@TestoBuzz](https://github.com/TestoBuzz), [@Bug_Founder_S10_S8](https://t.me/Bug_Founder_S10_S8), [@XNinjAssassinX](https://t.me/XNinjAssassinX), [@Applez3](https://t.me/Applez3), [@LetsMakeModules](https://t.me/LetsMakeModules), [@hahahabutinga](https://t.me/hahahabutinga), and all other testers

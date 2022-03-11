@@ -1,6 +1,7 @@
 id=MAGNETAR
 name=MAGNETAR
-version=NOVEMBER (2111302240)
-versionCode=2111302240
+version=OSCAR (220701143)
+versionCode=220701143
 author=Kyliekyler
 description=Device Performance Optimizer — Aims To Provide An Optimal Experience At Every Usage Scenario
+updateJson=https://raw.githubusercontent.com/Kyliekyler/MAGNETAR/master/update.json
