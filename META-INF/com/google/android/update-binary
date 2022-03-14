@@ -103,8 +103,8 @@ cp -af $MODPATH/module.prop $NVBASE/modules/$MODID/module.prop
 # REMOVE STUFFS
 rm -rf \
 $MODPATH/LICENSE $MODPATH/install \
-$MODPATH/*.md $MODPATH/.git* \
-$MODPATH/resources* 2>/dev/null
+$MODPATH/*.json $MODPATH/*.md \
+$MODPATH/.git* $MODPATH/resources* 2>/dev/null
 
 # FINALIZING
 cd /
