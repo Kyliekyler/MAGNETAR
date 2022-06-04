@@ -20,7 +20,7 @@
 - [MAGNEPEDIA](https://github.com/Kyliekyler/MAGNETAR/wiki)
 
 ## Changelog
-### PAPA (220901845)
+### PAPA (221520020)
 - Added Ability To Set Refresh-Rate Per App
 - Added Ability To Set Custom Resolution
 - Added Game Dashboard Optimization (Android 12+)
