@@ -1,8 +1,8 @@
 #!/sbin/sh
-#   _____ __________ _____ ____ _____ _________  
-#  |     | _  |   __|   | |  __|_   _| _  | __ | 
-#  | | | |    |  |  | | | |  __| | | |    |   -| 
-#  |_|_|_|_|__|_____|_|___|____| |_| |_|__|_|__| 
+#   _____ __________ _____ ____ _____ _________
+#  |     | _  |   __|   | |  __|_   _| _  | __ |
+#  | | | |    |  |  | | | |  __| | | |    |   -|
+#  |_|_|_|_|__|_____|_|___|____| |_| |_|__|_|__|
 #                      by Kyliekyler © 2019-2022
 
 #===========================================================================//
@@ -28,7 +28,7 @@ print_modname() {
 OUTFD=$2
 ZIPFILE=$3
 
-mount /data 2>/dev/null
+mount /data 2> /dev/null
 
 [ -f "/data/adb/magisk/util_functions.sh" ] || require_new_magisk
 . /data/adb/magisk/util_functions.sh
@@ -44,24 +44,24 @@ abort() {
   exit 1
 }
 
-rm -rf $TMPDIR 2>/dev/null
+rm -rf $TMPDIR 2> /dev/null
 mkdir -p $TMPDIR
 
 # ABORT ON RECOVERY
 if ! $BOOTMODE; then
-  recovery_actions 2>&1 >/dev/null
+  recovery_actions 2>&1 > /dev/null
   echo "- ABORTING..."
   abort "  INSTALLATION FROM RECOVERY NOT SUPPORTED"
-fi 
+fi
 
 # PREP FLASH
-ensure_bb 2>&1 >/dev/null
+ensure_bb 2>&1 > /dev/null
 
 # MOUNT PARTITIONS
-mount_partitions 2>&1 >/dev/null
+mount_partitions 2>&1 > /dev/null
 
 # SETUP BUSYBOX AND BINARIES
-boot_actions 2>&1 >/dev/null
+boot_actions 2>&1 > /dev/null
 
 # PREPARATION
 
@@ -79,7 +79,7 @@ MODNAME=$(grep_prop name $TMPDIR/module.prop)
 MODPATH=$MODULEROOT/$MODID
 
 # CREATE MODPATH
-rm -rf $MODPATH 2>/dev/null
+rm -rf $MODPATH 2> /dev/null
 mkdir -p $MODPATH
 
 # INSTALL
@@ -87,7 +87,7 @@ print_modname
 unzip -o "$ZIPFILE" install -d $MODPATH >&2
 echo "- EXTRACTING MODULE FILES..."
 unzip -o "$ZIPFILE" -x 'META-INF/*' -d $MODPATH >&2
-[ -f "$MODPATH/resources.xz" ] && tar -xf $MODPATH/resources.xz -C $MODPATH 2>/dev/null
+[ -f "$MODPATH/resources.xz" ] && tar -xf $MODPATH/resources.xz -C $MODPATH 2> /dev/null
 
 # DEFAULT PERMISSION
 set_perm_recursive $MODPATH 0 0 0755 0644
@@ -102,13 +102,12 @@ cp -af $MODPATH/module.prop $NVBASE/modules/$MODID/module.prop
 
 # REMOVE STUFFS
 rm -rf \
-$MODPATH/LICENSE $MODPATH/install \
-$MODPATH/*.json $MODPATH/*.md \
-$MODPATH/.git* $MODPATH/resources* 2>/dev/null
+  $MODPATH/LICENSE $MODPATH/install \
+  $MODPATH/*.json $MODPATH/*.md \
+  $MODPATH/.git* $MODPATH/resources* 2> /dev/null
 
 # FINALIZING
 cd /
 rm -rf $TMPDIR
 
 exit 0
- 
