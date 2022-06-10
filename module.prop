@@ -1,7 +1,7 @@
 id=MAGNETAR
 name=MAGNETAR
-version=PAPA (221582320-CR9)
-versionCode=221582320
+version=PAPA (221611400-CR10)
+versionCode=221611400
 author=Kyliekyler
 description=Device Performance Optimizer — Aims To Provide An Optimal Experience At Every Usage Scenario
 updateJson=https://raw.githubusercontent.com/Kyliekyler/MAGNETAR/master/update.json

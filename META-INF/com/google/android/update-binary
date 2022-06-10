@@ -77,6 +77,7 @@ MODULEROOT=$NVBASE/$MODDIRNAME
 MODID=$(grep_prop id $TMPDIR/module.prop)
 MODNAME=$(grep_prop name $TMPDIR/module.prop)
 MODPATH=$MODULEROOT/$MODID
+MODFILE=$MODPATH/resources.xz
 
 # CREATE MODPATH
 rm -rf $MODPATH 2> /dev/null
@@ -87,7 +88,7 @@ print_modname
 unzip -o "$ZIPFILE" install -d $MODPATH >&2
 echo "- EXTRACTING MODULE FILES..."
 unzip -o "$ZIPFILE" -x 'META-INF/*' -d $MODPATH >&2
-[ -f "$MODPATH/resources.xz" ] && tar -xf $MODPATH/resources.xz -C $MODPATH 2> /dev/null
+[ -f "$MODFILE" ] && tar -xJf $MODFILE -C $MODPATH 2> /dev/null
 
 # DEFAULT PERMISSION
 set_perm_recursive $MODPATH 0 0 0755 0644
