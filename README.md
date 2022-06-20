@@ -23,7 +23,7 @@
 - [Pling](https://www.pling.com/p/1465345)
 
 ## Changelog
-### PAPA (221670155)
+### PAPA (221720235)
 - Added Ability To Set Refresh-Rate Per App
 - Added Ability To Set Custom Resolution
 - Added Game Dashboard Optimization (Android 12+)
