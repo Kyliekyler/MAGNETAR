@@ -26,7 +26,7 @@
 
 ## Changelog
 
-### PAPA (221810005)
+### PAPA (221820245)
 
 - Added Ability To Set Refresh-Rate Per App
 - Added Ability To Set Custom Resolution
@@ -64,5 +64,5 @@
   <a href="https://t.me/MAGNETARCHAT"><img src="https://img.shields.io/badge/Telegram-Group-blue?logo=telegram&style=social"></a>
   <a href="https://facebook.com/MAGNETAR1999"><img src="https://img.shields.io/badge/Facebook-Page-blue?logo=facebook&style=social"></a>
   <br/>
-  MAGNETAR © 2019-2021
+  MAGNETAR © 2019-2022
 </p>
