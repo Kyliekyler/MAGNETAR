@@ -26,37 +26,24 @@
 
 ## Changelog
 
-### PAPA (221820245)
+### PAPA (221850145-CR17)
 
-- Added Ability To Set Refresh-Rate Per App
-- Added Ability To Set Custom Resolution
-- Added Game Dashboard Optimization (Android 12+)
-- Added Initial Android 13 Support
-- Added Backup Feature
-- Added Game Utility Feature
-- Added Updater
-- Fixed CPU Frequency Handling
-- Fixed GPU Load Detection For Some MTK Devices
-- Fixed Heating Issues
-- Fixed App Detection
-- Fixed Renderer Changer On Reboot
-- Improved Bugreport Feature
-- Improved Machine Learning
-- Improved App Detection
-- Improved Engine Runtime
-- Improved Memory Management
-- Improved Performance Optimization
-- Improved Command Line Interface
-- Improved Overall Stability
-- Removed Support For Magisk v22 Or Lower
-- Command Changes, See `magnetar --manual`
-- Miscellaneous Bug Fixes And Improvements
+- Enabled Low RAM Config Tuner
+- Fixed Failed Installation Cleanup
+- Fixed Bugreport Title
+- Fixed Privilege Revocation
+- Fixed Config Reset/Restore
+- Fixed Refresh Rate Checking
+- Fixed Registration Checking
+- Improved and Fixed Updater
+- Used `resetprop` for Fetching Props
+- Miscellaneous Changes
 
 [See More...](https://github.com/Kyliekyler/MAGNETAR/wiki/CHANGELOG#changelog)
 
 ## Special Thanks To
 
-[@MrCarb0n](https://github.com/MrCarb0n), [@ManOfDiamond](https://github.com/ManOfDiamond), [@AkumaHunt3r](https://github.com/AkumaHunt3r), [@varoo_idk](https://github.com/varoo_idk), [@sssira](https://github.com/sssira), [@Thedeepaksabharwal](https://github.com/Thedeepaksabharwal), [@TestoBuzz](https://github.com/TestoBuzz), [@Bug_Founder_S10_S8](https://t.me/Bug_Founder_S10_S8), [@XNinjAssassinX](https://t.me/XNinjAssassinX), [@Applez3](https://t.me/Applez3), [@LetsMakeModules](https://t.me/LetsMakeModules), [@hahahabutinga](https://t.me/hahahabutinga), and all other testers
+[@MrCarb0n](https://github.com/MrCarb0n), [@ManOfDiamond](https://github.com/ManOfDiamond), [@AkumaHunt3r](https://github.com/AkumaHunt3r), [@varoo_idk](https://github.com/varoo_idk), [@sssira](https://github.com/sssira), [@Thedeepaksabharwal](https://github.com/Thedeepaksabharwal), [@TestoBuzz](https://github.com/TestoBuzz), [@Bug_Founder_S10_S8](https://t.me/Bug_Founder_S10_S8), [@XNinjAssassinX](https://t.me/XNinjAssassinX), [@Applez3](https://t.me/Applez3), [@LetsMakeModules](https://t.me/LetsMakeModules), [@hahahabutinga](https://t.me/hahahabutinga), and all other testers.
 
 <br/>
 <p align="center">

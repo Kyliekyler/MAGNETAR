@@ -1,6 +1,6 @@
 {
-  "version": "PAPA CR16 ",
-  "versionCode": 221820245,
-  "zipUrl": "https://github.com/Kyliekyler/MAGNETAR-UPDATER/releases/download/updater/MAGNETAR.UPDATER.zip",
-  "changelog": "https://raw.githubusercontent.com/wiki/Kyliekyler/MAGNETAR/CHANGELOG.md"
+  "version": "PAPA CR17 ",
+  "versionCode": 221850145,
+  "zipUrl": "https://github.com/Kyliekyler/MAGNETAR-UPDATER/releases/download/v2.0/MAGNETAR-UPDATER.zip",
+  "changelog": "https://raw.githubusercontent.com/Kyliekyler/MAGNETAR/canary/changelog.md"
 }
