@@ -9,22 +9,15 @@
 # GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
 #===========================================================================//
 
-# INITIALIZATION
 umask 022
 
-# FUNCTIONS
+ui_print() { echo "$1"; }
+
 require_new_magisk() {
-  echo "- PLEASE INSTALL MAGISK V23+!"
+  ui_print "- PLEASE INSTALL MAGISK V23+!"
   exit 1
 }
 
-print_modname() {
-  echo " "
-  echo "- SETTING UP ENVIRONMENT..."
-  echo " "
-}
-
-# ENVIRONMENT
 OUTFD=$2
 ZIPFILE=$3
 
@@ -32,82 +25,63 @@ mount /data 2> /dev/null
 
 [ -f "/data/adb/magisk/util_functions.sh" ] || require_new_magisk
 . /data/adb/magisk/util_functions.sh
-[ "$MAGISK_VER_CODE" -lt "23000" ] && require_new_magisk
+[ "$MAGISK_VER_CODE" -lt "20400" ] && require_new_magisk
 
-TMPDIR=/dev/tmp
+install_module() {
+  if ! $BOOTMODE; then
+    recovery_actions > /dev/null 2>&1
+    ui_print "- ABORTING..."
+    abort "  INSTALLATION FROM RECOVERY NOT SUPPORTED"
+  fi
 
-# OVERRIDE ABORT AS OLD SCRIPTS HAVE SOME ISSUES
-abort() {
-  echo "$1"
-  [ -n "$MODPATH" ] && rm -rf $MODPATH
   rm -rf $TMPDIR
-  exit 1
+  mkdir -p $TMPDIR
+  chcon u:object_r:system_file:s0 $TMPDIR
+  cd $TMPDIR || abort "- UNABLE TO CHANGE DIRECTORY"
+
+  ensure_bb
+  mount_partitions > /dev/null 2>&1
+  boot_actions
+
+  unzip -o "$ZIPFILE" module.prop -d $TMPDIR >&2
+  [ ! -f $TMPDIR/module.prop ] && abort "- UNABLE TO EXTRACT ZIP FILE!"
+
+  RDM=$(tr -cd 'A-F0-9' < /dev/urandom | head -c 8)
+  sed -i "s/.*id=.*/id=$RDM/" $TMPDIR/module.prop
+  [ -f "/data/.mcore" ] && mv -f /data/.mcore /data/.ncore
+
+  MODDIRNAME=modules_update
+  MODULEROOT=$NVBASE/$MODDIRNAME
+  MODID=$(grep_prop id $TMPDIR/module.prop)
+  MODPATH=$MODULEROOT/$MODID
+
+  rm -rf $MODPATH
+  mkdir -p $MODPATH
+
+  unzip -o "$ZIPFILE" -x 'META-INF/*' -d $MODPATH >&2
+
+  set_perm_recursive $MODPATH 0 0 0755 0644
+  set_perm_recursive $MODPATH/install 0 0 0755 0755
+  set_perm_recursive $MODPATH/system/bin 0 2000 0755 0755
+  set_perm_recursive $MODPATH/system/xbin 0 2000 0755 0755
+  set_perm_recursive $MODPATH/system/system_ext/bin 0 2000 0755 0755
+  set_perm_recursive $MODPATH/system/vendor/bin 0 2000 0755 0755 u:object_r:vendor_file:s0
+
+  [ -f "$MODPATH/install" ] && $MODPATH/install
+
+  mktouch $NVBASE/modules/$MODID/update
+  rm -rf $NVBASE/modules/$MODID/remove 2> /dev/null
+  rm -rf $NVBASE/modules/$MODID/disable 2> /dev/null
+  cp -af $MODPATH/module.prop $NVBASE/modules/$MODID/module.prop
+
+  rm -rf \
+    $MODPATH/LICENSE $MODPATH/install \
+    $MODPATH/*.json $MODPATH/*.md \
+    $MODPATH/.git* $MODPATH/resources* 2> /dev/null
+
+  cd /
+  rm -rf $TMPDIR
 }
 
-rm -rf $TMPDIR 2> /dev/null
-mkdir -p $TMPDIR
-
-# ABORT ON RECOVERY
-if ! $BOOTMODE; then
-  recovery_actions 2>&1 > /dev/null
-  echo "- ABORTING..."
-  abort "  INSTALLATION FROM RECOVERY NOT SUPPORTED"
-fi
-
-# PREP FLASH
-ensure_bb 2>&1 > /dev/null
-
-# MOUNT PARTITIONS
-mount_partitions 2>&1 > /dev/null
-
-# SETUP BUSYBOX AND BINARIES
-boot_actions 2>&1 > /dev/null
-
-# PREPARATION
-
-# EXTRACT MODULE PROP
-unzip -o "$ZIPFILE" module.prop -d $TMPDIR >&2
-[ ! -f "$TMPDIR/module.prop" ] && abort "- UNABLE TO EXTRACT ZIP FILE!"
-ODD=$(cat /dev/urandom | tr -cd 'A-F0-9' | head -c 8)
-sed -i "s/.*id=.*/id=$ODD/" $TMPDIR/module.prop
-[ -f "/data/.mcore" ] && mv -f /data/.mcore /data/.ncore
-
-MODDIRNAME=modules_update
-MODULEROOT=$NVBASE/$MODDIRNAME
-MODID=$(grep_prop id $TMPDIR/module.prop)
-MODNAME=$(grep_prop name $TMPDIR/module.prop)
-MODPATH=$MODULEROOT/$MODID
-
-# CREATE MODPATH
-rm -rf $MODPATH 2> /dev/null
-mkdir -p $MODPATH
-
-# INSTALL
-print_modname
-unzip -o "$ZIPFILE" install -d $MODPATH >&2
-echo "- EXTRACTING MODULE FILES..."
-unzip -o "$ZIPFILE" -x 'META-INF/*' -d $MODPATH >&2
-[ -f "$MODPATH/resources.xz" ] && tar -xf $MODPATH/resources.xz -C $MODPATH 2> /dev/null
-
-# DEFAULT PERMISSION
-set_perm_recursive $MODPATH 0 0 0755 0644
-set_perm_recursive $MODPATH/install 0 0 0755 0755
-
-# LOAD CUSTOM INSTALLER
-$MODPATH/install
-
-# UPDATE MAGISK INFO
-mktouch $NVBASE/modules/$MODID/update
-cp -af $MODPATH/module.prop $NVBASE/modules/$MODID/module.prop
-
-# REMOVE STUFFS
-rm -rf \
-  $MODPATH/LICENSE $MODPATH/install \
-  $MODPATH/*.json $MODPATH/*.md \
-  $MODPATH/.git* $MODPATH/resources* 2> /dev/null
-
-# FINALIZING
-cd /
-rm -rf $TMPDIR
-
+install_module
 exit 0

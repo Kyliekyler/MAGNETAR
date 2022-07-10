@@ -8,7 +8,7 @@ Name: .gitignore
 SHA-256-Digest: EBaq2tnRAYf4pXYG1Pxx1nvM/ZXDJt6opsT0Ys7ZVc8=
 
 Name: META-INF/com/google/android/update-binary
-SHA-256-Digest: 5OiqSFeoYotNZMshszK+ms4CzkeO31EQ9HhyaRaQetE=
+SHA-256-Digest: tPPM4w85r0cSnzoQ4yC9vkFKu23ycJr4z8z8G/uXV1g=
 
 Name: .gitattributes
 SHA-256-Digest: XKe11BNCr5g9WUvXs/M7K1Z71WbXohxr1FTEkDZ7bhs=
@@ -17,22 +17,22 @@ Name: .github/FUNDING.yml
 SHA-256-Digest: ZFRRTZY0jmk79ucHO5NWpxbdEJiQ2gc2huhBJf/EzzI=
 
 Name: changelog.md
-SHA-256-Digest: eVYQDEKRvhRj2d3SHL7VV0BBq8V9uH5ygqqRvOLwQZo=
+SHA-256-Digest: VGUstr4+7u0f0sEFPJO7G1S2oNG9F3CDp5anEnMp5nM=
 
 Name: README.md
-SHA-256-Digest: A9wkyVnYkYHYjpZHBc0USCCGhjWR+iRVVsfeufOTz5Y=
+SHA-256-Digest: PhuRyfSfjeA15dE3gKuLQgdPjC9D2nCR9CKTYY9IGdE=
 
 Name: resources.xz
-SHA-256-Digest: 4K6XPxjrnydDIGtG6JCjw6iiDv7t07oO8e2dVqT0bS4=
+SHA-256-Digest: Iv+9M+DagZF9iPr8w/OsQivmsw9Q8fih0seGdUDM1mI=
 
 Name: module.prop
-SHA-256-Digest: bPJiZ2vlb0CA9W+RWT/mf/1vHdMJ5IflmFMZipZitOk=
+SHA-256-Digest: UKX8ahoYyFYekEVD6KgjnkvcNQik9u11aHXh71euB3g=
 
 Name: install
-SHA-256-Digest: ji10aUkeW2YmsFRv3qvAvrk8F5RkpGx1Q+V2fa3h/90=
+SHA-256-Digest: BKXSxcYhCiQCt8LoSoJHJmK4ruMjJOBPQFMvOX8nk+A=
 
 Name: update.json
-SHA-256-Digest: UXtqNi119RCbG8smoetRr+N4n1A4Jn6bd7dYuLFyDSk=
+SHA-256-Digest: ygIKQPq8y/PUPX4a4PXpOQcK4+WbK2m9kRfwXYSCg8U=
 
 Name: LICENSE
 SHA-256-Digest: NKuCMVBYbjskgdTY+itw7Mt+i1Q1USi6icGpelBPxEo=

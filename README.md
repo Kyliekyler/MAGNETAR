@@ -26,16 +26,30 @@
 
 ## Changelog
 
-### PAPA (221870000-CR18)
+### PAPA (221912345-CR19)
 
-- Fixed Duplicate Refresh Rate
-- Fixed Refresh Rate Support
-- Fixed Backup Importation
-- Fixed DPI Synchronization
-- Fetch New Userbase On Update
-- Hardcoded Build Type
-- Signed Release
-- Updated Clang Compiler to 14.0.6
+- Added Back Magisk 20.4+ Support
+- Added Fstrim Function
+- Added Per-App Thermal Profiles
+- Added Per-App Threshold Profiles
+- Added Preparation For Average FPS On Log
+- Added Safer Delete Function
+- Fixed AI Command Trigger
+- Fixed Helper Input Checking
+- Fixed Old Backup Importation
+- Fixed Shellcheck Errors
+- Fixed Typographical Error
+- Improved Installer
+- Improved Module Security
+- Improved Tampering Protection
+- Refactored Fast Charge Configuration
+- Refactored Per-App Profiling
+- Refactored Thermal Configuration
+- Used Busybox Standalone Mode
+- Used Persistent Zip Signing
+- Used Simpler Condition Tests
+- Used Simpler Screen State Detection
+- Miscellaneous Changes & Fixes
 
 [See More...](https://github.com/Kyliekyler/MAGNETAR/wiki/CHANGELOG#changelog)
 
