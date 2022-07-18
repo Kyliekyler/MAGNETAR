@@ -1,0 +1,43 @@
+Signature-Version: 1.0
+Created-By: 1.0 (Android SignApk)
+SHA-256-Digest-Manifest: taC5Rcm+7bpTahFkskTWfbVT9z7QCI89J6b29OnTN2w=
+
+Name: META-INF/com/google/android/updater-script
+SHA-256-Digest: dApXZLQElVs3CEv6F++xrF956DJKeruUrb9xh7HqQeQ=
+
+Name: .gitignore
+SHA-256-Digest: 0mKfilwoTmyn+xc8GDReyvVHfdNXAhqEgkdg3ea2u34=
+
+Name: META-INF/com/google/android/update-binary
+SHA-256-Digest: NegCByXTbyHGGuVv+kfeuTSdFLLEkOzpho68WzYAWBY=
+
+Name: .gitattributes
+SHA-256-Digest: HAUXdFzELt7FZiRiDcXmmFd8U+/IiJhe/vIEG9bFB88=
+
+Name: .github/FUNDING.yml
+SHA-256-Digest: N8XRbQyn+jUfD074YUpgzBoXiT4ro32Z5NXwmQ4VB/U=
+
+Name: changelog.md
+SHA-256-Digest: T8XgX5xM56SI6DS/xuW6JHo/9VO5dzNB5H0t1kbtCNs=
+
+Name: README.md
+SHA-256-Digest: AZ2O+qhSz7vZaaD9173ily9reRbbec6Zry2lV9f9tUk=
+
+Name: resources.xz
+SHA-256-Digest: cre2ae/gv20p3PmLrauHWuG9HBecAwHP1SBkCtihr/s=
+
+Name: module.prop
+SHA-256-Digest: ySNmvU/A1VfiJZxyUYgoxPEyJHCFG2K3FqCgss+0+Q0=
+
+Name: install
+SHA-256-Digest: 5KuJSC3hwxF3hdkkfFIaM6LnfQlurj81SzVESZ7GifU=
+
+Name: update.json
+SHA-256-Digest: kT+1S8ndrM492ka7BAeirFCUgg3aj8YUnGh4kagfONA=
+
+Name: LICENSE
+SHA-256-Digest: 7d9Db1ZyaJBwqLAu3aot2crUg6pi0oBnSzSDjJjS/iI=
+
+Name: .github/logo.png
+SHA-256-Digest: 61KWxbnKN/rNByMILL3UyUu2Wi9h2n4K7GvKQ8gWB60=
+
