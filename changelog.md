@@ -1,24 +1,15 @@
 ## Changelog:
 
-- Added Back Magisk 20.4+ Support
-- Added Fstrim Function
-- Added Per-App Thermal Profiles
-- Added Per-App Threshold Profiles
-- Added Preparation For Average FPS On Log
-- Added Safer Delete Function
-- Fixed AI Command Trigger
-- Fixed Helper Input Checking
-- Fixed Old Backup Importation
-- Fixed Shellcheck Errors
-- Fixed Typographical Error
-- Improved Installer
-- Improved Module Security
-- Improved Tampering Protection
-- Refactored Fast Charge Configuration
-- Refactored Per-App Profiling
-- Refactored Thermal Configuration
-- Used Busybox Standalone Mode
-- Used Persistent Zip Signing
-- Used Simpler Condition Tests
-- Used Simpler Screen State Detection
-- Miscellaneous Changes & Fixes
+- Added User Verification On Installation
+- Added Missing Day On Backup/Bugreport File Name
+- Added Some Tuning From Kilo Stable Version
+- Adjusted VM Tuning
+- Fixed Backup Importation
+- Fixed I/O Setup Errors
+- Fixed Tamper Protection
+- Fixed Charge Control
+- Fixed Per-App Threshold
+- Fixed Per-App Thermals
+- Improved Notify Function
+- Improved Character Extraction
+- Miscellaneous Changes & Improvements
