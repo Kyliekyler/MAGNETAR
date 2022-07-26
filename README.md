@@ -26,21 +26,16 @@
 
 ## Changelog
 
-### PAPA (221992050-CR20)
+### QUEBEC (222072230-CR1)
 
-- Added User Verification On Installation
-- Added Missing Day On Backup/Bugreport File Name
-- Added Some Tuning From Kilo Stable Version
-- Adjusted VM Tuning
-- Fixed Backup Importation
-- Fixed I/O Setup Errors
-- Fixed Tamper Protection
-- Fixed Charge Control
-- Fixed Per-App Threshold
-- Fixed Per-App Thermals
-- Improved Notify Function
-- Improved Character Extraction
-- Miscellaneous Changes & Improvements
+- Added Missing Reset All Database Option
+- Adjusted Extreme Mode I/O Scheduler
+- Avoided Running Main Config On Undetected Load
+- Disabled Fstrim
+- Fixed Game Utility
+- Improved CPU Cluster Detection
+- Removed Unnecessary Return
+- Miscellaneous Fixes
 
 [See More...](https://github.com/Kyliekyler/MAGNETAR/wiki/CHANGELOG#changelog)
 
