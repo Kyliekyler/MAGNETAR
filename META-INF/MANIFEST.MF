@@ -17,22 +17,22 @@ Name: .github/FUNDING.yml
 SHA-256-Digest: ZFRRTZY0jmk79ucHO5NWpxbdEJiQ2gc2huhBJf/EzzI=
 
 Name: changelog.md
-SHA-256-Digest: DCn1cPYqp542MljPrc7kCYzqRMEPQ28qwQI28EJnfuc=
+SHA-256-Digest: raXa9w1UvD54LZ8i0t0AMA3EMJOU6f/3VrYjwcgSmnE=
 
 Name: README.md
-SHA-256-Digest: tjUIjydwmm9k4ezr2LaeOy/mjYOwSerEJ1pRN+Iv1W0=
+SHA-256-Digest: SxX/91N3u1irRfZn8PGgpQYj33GjiszimCsfF2d7O2I=
 
 Name: resources.xz
-SHA-256-Digest: Laq4NpBYd2zMLBgKSgUtT0Jw7T1XVEhEzP3fkhvrOAo=
+SHA-256-Digest: U6034doEKVoHTPLqq47UEKM6DqT+xmcykQyaJy4l7OA=
 
 Name: module.prop
-SHA-256-Digest: I3cQ3Tt+T/kpvoirJVxX1vRMr4hVJ2dwdq4+JmrTQbk=
+SHA-256-Digest: +YnLpid6XF4CbLk50BRZUdayrXNlqE7yKWzcoS4poq8=
 
 Name: install
-SHA-256-Digest: GLQ83oGKSE3g2YzwW9xFKduZPVYupnCOyA4X4bY3DII=
+SHA-256-Digest: C0ZXdv3HwKgQ4k25iKaLcYdwxROlbH9J8eTu+abdCRs=
 
 Name: update.json
-SHA-256-Digest: OOHjDafDK/INfDH5agpMEQbtzlEsYj0+eQY63vKrB6g=
+SHA-256-Digest: DGWCDiTo2ArXUCtPySuTguAU9tpefZNOndQB4UwGnHk=
 
 Name: LICENSE
 SHA-256-Digest: NKuCMVBYbjskgdTY+itw7Mt+i1Q1USi6icGpelBPxEo=

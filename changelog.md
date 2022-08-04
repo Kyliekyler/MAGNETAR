@@ -1,10 +1,9 @@
 ## Changelog:
 
-- Added Missing Reset All Database Option
-- Adjusted Extreme Mode I/O Scheduler
-- Avoided Running Main Config On Undetected Load
-- Disabled Fstrim
-- Fixed Game Utility
-- Improved CPU Cluster Detection
-- Removed Unnecessary Return
-- Miscellaneous Fixes
+- Adjusted VM Tuning
+- Adjusted Endurance+ Mode GPU Frequency
+- Fixed Unsetting Of Thermal Profile
+- Increased Threshold Temperature Range (40-50°C)
+- Improved KCAL Support
+- Set Default Update Channel According to Build Type
+- Miscellaneous Changes
