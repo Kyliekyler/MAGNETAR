@@ -1,9 +1,12 @@
 ## Changelog:
 
 - Adjusted VM Tuning
-- Adjusted Endurance+ Mode GPU Frequency
-- Fixed Unsetting Of Thermal Profile
-- Increased Threshold Temperature Range (40-50°C)
-- Improved KCAL Support
-- Set Default Update Channel According to Build Type
+- Extended Game Utility For Apps Set to Game Mode
+- Extended Cache Dropping For Apps Set to Game Mode
+- Fixed Game Detection
+- Fixed Failed Installation Cleanup
+- Fixed Thermal Config Restoration
+- Fixed Updater
+- Improved Start-up Logic
+- Improved Offline Manual Fluency
 - Miscellaneous Changes
