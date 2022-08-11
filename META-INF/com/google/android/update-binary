@@ -24,7 +24,7 @@ ZIPFILE=$3
 mount /data 2> /dev/null
 
 [ -f "/data/adb/magisk/util_functions.sh" ] || require_new_magisk
-. /data/adb/magisk/util_functions.sh
+source /data/adb/magisk/util_functions.sh
 [ "$MAGISK_VER_CODE" -lt "20400" ] && require_new_magisk
 
 install_module() {
@@ -46,7 +46,7 @@ install_module() {
   unzip -o "$ZIPFILE" module.prop -d $TMPDIR >&2
   [ ! -f $TMPDIR/module.prop ] && abort "- UNABLE TO EXTRACT ZIP FILE!"
 
-  RDM=$(tr -cd 'A-F0-9' < /dev/urandom | head -c 8)
+  RDM=$(tr < /dev/urandom -cd 'A-F0-9' | head -c 8)
   sed -i "s/.*id=.*/id=$RDM/" $TMPDIR/module.prop
   [ -f "/data/.mcore" ] && mv -f /data/.mcore /data/.ncore
 

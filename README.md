@@ -13,7 +13,7 @@
 
 - [![Android 5](https://img.shields.io/badge/Android-5-red.svg)](<>) [![Android 6](https://img.shields.io/badge/Android-6-pink.svg)](<>) [![Android 7](https://img.shields.io/badge/Android-7-violet.svg)](<>) [![Android 8](https://img.shields.io/badge/Android-8-yellow.svg)](<>) [![Android 9](https://img.shields.io/badge/Android-9-lightgreen.svg)](<>) [![Android 10](https://img.shields.io/badge/Android-10-brightgreen.svg)](<>) [![Android 11](https://img.shields.io/badge/Android-11-orange.svg)](<>) [![Android 12](https://img.shields.io/badge/Android-12-white.svg)](<>) [![Android 12L](https://img.shields.io/badge/Android-12L-white.svg)](<>) [![Android 13](https://img.shields.io/badge/Android-13-brown.svg)](<>)
 - [![CPU ABI32](https://img.shields.io/badge/ABI-32-pink.svg)](<>) [![CPU ABI64](https://img.shields.io/badge/ABI-64-pink.svg)](<>)
-- [![Magisk](https://img.shields.io/badge/Magisk-23%2B-00B39B.svg)](<>)
+- [![Magisk](https://img.shields.io/badge/Magisk-20.4%2B-00B39B.svg)](<>)
 
 ## Installation
 
@@ -26,18 +26,19 @@
 
 ## Changelog
 
-### QUEBEC (222192219-CR3)
+### QUEBEC (222230845-CR4)
 
+- Added Easter More Easter Egg To Find
+- Added More Games To Detect
+- Added Support For Alternative Gamespace
 - Adjusted VM Tuning
-- Extended Game Utility For Apps Set to Game Mode
-- Extended Cache Dropping For Apps Set to Game Mode
-- Fixed Game Detection
-- Fixed Failed Installation Cleanup
-- Fixed Thermal Config Restoration
-- Fixed Updater
-- Improved Start-up Logic
-- Improved Offline Manual Fluency
-- Miscellaneous Changes
+- Adjusted Default Game Dashboard Preferences
+- Disabled Cache Dropping
+- Fixed Dynamic LMK Trigger
+- Fixed Application of LMK Tuning
+- Fixed Fallback Mode On Sleep Mode
+- Fixed Broken Pipe
+- Fixed Temporary Directory Deletion
 
 [See More...](https://github.com/Kyliekyler/MAGNETAR/wiki/CHANGELOG#changelog)
 

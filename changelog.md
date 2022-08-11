@@ -1,12 +1,13 @@
 ## Changelog:
 
+- Added Easter More Easter Egg To Find
+- Added More Games To Detect
+- Added Support For Alternative Gamespace
 - Adjusted VM Tuning
-- Extended Game Utility For Apps Set to Game Mode
-- Extended Cache Dropping For Apps Set to Game Mode
-- Fixed Game Detection
-- Fixed Failed Installation Cleanup
-- Fixed Thermal Config Restoration
-- Fixed Updater
-- Improved Start-up Logic
-- Improved Offline Manual Fluency
-- Miscellaneous Changes
+- Adjusted Default Game Dashboard Preferences
+- Disabled Cache Dropping
+- Fixed Dynamic LMK Trigger
+- Fixed Application of LMK Tuning
+- Fixed Fallback Mode On Sleep Mode
+- Fixed Broken Pipe
+- Fixed Temporary Directory Deletion
