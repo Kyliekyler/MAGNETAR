@@ -1,12 +1,9 @@
 ## Changelog:
 
-- Fixed Unhidden Output
-- Fixed Preload System App Detection
-- Fixed Freeform App Detection on Android 10 and Below
-- Fixed Unsetting Profile
-- Improved Key Encryption
-- Improved Module Security
-- Reduced Module Size
-- Refactored CPU Frequency Management
-- Refactored Engine Mode Activation
-- Miscellaneous Changes & Fixes
+- Added Smart Preloading
+- Added More Games To Detect
+- Fixed Profile Unset
+- Fixed Updater Footer
+- Fixed Potential Cause Of Reboot On Mali & Exynos Devices
+- Fixed Possible LMK Tuning Support Checking Failure
+- Fixed Error Spam For Undetected App
