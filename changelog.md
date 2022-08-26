@@ -1,9 +1,12 @@
 ## Changelog:
 
-- Added Smart Preloading
-- Added More Games To Detect
-- Fixed Profile Unset
-- Fixed Updater Footer
-- Fixed Potential Cause Of Reboot On Mali & Exynos Devices
-- Fixed Possible LMK Tuning Support Checking Failure
-- Fixed Error Spam For Undetected App
+- Added More Games to Detect
+- Added Per-App Resolution Scaling (Android 12+)
+- Adjusted Game Mode CPU Frequency Handling
+- Fixed Bugreport Setup Message
+- Improved Module Security
+- Improved Process Handling
+- Improved Resolution Setting
+- Refactored Engine
+- Synchronized Emoji w/ Wiki
+- Miscellaneous Fixes and Improvements
