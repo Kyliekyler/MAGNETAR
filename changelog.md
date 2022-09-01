@@ -1,8 +1,9 @@
 ## Changelog:
 
-- Adjusted Modes Tuning
-- Fixed Database Reset
-- Fixed Per-App Profiler
-- Improved Updater
-- Refactored Tuner
-- Miscellaneous Changes & Fixes
+- Adjusted General Tuning
+- Decreased Auto ART Optimization Aggressiveness
+- Fixed Downscale Reloader
+- Improved Game Detection
+- Refactored Engine
+- Code Cleanup
+- Miscellaneous Improvements
