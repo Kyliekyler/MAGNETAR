@@ -1,15 +1,12 @@
-## Changelog:
+## Changelog
 
-- Allowed Undetected GPU Load (Experimental)
-- Adjusted Boost Duration
-- Disabled Automatic Resolution Scaling
-- Fixed Automatic ART Optimization
-- Fixed Finished Task Notification
-- Fixed App Thermal Profile Backup
-- Fixed Steam App Detection
-- Fixed Stuck-up After Config Importation/Reset
-- Fixed Resolution Setting
-- Fixed Identical App Name Detection
-- Refactored Switchers
-- Updated Compiler to GCC 12
-- Miscellaneous Changes
+- Adjusted Stune Boosts
+- Adjusted CPU Frequency Scaling
+- Fixed Per-App Profilers
+- Fixed Mali GPU Frequency Detection
+- Fixed Resolution Scaling
+- Improved Auto ART Trigger
+- Improved Module Security
+- Reduced Module Size
+- Refactored Frequency Getter
+- Code Cleanup

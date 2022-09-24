@@ -1,7 +1,7 @@
 id=MAGNETAR
 name=MAGNETAR
-version=QUEBEC (222650105-CR11)
-versionCode=222650105
+version=QUEBEC (222672320-CR12)
+versionCode=222672320
 author=Kyliekyler
 description=Device Performance Optimizer — Aims To Provide An Optimal Experience At Every Usage Scenario
 updateJson=https://raw.githubusercontent.com/Kyliekyler/MAGNETAR/canary/update.json

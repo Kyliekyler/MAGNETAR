@@ -3,4 +3,7 @@
 *.prop text eol=lf
 *.json text eol=lf
 *.yml text eol=lf
+.git* text eol=lf
+LICENSE text eol=lf
+META-INF/* text eol=lf
 META-INF/** text eol=lf
