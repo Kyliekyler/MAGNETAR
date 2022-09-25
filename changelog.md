@@ -1,12 +1,10 @@
 ## Changelog
 
-- Adjusted Stune Boosts
 - Adjusted CPU Frequency Scaling
-- Fixed Per-App Profilers
-- Fixed Mali GPU Frequency Detection
-- Fixed Resolution Scaling
-- Improved Auto ART Trigger
-- Improved Module Security
+- Disabled FS Tweaks
+- Fixed User Input Reader
+- Fixed KCAL Config Saver
+- Improved Preload Package Detection
 - Reduced Module Size
-- Refactored Frequency Getter
-- Code Cleanup
+- Compiled Using Musl
+- Moved to Semantic Versioning
