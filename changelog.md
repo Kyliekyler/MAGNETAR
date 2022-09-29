@@ -1,10 +1,12 @@
 ## Changelog
 
-- Adjusted CPU Frequency Scaling
-- Disabled FS Tweaks
-- Fixed User Input Reader
-- Fixed KCAL Config Saver
-- Improved Preload Package Detection
-- Reduced Module Size
-- Compiled Using Musl
-- Moved to Semantic Versioning
+- Added App's OBB on Preload
+- Added More Games To Detect
+- Fixed Bugreport
+- Fixed Resetting Fascharge Config
+- Fixed KCAL Profile Notice
+- Fixed Profile Manager Disabler
+- Fixed Game Utility
+- Improved Engine App Detection
+- Improved Init Asyncrhonous Process Execution
+- Reverted Reliable Auto ART Optimization Trigger

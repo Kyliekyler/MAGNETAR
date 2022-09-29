@@ -14,9 +14,9 @@ MAGNETAR is an all-in-one kernel tweaker that aims to provide an optimal experie
 
 MAGNETAR requires the following to function properly:
 
-- [![API 21+](https://img.shields.io/badge/API-21%2B-3DDC84.svg?style=flat&logo=android)](<>)
-- [![ABI armeabi-v7a](https://img.shields.io/badge/ABI-armeabi--v7a-0091BD.svg?style=flat&logo=arm)](<>) [![ABI arm64-v8a](https://img.shields.io/badge/ABI-arm64--v8a-0091BD.svg?style=flat&logo=arm)](<>)
-- [![Magisk 20.4+](https://img.shields.io/badge/Magisk-20.4%2B-00B39B.svg?style=flat&logo=magisk)](<>)
+- [![API 21+](https://img.shields.io/badge/API-21%2B-3DDC84.svg?style=flat&logo=android)](https://www.android.com/)
+- [![ABI armeabi-v7a](https://img.shields.io/badge/ABI-armeabi--v7a-0091BD.svg?style=flat&logo=arm)](https://www.arm.com/) [![ABI arm64-v8a](https://img.shields.io/badge/ABI-arm64--v8a-0091BD.svg?style=flat&logo=arm)](https://www.arm.com/)
+- [![Magisk 20.4+](https://img.shields.io/badge/Magisk-20.4%2B-00B39B.svg?style=flat&logo=magisk)](https://github.com/topjohnwu/Magisk)
 
 Once the system has been verified to meet MAGNETAR requirements, it can be flashed on magisk manager and then rebooted to take effect.
 
