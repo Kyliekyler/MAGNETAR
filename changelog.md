@@ -1,12 +1,8 @@
 ## Changelog
 
-- Added App's OBB on Preload
-- Added More Games To Detect
-- Fixed Bugreport
-- Fixed Resetting Fascharge Config
-- Fixed KCAL Profile Notice
-- Fixed Profile Manager Disabler
-- Fixed Game Utility
-- Improved Engine App Detection
-- Improved Init Asyncrhonous Process Execution
-- Reverted Reliable Auto ART Optimization Trigger
+- Added More Games to Detect
+- Added Option to Disable Automatic ART Optimization
+- Disabled Automatic ART Optimization by Default
+- Removed Duplicated Engine Doze Check
+- Removed Key Generation from Input
+- Miscellaneaous Changes
