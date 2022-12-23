@@ -1,8 +1,6 @@
 ## Changelog
 
-- Added More Games to Detect
-- Added Option to Disable Automatic ART Optimization
-- Disabled Automatic ART Optimization by Default
-- Removed Duplicated Engine Doze Check
-- Removed Key Generation from Input
-- Miscellaneaous Changes
+- Fixed Automatic ART Optimization Disabler
+- Fixed Game Dashboard Profiles
+- Readded Global Refresh Rate Setter
+- Reduced LMK Tuning Aggressiveness By 20%
