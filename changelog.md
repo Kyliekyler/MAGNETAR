@@ -1,6 +1,10 @@
 ## Changelog
 
-- Fixed Automatic ART Optimization Disabler
-- Fixed Game Dashboard Profiles
-- Readded Global Refresh Rate Setter
-- Reduced LMK Tuning Aggressiveness By 20%
+- Decreased LMK Tuning Aggressiveness by 20%
+- Fixed Automatic ART Optimization Trigger
+- Fixed Problematic Exit Code
+- Fixed Refresh-Rate Setting
+- Increased Cooldown Mode Aggressiveness
+- Refactored Config Parsing
+- Refactored Daemon
+- Updated Dependencies
