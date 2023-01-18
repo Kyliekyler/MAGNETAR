@@ -1,7 +1,7 @@
 id=MAGNETAR
 name=MAGNETAR
-version=17.0.2 (ROMEO)
-versionCode=17002
+version=18.0.0 (ROMEO)
+versionCode=18000
 author=Kyliekyler
 description=Device Performance Optimizer — Aims To Provide An Optimal Experience At Every Usage Scenario
 updateJson=https://raw.githubusercontent.com/Kyliekyler/MAGNETAR/canary/update.json

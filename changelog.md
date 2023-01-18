@@ -1,10 +1,10 @@
 ## Changelog
 
-- Decreased LMK Tuning Aggressiveness by 20%
-- Fixed Automatic ART Optimization Trigger
-- Fixed Problematic Exit Code
-- Fixed Refresh-Rate Setting
-- Increased Cooldown Mode Aggressiveness
-- Refactored Config Parsing
-- Refactored Daemon
-- Updated Dependencies
+- Fixed App Detection on Some Devices
+- Updated Copyright Notice
+- Fixed Config Reset
+- Fixed Broken Init Function
+- Fixed Security Vulnerability
+- Increased Minimum Required Magisk Version to v23
+- Fixed Mode Switching
+- Miscellaneous Changes

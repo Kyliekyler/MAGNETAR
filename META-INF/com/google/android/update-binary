@@ -3,7 +3,7 @@
 #  |     | _  |   __|   | |  __|_   _| _  | __ |
 #  | | | |    |  |  | | | |  __| | | |    |   -|
 #  |_|_|_|_|__|_____|_|___|____| |_| |_|__|_|__|
-#                      by Kyliekyler © 2019-2022
+#                      by Kyliekyler © 2019-2023
 
 #===========================================================================//
 # GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
@@ -27,7 +27,7 @@ mount /data 2> /dev/null
 [ -f "/data/adb/magisk/util_functions.sh" ] || require_new_magisk
 # shellcheck disable=SC1091
 . /data/adb/magisk/util_functions.sh
-[ "$MAGISK_VER_CODE" -lt "20400" ] && require_new_magisk
+[ "$MAGISK_VER_CODE" -lt "23000" ] && require_new_magisk
 
 install_module() {
   if ! $BOOTMODE; then
@@ -80,5 +80,5 @@ install_module() {
   rm -rf $TMPDIR
 }
 
-install_module
+install_module || abort "- SOMETHING WENT WRONG, INSTALLATION ABORTED!"
 exit 0
