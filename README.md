@@ -16,7 +16,7 @@ MAGNETAR requires the following to function properly:
 
 - [![API 21+](https://img.shields.io/badge/API-21%2B-3DDC84.svg?style=flat&logo=android)](https://www.android.com/)
 - [![ABI armeabi-v7a](https://img.shields.io/badge/ABI-armeabi--v7a-0091BD.svg?style=flat&logo=arm)](https://www.arm.com/) [![ABI arm64-v8a](https://img.shields.io/badge/ABI-arm64--v8a-0091BD.svg?style=flat&logo=arm)](https://www.arm.com/)
-- [![Magisk 20.4+](https://img.shields.io/badge/Magisk-20.4%2B-00B39B.svg?style=flat&logo=magisk)](https://github.com/topjohnwu/Magisk)
+- [![Magisk 23+](https://img.shields.io/badge/Magisk-23%2B-00B39B.svg?style=flat&logo=magisk)](https://github.com/topjohnwu/Magisk)
 
 Once the system has been verified to meet MAGNETAR requirements, it can be flashed on magisk manager and then rebooted to take effect.
 
@@ -51,5 +51,5 @@ MAGNETAR is licensed under Creative Commons Attribution-NonCommercial-NoDerivati
   <a href="https://facebook.com/MAGNETAR1999"><img src="https://img.shields.io/badge/Facebook-Page-blue?logo=facebook&style=social"></a>
   <a href="https://forum.xda-developers.com/t/module-magnetar.4372135/"><img src="https://img.shields.io/badge/XDA-Thread-purple?logo=xdadevelopers&style=social"></a>
   <br/>
-  MAGNETAR © 2019-2022
+  MAGNETAR © 2019-2023
 </p>
