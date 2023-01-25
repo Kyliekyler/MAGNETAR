@@ -80,5 +80,5 @@ install_module() {
   rm -rf $TMPDIR
 }
 
-install_module || abort "- SOMETHING WENT WRONG, INSTALLATION ABORTED!"
+install_module
 exit 0
