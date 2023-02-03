@@ -1,9 +1,10 @@
 ## Changelog
 
-- Added Unit of Seconds on Log Timestamp
-- Added FPS Information on Log (Experimental)
-- Fixed Mode Switching
-- Improved App Parsing
-- Improved Daemon Efficiency
-- Miscellaneous Improvements
-- Code Cleanup
+- Added Touch Sampling Rate Changer
+- Allowed Bugreport on Engine Failure
+- Adjusted MFK/EFK Values
+- Fixed Memory Leak
+- Fixed Failed Bugreport File Generation
+- Fixed Connection Issues
+- Improved Efficiency
+- Miscellaneous Fixes and Improvements
