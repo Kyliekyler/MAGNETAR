@@ -7,3 +7,7 @@
 LICENSE text eol=lf
 META-INF/* text eol=lf
 META-INF/** text eol=lf
+
+# Declare binary files
+*.xz binary
+install binary

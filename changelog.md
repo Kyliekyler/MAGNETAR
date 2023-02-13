@@ -1,9 +1,12 @@
 ## Changelog
 
-- Added More Games on Database
-- Added Touch-Rate for Regular Users
+- Added Config Sharing
 - Adjusted Tuning Profiles
-- Fixed Vulnerability
-- Fixed Bugreport Fail Checks
-- Fixed ART Profile
-- Fixed Game Database
+- Dropped Support for 32bit Devices
+- Enforced Tamper Protection on Bugreport
+- Fixed OTA Update Pass Through Verification
+- Fixed Touch-Rate for Regular Users
+- Improved Machine Learning Algorithm
+- Improved Overall Efficiency
+- Improved Key Checking
+- Micellaneous Improvements and Fixes

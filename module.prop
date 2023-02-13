@@ -1,7 +1,7 @@
 id=MAGNETAR
 name=MAGNETAR
-version=18.0.3 (SIERRA)
-versionCode=18003
+version=18.0.4 (SIERRA)
+versionCode=18004
 author=Kyliekyler
 description=Device Performance Optimizer — Aims To Provide An Optimal Experience At Every Usage Scenario
 updateJson=https://raw.githubusercontent.com/Kyliekyler/MAGNETAR/canary/update.json
