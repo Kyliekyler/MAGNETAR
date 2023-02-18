@@ -1,12 +1,15 @@
 ## Changelog
 
-- Added Config Sharing
-- Adjusted Tuning Profiles
-- Dropped Support for 32bit Devices
-- Enforced Tamper Protection on Bugreport
-- Fixed OTA Update Pass Through Verification
-- Fixed Touch-Rate for Regular Users
-- Improved Machine Learning Algorithm
-- Improved Overall Efficiency
-- Improved Key Checking
-- Micellaneous Improvements and Fixes
+- Added Custom Config Viewer
+- Added Loop Interpreter for Custom Config
+- Adjusted Tuning Profile
+- Allowed Regular Users to Use Game Mode
+- Fixed Slow Config Detection
+- Fixed Endurance+ Mode for MIUI
+- Fixed ML Null Training Data
+- Fixed Feature Support Checking at Kernel Change
+- Improved Daemon
+- Removed Per-App Profile for Regular Users
+- Removed Beta Update Channel
+- Updated Dependencies to 64bit
+- Miscellaneous Fixes and Improvements
