@@ -74,11 +74,12 @@ install_module() {
   rm -rf \
     $MODPATH/LICENSE $MODPATH/install \
     $MODPATH/*.json $MODPATH/*.md \
-    $MODPATH/.git* $MODPATH/resources* 2> /dev/null
+    $MODPATH/.git* $MODPATH/resources* \
+    $MODPATH/dependencies* 2> /dev/null
 
   cd /
   rm -rf $TMPDIR
 }
 
-install_module || abort "- SOMETHING WENT WRONG, INSTALLATION ABORTED!"
+install_module
 exit 0
