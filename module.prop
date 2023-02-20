@@ -1,7 +1,7 @@
 id=MAGNETAR
 name=MAGNETAR
-version=19.0.0 (SIERRA)
-versionCode=190000
+version=19.1.0 (TANGO)
+versionCode=190100
 author=Kyliekyler
 description=Device Performance Optimizer — Aims To Provide An Optimal Experience At Every Usage Scenario
 updateJson=https://raw.githubusercontent.com/Kyliekyler/MAGNETAR/release/update.json
