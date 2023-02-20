@@ -14,72 +14,17 @@ umask 022
 ui_print() { echo "$1"; }
 
 require_new_magisk() {
-  ui_print "- PLEASE INSTALL MAGISK V23+!"
+  ui_print "- PLEASE INSTALL MAGISK VERSION 23 OR NEWER!"
   exit 1
 }
 
-# shellcheck disable=SC2034
 OUTFD=$2
 ZIPFILE=$3
 
 mount /data 2> /dev/null
 
 [ -f "/data/adb/magisk/util_functions.sh" ] || require_new_magisk
-# shellcheck disable=SC1091
 . /data/adb/magisk/util_functions.sh
-[ "$MAGISK_VER_CODE" -lt "23000" ] && require_new_magisk
-
-install_module() {
-  if ! $BOOTMODE; then
-    recovery_actions > /dev/null 2>&1
-    ui_print "- ABORTING..."
-    abort "  INSTALLATION FROM RECOVERY NOT SUPPORTED"
-  fi
-
-  rm -rf $TMPDIR
-  mkdir -p $TMPDIR
-  chcon u:object_r:system_file:s0 $TMPDIR
-  cd $TMPDIR || abort "- UNABLE TO CHANGE DIRECTORY"
-
-  ensure_bb
-  mount_partitions > /dev/null 2>&1
-  boot_actions
-
-  unzip -o "$ZIPFILE" module.prop -d $TMPDIR >&2
-  [ ! -f $TMPDIR/module.prop ] && abort "- UNABLE TO EXTRACT ZIP FILE!"
-
-  RDM=$(tr < /dev/urandom -cd 'A-F0-9' | head -c 8)
-  sed -i "s/.*id=.*/id=$RDM/" $TMPDIR/module.prop
-  [ -f "/data/.mcore" ] && mv -f /data/.mcore /data/.ncore
-
-  MODDIRNAME=modules_update
-  MODULEROOT=$NVBASE/$MODDIRNAME
-  MODID=$(grep_prop id $TMPDIR/module.prop)
-  MODPATH=$MODULEROOT/$MODID
-
-  rm -rf $MODPATH
-  mkdir -p $MODPATH
-
-  unzip -o "$ZIPFILE" -x 'META-INF/*' -d $MODPATH >&2
-
-  set_perm_recursive $MODPATH 0 0 0755 0644
-  set_perm_recursive $MODPATH/install 0 0 0755 0755
-  set_perm_recursive $MODPATH/system/bin 0 2000 0755 0755
-  set_perm_recursive $MODPATH/system/xbin 0 2000 0755 0755
-  set_perm_recursive $MODPATH/system/system_ext/bin 0 2000 0755 0755
-  set_perm_recursive $MODPATH/system/vendor/bin 0 2000 0755 0755 u:object_r:vendor_file:s0
-
-  [ -f "$MODPATH/install" ] && $MODPATH/install
-
-  rm -rf \
-    $MODPATH/LICENSE $MODPATH/install \
-    $MODPATH/*.json $MODPATH/*.md \
-    $MODPATH/.git* $MODPATH/resources* \
-    $MODPATH/dependencies* 2> /dev/null
-
-  cd /
-  rm -rf $TMPDIR
-}
 
 install_module
 exit 0
