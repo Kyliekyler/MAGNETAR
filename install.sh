@@ -8,6 +8,8 @@
 # GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
 #===========================================================================//
 
+print_modname() { :; }
+
 require_new_magisk() {
   ui_print "- PLEASE INSTALL MAGISK VERSION 23 OR NEWER!"
   exit 1
