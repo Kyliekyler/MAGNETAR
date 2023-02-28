@@ -1,17 +1,13 @@
 ## Changelog
 
-- Added LMK Tweak Disabler
-- Added New Custom Config Parameters
-  - `SMALL_CPU_FREQUENCY`
-  - `BIG_CPU_FREQUENCY`
-  - `PRIME_CPU_FREQUENCY`
-- Adjusted Frequency Scaling
-- Disabled Frequency Lower Limit Capping
-- Disabled Curl Fast Fail
-- Fixed Arch Detection
-- Fixed Database Reset Function
-- Fixed Refresh-Rate Function
-- Fixed Bugreport Config
-- Fixed Backup on Installation
-- Updated AAPT2 to 64bit
+- Added Process Optimization
+- Added User Checking
+- Added Option to Disable Tuning Profiles
+- Adjusted Tuning Profiles
+- Adjusted Minimum KernelSU Version to 10647
+- Disabled OBB Preloading
+- Fixed Refresh-Rate for Some Devices
+- Fixed Touch-Rate for Some Devices
+- Fixed Resetting Manual Resolution
+- Fixed and Updated Updater to v5
 - Miscellaneous Fixes and Improvements
