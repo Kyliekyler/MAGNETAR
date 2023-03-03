@@ -1,13 +1,10 @@
 ## Changelog
 
-- Added Process Optimization
-- Added User Checking
-- Added Option to Disable Tuning Profiles
-- Adjusted Tuning Profiles
-- Adjusted Minimum KernelSU Version to 10647
-- Disabled OBB Preloading
-- Fixed Refresh-Rate for Some Devices
-- Fixed Touch-Rate for Some Devices
-- Fixed Resetting Manual Resolution
-- Fixed and Updated Updater to v5
+- Added Alternative Download Method
+- Adjusted Minimum KernelSU Version to 10672
+- Adjusted and Renewed GPU Frequency Scaling
+- Fixed Updater
+- Fixed Custom Config Auto Backup/Restore
+- Fixed Manual Key Verification
+- Fixed Thermal Configuration
 - Miscellaneous Fixes and Improvements

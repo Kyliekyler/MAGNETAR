@@ -24,7 +24,7 @@ on_install() {
   [ ! "$BOOTMODE" ] && abort "- INSTALLATION FROM RECOVERY NOT SUPPORTED!"
   [ "$ARCH" = "arm64" ] || abort "- $(awk -v var="$ARCH" 'BEGIN{print toupper(var)}') NOT SUPPORTED!"
 
-  if [ -n "$KSU_KERNEL_VER_CODE" ] && [ "$KSU_KERNEL_VER_CODE" -lt "10647" ]; then
+  if [ -n "$KSU_KERNEL_VER_CODE" ] && [ "$KSU_KERNEL_VER_CODE" -lt "10672" ]; then
     require_new_ksu
   elif [ "$MAGISK_VER_CODE" -lt "23000" ]; then
     require_new_magisk
