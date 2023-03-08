@@ -16,7 +16,7 @@ require_new_magisk() {
 }
 
 require_new_ksu() {
-  ui_print "- PLEASE INSTALL KERNELSU VERSION 10647 OR NEWER!"
+  ui_print "- PLEASE INSTALL KERNELSU VERSION 10672 OR NEWER!"
   exit 1
 }
 
