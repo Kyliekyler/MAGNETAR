@@ -8,29 +8,27 @@
 # GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
 #===========================================================================//
 
+print_modname() { :; }
+
 require_new_magisk() {
   ui_print "- PLEASE INSTALL MAGISK VERSION 23 OR NEWER!"
   exit 1
 }
 
 require_new_ksu() {
-  ui_print "- PLEASE INSTALL KERNELSU VERSION 10575 OR NEWER!"
+  ui_print "- PLEASE INSTALL KERNELSU VERSION 10672 OR NEWER!"
   exit 1
 }
 
 on_install() {
-  if ! $BOOTMODE; then
-    recovery_actions > /dev/null 2>&1
-    abort "- INSTALLATION FROM RECOVERY NOT SUPPORTED!"
-  fi
+  [ ! "$BOOTMODE" ] && abort "- INSTALLATION FROM RECOVERY NOT SUPPORTED!"
+  [ "$ARCH" = "arm64" ] || abort "- $(awk -v var="$ARCH" 'BEGIN{print toupper(var)}') NOT SUPPORTED!"
 
-  if [ -n "$KSU_KERNEL_VER_CODE" ] && [ "$KSU_KERNEL_VER_CODE" -lt "10575" ]; then
+  if [ -n "$KSU_KERNEL_VER_CODE" ] && [ "$KSU_KERNEL_VER_CODE" -lt "10672" ]; then
     require_new_ksu
   elif [ "$MAGISK_VER_CODE" -lt "23000" ]; then
     require_new_magisk
   fi
-
-  [ "$ARCH" = "arm64" ] || abort "- $(awk -v var="$ARCH" 'BEGIN{print toupper(var)}') NOT SUPPORTED!"
 
   rm -rf $TMPDIR
   mkdir -p $TMPDIR

@@ -1,10 +1,29 @@
 ## Changelog
 
-- Added KernelSU Support
-- Fixed ML Algorithm
-- Fixed Frequency Scaling
-- Fixed Config Interpreter
-- Fixed Refresh Rate on Boot
-- Fixed Installation on Other Managers
-- Updated Module Updater to v4.0
+- Added LMK Tweak Disabler
+- Added More Games to Detect
+- Added New Custom Config Parameters
+  - `BIG_CPU_FREQUENCY`
+  - `PRIME_CPU_FREQUENCY`
+  - `SMALL_CPU_FREQUENCY`
+- Added New Dynamic Refresh-Rates
+- Added Option to Disable Tuning Profiles
+- Added Process Optimization
+- Added User Checking
+- Adjusted Minimum KernelSU Version to 10672
+- Adjusted Sleep Mode Exit Time
+- Adjusted Tuning Profiles
+- Disabled Automatic Game Downscaling
+- Disabled Frequency Lower Limit Capping
+- Disabled OBB Preloading
+- Fixed Arch Detection
+- Fixed Installation Issues
+- Fixed Manual Key Verification
+- Fixed Resetting Manual Resolution
+- Improved Refresh-Rate Device Support
+- Improved Tamper Protection
+- Improved Touch-Rate Device Support
+- Removed Per-App Refresh-Rate for Regular Users
+- Removed Support for Old Config Backups
+- Removed Unnecessary Process Overhead
 - Miscellaneous Fixes and Improvements
