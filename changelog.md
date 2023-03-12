@@ -1,8 +1,7 @@
 ## Changelog
 
-- Added More Games to Detect
-- Adjusted GPU Frequency Scaling
-- Fixed Shuffled Refresh-Rate Config
-- Fixed Updater
-- Fixed CLI Prompt Response
-- Miscellaneous Improvements
+- Added Auto Low Refresh-Rate on Sleep Mode
+- Fixed GPU and Input Boost Frequency Scaling
+- Fixed Refresh-Rate Help Response
+- Improved Game Detection
+- Reduced Sleep Mode Exit Time
