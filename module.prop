@@ -1,7 +1,7 @@
 id=MAGNETAR
 name=MAGNETAR
-version=19.2.2 (VICTOR)
-versionCode=190202
+version=19.2.3 (VICTOR)
+versionCode=190203
 author=Kyliekyler
 description=Device Performance Optimizer — Aims To Provide An Optimal Experience At Every Usage Scenario
 updateJson=https://raw.githubusercontent.com/Kyliekyler/MAGNETAR/pre-release/update.json

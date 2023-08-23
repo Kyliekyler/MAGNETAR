@@ -1,11 +1,8 @@
 ## Changelog
 
+- Added Packages on Game Database
 - Adjusted Dynamic Refresh-Rate Sensitivity
-- Fixed Config on Kernel Change
-- Fixed NFC Issues
-- Fixed Touch-Rate Config Restoration
-- Improved & Simplified Updater
-- Improved Auto Low Refresh-Rate on Sleep Mode
-- Moved Mountpoint Inside Module Path
-- Removed Notifier
+- Fixed Duplicate Installation
+- Switched Target to aarch64-linux-android from aarch64-unknown-linux-musl
+- Updated Dependencies
 - Miscellaneous Fixes and Improvements
