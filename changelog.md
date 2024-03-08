@@ -1,29 +1,20 @@
 ## Changelog
 
-- Added LMK Tweak Disabler
-- Added More Games to Detect
-- Added New Custom Config Parameters
-  - `BIG_CPU_FREQUENCY`
-  - `PRIME_CPU_FREQUENCY`
-  - `SMALL_CPU_FREQUENCY`
-- Added New Dynamic Refresh-Rates
-- Added Option to Disable Tuning Profiles
-- Added Process Optimization
-- Added User Checking
-- Adjusted Minimum KernelSU Version to 10672
-- Adjusted Sleep Mode Exit Time
-- Adjusted Tuning Profiles
-- Disabled Automatic Game Downscaling
-- Disabled Frequency Lower Limit Capping
-- Disabled OBB Preloading
-- Fixed Arch Detection
-- Fixed Installation Issues
-- Fixed Manual Key Verification
-- Fixed Resetting Manual Resolution
-- Improved Refresh-Rate Device Support
-- Improved Tamper Protection
-- Improved Touch-Rate Device Support
-- Removed Per-App Refresh-Rate for Regular Users
-- Removed Support for Old Config Backups
-- Removed Unnecessary Process Overhead
-- Miscellaneous Fixes and Improvements
+- Added Support for Android 14
+- Added Support for Apatch
+- Added Auto Low Refresh-Rate on Sleep Mode
+- Added More Games to Database
+- Adjusted Dynamic Refresh-Rate Sensitivity
+- Adjusted Frequency Scaling
+- Adjusted Tuning
+- Fixed Config on Kernel Change
+- Fixed GPU and Input Boost Frequency Scaling
+- Fixed Machine Learning Automatic Train Trigger
+- Improved Debug Logging
+- Improved Execution Time
+- Improved Module Memory Usage & Handling
+- Improved Security
+- Implemented Smart Parameter Checking
+- Reduced Sleep Mode Exit Time
+- Updated Dependencies
+- Code Cleanup & Miscellaneous Changes

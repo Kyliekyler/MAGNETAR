@@ -2,7 +2,7 @@
 #  |     | _  |   __|   | |  __|_   _| _  | __ |
 #  | | | |    |  |  | | | |  __| | | |    |   -|
 #  |_|_|_|_|__|_____|_|___|____| |_| |_|__|_|__|
-#                      by Kyliekyler © 2019-2023
+#                      by Kyliekyler © 2019-2024
 
 #===========================================================================//
 # GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
@@ -11,22 +11,26 @@
 print_modname() { :; }
 
 require_new_magisk() {
-  ui_print "- PLEASE INSTALL MAGISK VERSION 23 OR NEWER!"
-  exit 1
+  abort "- PLEASE INSTALL MAGISK VERSION 23000 OR NEWER!"
 }
 
 require_new_ksu() {
-  ui_print "- PLEASE INSTALL KERNELSU VERSION 10672 OR NEWER!"
-  exit 1
+  abort "- PLEASE INSTALL KERNELSU VERSION 10672 OR NEWER!"
+}
+
+require_new_ap() {
+  abort "- PLEASE INSTALL APATCH VERSION 10400 OR NEWER!"
 }
 
 on_install() {
-  [ ! "$BOOTMODE" ] && abort "- INSTALLATION FROM RECOVERY NOT SUPPORTED!"
+  $BOOTMODE || abort "- INSTALLATION FROM RECOVERY NOT SUPPORTED!"
   [ "$ARCH" = "arm64" ] || abort "- $(awk -v var="$ARCH" 'BEGIN{print toupper(var)}') NOT SUPPORTED!"
 
-  if [ -n "$KSU_KERNEL_VER_CODE" ] && [ "$KSU_KERNEL_VER_CODE" -lt "10672" ]; then
+  if [ -n "$AP_KERNEL_VER_CODE" ] && [ "$AP_KERNEL_VER_CODE" -lt "10400" ]; then
+    require_new_ap
+  elif [ -n "$KSU_KERNEL_VER_CODE" ] && [ "$KSU_KERNEL_VER_CODE" -lt "10672" ]; then
     require_new_ksu
-  elif [ "$MAGISK_VER_CODE" -lt "23000" ]; then
+  elif [ -n "$MAGISK_VER_CODE" ] && [ "$MAGISK_VER_CODE" -lt "23000" ]; then
     require_new_magisk
   fi
 
