@@ -51,5 +51,5 @@ MAGNETAR is licensed under Creative Commons Attribution-NonCommercial-NoDerivati
   <a href="https://facebook.com/MAGNETAR1999"><img src="https://img.shields.io/badge/Facebook-Page-blue?logo=facebook&style=social"></a>
   <a href="https://forum.xda-developers.com/t/module-magnetar.4372135/"><img src="https://img.shields.io/badge/XDA-Thread-purple?logo=xdadevelopers&style=social"></a>
   <br/>
-  MAGNETAR © 2019-2023
+  MAGNETAR © 2019-2024
 </p>
