@@ -1,7 +1,7 @@
 id=MAGNETAR
 name=MAGNETAR
-version=19.3.1 (WHISKEY)
-versionCode=190301
+version=19.3.2 (WHISKEY)
+versionCode=190302
 author=Kyliekyler
 description=Device Performance Optimizer — Aims To Provide An Optimal Experience At Every Usage Scenario
 updateJson=https://raw.githubusercontent.com/Kyliekyler/MAGNETAR/pre-release/update.json
