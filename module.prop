@@ -1,7 +1,7 @@
 id=MAGNETAR
 name=MAGNETAR
-version=19.4.1 (X-RAY)
-versionCode=190401
+version=19.5.0 (X-RAY)
+versionCode=190500
 author=Kyliekyler
 description=Device Performance Optimizer — Aims To Provide An Optimal Experience At Every Usage Scenario
 updateJson=https://raw.githubusercontent.com/Kyliekyler/MAGNETAR/pre-release/update.json
