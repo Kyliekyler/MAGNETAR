@@ -1,15 +1,11 @@
 ## Changelog
 
-- Fixed Notifier Permissions
-- Increased FPS Throttling Value to Half of Max Refresh-Rate for A13+
-- Improved Training Algorithm Efficiency
-- Improved Debug Logging
-- Improved Daemon Runtime
-- Fixed CPU and GPU Frequency Scaling for Some Devices
-- Fixed Notification Function
-- Added CPU Core Control
-- Adjusted Ram Management Aggressiveness on Sleep Mode
-- Adjusted CPU Freq Scaling Aggressiveness
-- Added Support for Android 15
-- Removed Unnecessary Checking of Config
+- Added App Monitor Service
+- Added FPS Monitor Service
+- Changed Default Core Control Mode from Dynamic to Disabled
+- Fixed CPU Core Control Backup Restoration
+- Fixed Missing CPU Core Control Info on Help
+- Improved Daemon Efficiency by ~85-95%
+- Improved Notifier Installation
 - Updated Dependencies
+- Miscellaneous Fixes and Improvements
