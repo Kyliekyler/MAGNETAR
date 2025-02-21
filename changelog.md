@@ -1,11 +1,11 @@
 ## Changelog
 
-- Added App Monitor Service
-- Added FPS Monitor Service
-- Changed Default Core Control Mode from Dynamic to Disabled
-- Fixed CPU Core Control Backup Restoration
-- Fixed Missing CPU Core Control Info on Help
-- Improved Daemon Efficiency by ~85-95%
-- Improved Notifier Installation
-- Updated Dependencies
-- Miscellaneous Fixes and Improvements
+- Added PowerVR GPU Directory on Detection List
+- Added More Games to Detect
+- Fixed Logcat Detection
+- Increased Minimum Magisk to 26404
+- Increased Minimum KernelSU to 11422
+- Increased Minimum APatch to 10472
+- Migrated to Rust 2024 Edition
+- Refined Daemon Process
+- Misc Fixes and Improvements
