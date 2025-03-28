@@ -24,9 +24,13 @@ require_new_ap() {
 
 on_install() {
   $BOOTMODE || abort "- INSTALLATION FROM RECOVERY NOT SUPPORTED!"
-  [ "$ARCH" = "arm64" ] || abort "- $(awk -v var="$ARCH" 'BEGIN{print toupper(var)}') NOT SUPPORTED!"
 
-  if $AP && [ "$AP_KERNEL_VER_CODE" -lt "10472" ]; then
+  case "$ARCH" in
+    arm|arm64) : ;;
+    *) abort "- $(awk -v var="$ARCH" 'BEGIN{print toupper(var)}') NOT SUPPORTED!" ;;
+  esac
+
+  if $APATCH && [ "$APATCH_VER_CODE" -lt "10472" ]; then
     require_new_ap
   fi
 
@@ -34,9 +38,8 @@ on_install() {
     require_new_ksu
   fi
   
-  if [ -n "$MAGISK_VER_CODE" ] && [ "$MAGISK_VER_CODE" -lt "26404" ]; then
-    $KSU || require_new_magisk
-    $AP || require_new_magisk
+  if [ "$MAGISK_VER_CODE" -lt "26404" ] && ! $KSU && ! $APATCH; then
+    require_new_magisk
   fi
 
   rm -rf $TMPDIR
@@ -53,8 +56,8 @@ on_install() {
 
   rm -rf $MODPATH
 
-  RDM=$(tr < /dev/urandom -cd 'A-F0-9' | head -c 8)
-  sed -i "s/.*id=.*/id=$RDM/" $TMPDIR/module.prop
+  #RDM=$(tr < /dev/urandom -cd 'A-F0-9' | head -c 8)
+  #sed -i "s/.*id=.*/id=$RDM/" $TMPDIR/module.prop
 
   MODID=$(grep_prop id $TMPDIR/module.prop)
   MODPATH=$MODULEROOT/$MODID

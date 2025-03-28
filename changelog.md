@@ -1,11 +1,9 @@
 ## Changelog
 
-- Added PowerVR GPU Directory on Detection List
-- Added More Games to Detect
-- Fixed Logcat Detection
-- Increased Minimum Magisk to 26404
-- Increased Minimum KernelSU to 11422
-- Increased Minimum APatch to 10472
-- Migrated to Rust 2024 Edition
-- Refined Daemon Process
-- Misc Fixes and Improvements
+- Added Support to 32bit ARM Devices
+- Added Multi-User Support
+- Added Initial Support to Android 16
+- Fixed APatch Detection
+- Fixed High CPU Usage on API Below 34
+- Improved App Monitor Backwards Compatibility
+- Miscellaneous Changes and Improvements
