@@ -2,7 +2,7 @@
   <img src="https://telegra.ph/file/66ccb5726f1ef57c99d36.png">
 </p>
 
-[![Page Views](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FKyliekyler%2FMAGNETAR&count_bg=%2379C83D&title_bg=%23555555&icon=github.svg&icon_color=%23E7E7E7&title=Page+Views&edge_flat=false)](https://hits.seeyoufarm.com)
+[![GitHub Release](https://img.shields.io/github/v/release/Kyliekyler/MAGNETAR?label=Release)](https://github.com/Kyliekyler/MAGNETAR/tree/release) [![GitHub Release](https://img.shields.io/github/v/release/Kyliekyler/MAGNETAR?include_prereleases&label=Pre-Release)](https://github.com/Kyliekyler/MAGNETAR/tree/pre-release)
 
 ## Description
 
@@ -51,5 +51,5 @@ MAGNETAR is licensed under Creative Commons Attribution-NonCommercial-NoDerivati
   <a href="https://facebook.com/MAGNETAR1999"><img src="https://img.shields.io/badge/Facebook-Page-blue?logo=facebook&style=social"></a>
   <a href="https://forum.xda-developers.com/t/module-magnetar.4372135/"><img src="https://img.shields.io/badge/XDA-Thread-purple?logo=xdadevelopers&style=social"></a>
   <br/>
-  MAGNETAR © 2019-2024
+  MAGNETAR © 2019-2025
 </p>

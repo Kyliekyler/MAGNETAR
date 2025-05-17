@@ -1,7 +1,7 @@
 id=MAGNETAR
 name=MAGNETAR
-version=19.5.3 (YANKEE)
-versionCode=190503
+version=19.5.4 (YANKEE)
+versionCode=190504
 author=Kyliekyler
 description=Device Performance Optimizer — Aims To Provide An Optimal Experience At Every Usage Scenario
 updateJson=https://raw.githubusercontent.com/Kyliekyler/MAGNETAR/pre-release/update.json

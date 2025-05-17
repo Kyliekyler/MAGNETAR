@@ -56,9 +56,6 @@ on_install() {
 
   rm -rf $MODPATH
 
-  #RDM=$(tr < /dev/urandom -cd 'A-F0-9' | head -c 8)
-  #sed -i "s/.*id=.*/id=$RDM/" $TMPDIR/module.prop
-
   MODID=$(grep_prop id $TMPDIR/module.prop)
   MODPATH=$MODULEROOT/$MODID
 
