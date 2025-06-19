@@ -30,15 +30,15 @@ on_install() {
     *) abort "- $(awk -v var="$ARCH" 'BEGIN{print toupper(var)}') NOT SUPPORTED!" ;;
   esac
 
-  if $APATCH && [ "$APATCH_VER_CODE" -lt "10472" ]; then
+  if [ -n "$APATCH" ] && [ "$APATCH_VER_CODE" -lt "10472" ]; then
     require_new_ap
   fi
 
-  if $KSU && [ "$KSU_KERNEL_VER_CODE" -lt "11422" ]; then
+  if [ -n "$KSU" ] && [ "$KSU_KERNEL_VER_CODE" -lt "11422" ]; then
     require_new_ksu
   fi
   
-  if [ "$MAGISK_VER_CODE" -lt "26404" ] && ! $KSU && ! $APATCH; then
+  if [ "$MAGISK_VER_CODE" -lt "26404" ] && [ -z "$KSU" ] && [ -z "$APATCH" ]; then
     require_new_magisk
   fi
 
