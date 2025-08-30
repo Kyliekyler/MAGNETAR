@@ -2,7 +2,7 @@
 #  |     | _  |   __|   | |  __|_   _| _  | __ |
 #  | | | |    |  |  | | | |  __| | | |    |   -|
 #  |_|_|_|_|__|_____|_|___|____| |_| |_|__|_|__|
-#                      by Kyliekyler © 2019-2024
+#                      by Kyliekyler © 2019-2025
 
 #===========================================================================//
 # GIVE PROPER CREDITS IF YOU USE THE PART OF IT IN YOUR WORK, THANKS!
@@ -11,26 +11,34 @@
 print_modname() { :; }
 
 require_new_magisk() {
-  abort "- PLEASE INSTALL MAGISK VERSION 23000 OR NEWER!"
+  abort "- PLEASE INSTALL MAGISK VERSION 26404 OR NEWER!"
 }
 
 require_new_ksu() {
-  abort "- PLEASE INSTALL KERNELSU VERSION 10672 OR NEWER!"
+  abort "- PLEASE INSTALL KERNELSU VERSION 11422 OR NEWER!"
 }
 
 require_new_ap() {
-  abort "- PLEASE INSTALL APATCH VERSION 10400 OR NEWER!"
+  abort "- PLEASE INSTALL APATCH VERSION 10472 OR NEWER!"
 }
 
 on_install() {
   $BOOTMODE || abort "- INSTALLATION FROM RECOVERY NOT SUPPORTED!"
-  [ "$ARCH" = "arm64" ] || abort "- $(awk -v var="$ARCH" 'BEGIN{print toupper(var)}') NOT SUPPORTED!"
 
-  if [ -n "$AP_KERNEL_VER_CODE" ] && [ "$AP_KERNEL_VER_CODE" -lt "10400" ]; then
+  case "$ARCH" in
+    arm|arm64) : ;;
+    *) abort "- $(awk -v var="$ARCH" 'BEGIN{print toupper(var)}') NOT SUPPORTED!" ;;
+  esac
+
+  if [ -n "$APATCH" ] && [ "$APATCH_VER_CODE" -lt "10472" ]; then
     require_new_ap
-  elif [ -n "$KSU_KERNEL_VER_CODE" ] && [ "$KSU_KERNEL_VER_CODE" -lt "10672" ]; then
+  fi
+
+  if [ -n "$KSU" ] && [ "$KSU_KERNEL_VER_CODE" -lt "11422" ]; then
     require_new_ksu
-  elif [ -n "$MAGISK_VER_CODE" ] && [ "$MAGISK_VER_CODE" -lt "23000" ]; then
+  fi
+  
+  if [ "$MAGISK_VER_CODE" -lt "26404" ] && [ -z "$KSU" ] && [ -z "$APATCH" ]; then
     require_new_magisk
   fi
 
@@ -47,9 +55,6 @@ on_install() {
   [ ! -f $TMPDIR/module.prop ] && abort "- UNABLE TO EXTRACT ZIP FILE!"
 
   rm -rf $MODPATH
-
-  RDM=$(tr < /dev/urandom -cd 'A-F0-9' | head -c 8)
-  sed -i "s/.*id=.*/id=$RDM/" $TMPDIR/module.prop
 
   MODID=$(grep_prop id $TMPDIR/module.prop)
   MODPATH=$MODULEROOT/$MODID
